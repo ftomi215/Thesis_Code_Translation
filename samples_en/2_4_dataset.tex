@@ -1,0 +1,15 @@
+\section{Datasets for Code Translation}
+
+The effectiveness of deep learning models for code translation strongly depends on the availability of high-quality datasets. In recent years, several benchmark datasets have been introduced to support research in code understanding and generation, particularly focusing on parallel code corpora.
+
+One of the most widely used benchmarks is CodeXGLUE, a comprehensive dataset collection designed for multiple code intelligence tasks. It includes a diverse set of datasets covering tasks such as code translation, code summarization, and code search, along with standardized evaluation protocols \cite{lu2021codexglue}. 
+
+For code translation tasks, CodeXGLUE provides parallel datasets containing semantically equivalent code snippets across different programming languages. These datasets are typically constructed by aligning code from open-source repositories, enabling supervised learning of translation models. However, the size and diversity of such parallel datasets are still limited, which can affect the generalization ability of models.
+
+To address these limitations, newer datasets such as XLCoST have been proposed. XLCoST (Cross-Lingual Code Snippet Dataset) is a large-scale benchmark that provides fine-grained parallel code across multiple programming languages. It includes aligned code snippets from several languages and supports a wide range of cross-lingual tasks, making it particularly suitable for code translation research \cite{zhu2022xlcost}.
+
+A key advantage of XLCoST is its focus on multilingual and parallel data, which enables models to learn both syntactic transformations and semantic equivalence more effectively. This makes it more representative of real-world code translation scenarios compared to smaller or less diverse datasets.
+
+In addition to these benchmarks, other datasets have been developed for specific tasks or language pairs. Some of these datasets are synthetically generated, providing clean and well-aligned data, while others are derived from real-world repositories. Synthetic datasets offer scalability but may lack realistic complexity, whereas real-world datasets capture practical challenges such as inconsistent coding styles, dependencies, and incomplete context.
+
+In summary, dataset quality and diversity play a crucial role in the development of robust code translation models. While benchmarks such as CodeXGLUE and XLCoST have significantly advanced the field, challenges remain in obtaining large-scale, high-quality parallel datasets that accurately reflect real-world programming environments.

@@ -1,0 +1,29 @@
+\section{Research Questions}
+
+Building on the challenges discussed in the previous sections, this thesis aims to investigate the effectiveness and limitations of deep learning-based approaches for automatic code translation. The focus is placed on evaluating model performance in realistic scenarios, with particular attention to functional correctness and reliable evaluation methodologies.
+
+Although recent advances in deep learning have shown promising results in code translation, existing approaches still face significant challenges. In particular, models often struggle to generate reliable outputs for complex or real-world codebases \cite{llm_limitations}. Additionally, traditional evaluation metrics based on textual similarity are insufficient to assess the true correctness of translated programs, as they fail to capture behavioral equivalence \cite{evaluation_limitations}.
+
+To address these challenges, the thesis is guided by the following research questions:
+
+\begin{itemize}
+    \item \textbf{RQ1: How effective are deep learning models in translating source code between programming languages?} \\
+    This question evaluates the overall performance of modern models, including their ability to generate syntactically correct and executable code.
+
+    \item \textbf{RQ2: To what extent do these models preserve the functional correctness of the original code?} \\
+    This question focuses on whether the translated code maintains the same behavior as the original program when evaluated using test cases.
+
+    \item \textbf{RQ3: How effective are execution-based evaluation methods compared to traditional similarity-based metrics?} \\
+    This question examines whether execution-based approaches provide a more reliable assessment of correctness than metrics such as BLEU or token-level similarity.
+
+    \item \textbf{RQ4: What types of errors are most commonly produced by deep learning models during code translation?} \\
+    This question analyzes typical error categories, including syntactic errors, semantic inconsistencies, and missing dependencies.
+
+    \item \textbf{
+    {\color{red}RQ5: What are the main limitations of current approaches, and how can they be addressed?}} \\
+    {\color{red}
+    This question identifies key weaknesses of existing methods and outlines potential directions for improvement.
+    }
+\end{itemize}
+
+These research questions establish the foundation for the experimental and analytical components of the thesis, guiding the evaluation of model performance and the identification of future research directions.

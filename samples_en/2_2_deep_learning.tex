@@ -1,0 +1,13 @@
+\section{Deep Learning for Code Translation}
+
+The emergence of deep learning has significantly transformed the field of code translation by enabling data-driven approaches that learn patterns directly from large-scale datasets. These methods are largely inspired by advances in neural machine translation (NMT), where sequence-to-sequence (seq2seq) models have become a dominant paradigm.
+
+Early deep learning approaches to code translation relied on encoder–decoder architectures based on recurrent neural networks (RNNs), including Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) models. In these architectures, the encoder processes the input sequence and encodes it into a fixed-length vector representation, which is then used by the decoder to generate the target sequence \cite{seq2seq_original}. While effective in modeling sequential data, these models suffer from limitations when handling long sequences, as important information may be lost during encoding \cite{seq2seq_limitations}. 
+
+To address these limitations, the attention mechanism was introduced, allowing the model to dynamically focus on relevant parts of the input sequence during decoding. This significantly improved translation quality by overcoming the bottleneck of fixed-length representations and enabling better handling of long-range dependencies \cite{attention_bahdanau}. 
+
+These neural machine translation techniques were later adapted to source code, where programs are treated as sequences of tokens similar to natural language. This adaptation enabled models to learn mappings between programming languages without relying on handcrafted rules. However, unlike natural language, source code has strict syntax and semantics, which introduces additional challenges for deep learning models.
+
+Despite the improvements brought by attention mechanisms, RNN-based seq2seq models remain difficult to parallelize and scale efficiently. This limitation led to the development of the Transformer architecture, which relies entirely on attention mechanisms and eliminates recurrence, enabling more efficient training and improved performance in sequence modeling tasks \cite{vaswani2017}. 
+
+The introduction of Transformers marked a major shift in the field and laid the foundation for modern approaches to code translation, which are discussed in the following section.

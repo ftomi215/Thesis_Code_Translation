@@ -1,0 +1,13 @@
+\section{Evaluation Methods for Code Translation}
+
+Evaluating the quality of code translation remains a challenging task, as it requires assessing not only syntactic correctness but also the preservation of program semantics. Existing evaluation approaches can be broadly divided into text-based metrics and execution-based methods.
+
+Text-based metrics are derived from natural language processing and measure the similarity between generated and reference code at the token level. One of the most widely used metrics is BLEU, which evaluates n-gram overlap between the generated output and the reference translation \cite{bleu_metric}. Although BLEU is simple and widely adopted, it is limited in the context of code, as it does not account for syntactic structure or semantic equivalence.
+
+To address these limitations, CodeBLEU was introduced as an extension of BLEU specifically designed for code evaluation. CodeBLEU incorporates additional factors such as abstract syntax tree (AST) structure and data-flow information, providing a more comprehensive assessment of code quality \cite{ren2020codebleu}. However, despite these improvements, CodeBLEU still relies on surface-level similarity and may fail to capture functional correctness.
+
+Execution-based evaluation methods provide a more reliable alternative by assessing whether the generated code behaves correctly when executed. These approaches typically involve compiling the translated code and running it against a set of test cases. The correctness of the output is then compared to the expected results, often using metrics such as pass rate or pass@k. This method directly measures whether the translated code preserves the intended functionality.
+
+Recent studies have shown that models achieving high scores on text-based metrics do not necessarily perform well in execution-based evaluations, highlighting the limitations of similarity-based approaches \cite{huang2022exeds}. In particular, code with low textual similarity may still be functionally correct, while code with high similarity may fail to execute correctly.
+
+Overall, the discrepancy between text-based and execution-based evaluation highlights a fundamental challenge in code translation: semantic correctness cannot be reliably captured by token-level similarity alone. This motivates the increasing use of execution-based evaluation methods, which better reflect real-world correctness and are therefore more suitable for assessing practical code translation systems.

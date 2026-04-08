@@ -1,0 +1,23 @@
+\section{Objectives}
+
+The primary objective of this thesis is to investigate the effectiveness of deep learning-based approaches for automatic source code translation, with a particular focus on the impact of model fine-tuning and evaluation methodologies. While pre-trained models provide strong baseline performance, it remains an open question to what extent fine-tuning can improve translation quality in terms of both syntactic accuracy and functional correctness.
+
+To address this, the thesis aims to analyze and compare the performance of base and fine-tuned models on code translation tasks. In addition, multiple models are evaluated under the same conditions in order to better understand their strengths, limitations, and differences in behavior.
+
+A key objective of this work is to examine the relationship between traditional similarity-based evaluation metrics and execution-based evaluation methods. Metrics such as BLEU are widely used due to their simplicity and efficiency, but they do not necessarily reflect whether the generated code is correct from a functional perspective. Therefore, this thesis places strong emphasis on execution-based evaluation, where the generated code is compiled and tested using predefined test cases.
+
+To achieve these goals, the thesis includes the implementation of a practical code translation pipeline. This involves selecting an appropriate dataset, preparing the data for training, and applying fine-tuning techniques to adapt the model to the translation task. Special attention is given to ensuring that the experimental setup reflects realistic conditions and allows for fair comparison between models.
+
+Another important objective is the analysis of the results obtained during evaluation. This includes identifying common error types, such as syntactic errors, semantic inconsistencies, and logical mistakes in the translated code. Understanding these errors provides insight into the limitations of current models and helps to explain differences between base and fine-tuned performance.
+
+In summary, the objectives of this thesis can be formulated as follows:
+
+\begin{itemize}
+    \item To compare the performance of base and fine-tuned code translation models.
+    \item To evaluate multiple models using both similarity-based (BLEU) and execution-based methods.
+    \item To investigate whether fine-tuning improves functional correctness of translated code.
+    \item To analyze common error patterns in generated translations.
+    \item {\color{red}
+    To assess the effectiveness of execution-based evaluation tools such as CodeEvalBench.
+    }
+\end{itemize}

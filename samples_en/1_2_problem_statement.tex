@@ -1,0 +1,19 @@
+\section{Problem Statement}
+
+Although significant progress has been made in the field of automatic code translation, current approaches still struggle to provide reliable and practically usable results. The main objective of code translation is to transform source code from one programming language into another while preserving its original functionality. However, achieving both syntactic correctness and semantic equivalence remains a challenging task, especially when using modern deep learning-based methods.
+
+One of the fundamental issues lies in the evaluation of code translation models. Traditional metrics, such as BLEU, measure the similarity between the generated and reference code based on token-level overlap. While BLEU is widely used in machine translation and provides a fast and simple evaluation method, it does not account for the actual behavior of the generated code \cite{bleu_metric}. As a result, a model may achieve a high BLEU score while producing code that does not compile or does not function correctly.
+
+To address this limitation, execution-based evaluation methods have been introduced. These approaches evaluate the generated code by compiling and running it against predefined test cases, providing a more realistic measure of functional correctness. Research shows that execution-based metrics are more effective in capturing real errors and model performance compared to surface-level similarity metrics \cite{huang2022exeds}. However, such evaluation methods are more complex and computationally expensive.
+
+Another important challenge is the effectiveness of model fine-tuning. While pre-trained models provide a strong baseline for code translation, it is not always clear to what extent fine-tuning improves their performance. In practice, fine-tuning is expected to adapt the model to a specific task or dataset, potentially improving both syntactic accuracy and functional correctness. However, the actual benefit of fine-tuning compared to the base model remains an open question and requires systematic evaluation.
+
+Furthermore, comparing multiple models under the same conditions is essential to better understand their strengths and limitations. Different model architectures may behave differently in terms of generalization, error patterns, and robustness. Without consistent evaluation using both similarity-based and execution-based metrics, it is difficult to determine which model performs better in real-world scenarios.
+
+Based on these challenges, the main problem addressed in this thesis can be formulated as follows:
+
+\begin{quote}
+How does fine-tuning affect the performance of code translation models, and how do different models compare when evaluated using both BLEU score and execution-based benchmarks such as CodeEvalBench?
+\end{quote}
+
+This thesis aims to answer this question by comparing base and fine-tuned models, as well as evaluating multiple models using both traditional and execution-based metrics. The goal is to determine whether fine-tuning leads to measurable improvements and to assess how well these improvements translate to real functional correctness.
