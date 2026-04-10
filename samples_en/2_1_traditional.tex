@@ -1,9 +1,40 @@
 \section{Traditional Approaches to Code Translation}
 
-Before the rise of data-driven methods, code translation was primarily addressed using rule-based and compiler-driven techniques. Rule-based approaches rely on manually defined transformation rules that map constructs between programming languages. These systems are typically based on pattern matching and linguistic or syntactic rules, ensuring deterministic and interpretable outputs. However, creating and maintaining such rules requires significant manual effort and does not scale well to complex or evolving codebases \cite{rule_based_translation}.
+%SzB: több hivatkozás kellene. Meg konkrétabb beszámoló részek is kellenek.
+% Pl:
+% Another class of traditional solutions is ... . For example, XY et al. investigated ... . Their results show ... .
+% és akkor ebből sok...
 
-Another class of traditional solutions includes compiler-based approaches and transpilers. These methods convert source code from one language to another using intermediate representations such as abstract syntax trees (ASTs) or compiler-level structures. While transpilers can provide reliable translations for well-defined patterns, they often depend on handcrafted rules and syntactic mappings, which limits their flexibility and may result in unnatural or suboptimal code \cite{transpiler_limitations}. Furthermore, handling semantic differences between programming languages remains a significant challenge.
+Before the rise of data-driven methods, code translation was primarily addressed
+using rule-based and compiler-driven techniques. %hivatkoás hiányzik innen. mindent azonnal alá kell támasztani
+Rule-based approaches rely on manually defined transformation rules that map
+constructs between programming languages. These systems are typically based on
+pattern matching and linguistic or syntactic rules, ensuring deterministic and
+interpretable outputs. However, creating and maintaining such rules requires
+significant manual effort and does not scale well to complex or evolving
+codebases \cite{rule_based_translation}. %ez a hivatkozás szövegkörnyezet alapján a manual effort nagyságáról és a skálázhatóság nehézségéről szól. Ha így van, maradhat.
+%SzB: kb. ugyanazt olvasom itt, mint az introba. Introban rövidíteni kellene
 
-In addition, static analysis-based approaches have been used to support code translation by examining program structure, control flow, and dependencies. These techniques aim to preserve correctness by analyzing the behavior of the source program before generating the target code. Despite their advantages, static methods struggle to capture all semantic nuances of modern software systems and are often insufficient when dealing with complex or highly dynamic code \cite{static_analysis_translation}.
+Another class of traditional solutions includes compiler-based %Szb: biztos jó itt? A compiler-based és compiler-driven nem ugyanaz? Nem látom a különbséget a név alapján. Valami itt kell
+approaches and transpilers. These methods convert source code from one language
+to another using intermediate representations such as abstract syntax trees
+(ASTs) or compiler-level structures. While transpilers can provide reliable
+translations for well-defined patterns, they often depend on handcrafted rules
+and syntactic mappings, which limits their flexibility and may result in
+unnatural or suboptimal code \cite{transpiler_limitations}. Furthermore,
+handling semantic differences between programming languages remains a
+significant challenge.
 
-In general, traditional approaches provide precise and predictable results but lack scalability and generalizability capabilities. These limitations have led to the increasing adoption of learning-based methods, which are discussed in the following sections.
+In addition, static analysis-based approaches have been used to support code
+translation by examining program structure, control flow, and dependencies.
+These techniques aim to preserve correctness by analyzing the behavior of the
+source program before generating the target code. Despite their advantages,
+static methods struggle to capture all semantic nuances of modern software
+systems and are often insufficient when dealing with complex or highly dynamic
+code \cite{static_analysis_translation}.
+
+In general, traditional approaches provide precise and predictable results but
+lack scalability and generalizability capabilities. These limitations have led
+to the increasing adoption of learning-based methods, which are discussed in the
+following sections.
+%Szb: ne foglalj mindent össze

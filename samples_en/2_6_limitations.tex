@@ -1,15 +1,36 @@
 \section{Limitations of Current Approaches}
 
-Despite significant progress in deep learning-based code translation, current approaches still face several important limitations that affect their reliability and applicability in real-world scenarios.
+%SzB: Minden egyes limitation-t alá kell támasztani minimum 1-2 hivatkozással. és azok alapján kell ezeket a gondolatoka megfogalmazni.
 
-One major issue is hallucination and incorrect logic generation. Models can produce syntactically valid code that appears plausible but fails to correctly implement the intended functionality. This highlights the gap between surface-level correctness and true semantic understanding.
+Despite significant progress in deep learning-based code translation, current
+approaches still face several important limitations that affect their
+reliability and applicability in real-world scenarios.
 
-Another limitation is the handling of dependencies and external context. Most models operate on isolated code snippets and do not fully consider external libraries, project structure, or runtime dependencies. As a result, generated code may fail to compile or execute correctly in practical environments.
+One major issue is hallucination and incorrect logic generation. Models can
+produce syntactically valid code that appears plausible but fails to correctly
+implement the intended functionality. This highlights the gap between
+surface-level correctness and true semantic understanding.
 
-Context handling also remains a challenge. Although Transformer-based models can capture long-range dependencies, they are still constrained by fixed context window sizes. This limitation can lead to incomplete translations or loss of critical information in larger or more complex codebases.
+Another limitation is the handling of dependencies and external context. Most
+models operate on isolated code snippets and do not fully consider external
+libraries, project structure, or runtime dependencies. As a result, generated
+code may fail to compile or execute correctly in practical environments.
 
-Furthermore, generalization across datasets and programming languages remains limited. Models trained on specific datasets often perform well within the same distribution but struggle when applied to unseen languages, coding styles, or problem domains.
+Context handling also remains a challenge. Although Transformer-based models can
+capture long-range dependencies, they are still constrained by fixed context
+window sizes. This limitation can lead to incomplete translations or loss of
+critical information in larger or more complex codebases.
 
-These limitations are closely connected to challenges in evaluation. Studies have shown that models achieving high scores on text-based metrics may still fail in execution-based evaluation, indicating that token-level similarity does not reliably reflect functional correctness \cite{huang2022exeds}.
+Furthermore, generalization across datasets and programming languages remains
+limited. Models trained on specific datasets often perform well within the same
+distribution but struggle when applied to unseen languages, coding styles, or
+problem domains.
 
-These issues demonstrate that current approaches are not yet sufficiently robust for fully automated code translation. Addressing these challenges requires improvements in both modeling techniques and evaluation methodologies.
+These limitations are closely connected to challenges in evaluation. Studies
+have shown that models achieving high scores on text-based metrics may still
+fail in execution-based evaluation, indicating that token-level similarity does
+not reliably reflect functional correctness \cite{huang2022exeds}.
+
+These issues demonstrate that current approaches are not yet sufficiently robust
+for fully automated code translation. Addressing these challenges requires
+improvements in both modeling techniques and evaluation methodologies.

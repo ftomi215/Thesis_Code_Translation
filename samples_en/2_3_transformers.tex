@@ -1,15 +1,40 @@
 \section{Transformer-Based Models for Code Understanding and Generation}
 
-The introduction of the Transformer architecture marked a major breakthrough in sequence modeling and has become the foundation of modern approaches to code understanding and generation. Unlike recurrent models, Transformers rely entirely on self-attention mechanisms, enabling efficient parallel processing and improved modeling of long-range dependencies \cite{vaswani2017}.
+%Itt is hiányzik a related work, meg pár hivatkozás, pl. a qwen coderekhez
 
-In recent years, several Transformer-based models have been specifically adapted for programming languages. These models are typically pre-trained on large-scale code corpora and are capable of capturing both syntactic and semantic aspects of source code.
+The introduction of the Transformer architecture marked a major breakthrough in
+sequence modeling and has become the foundation of modern approaches to code
+understanding and generation. Unlike recurrent models, Transformers rely
+entirely on self-attention mechanisms, enabling efficient parallel processing
+and improved modeling of long-range dependencies \cite{vaswani2017}.
 
-One of the earliest influential models is CodeBERT, a bimodal Transformer trained on both natural language and programming language data. It learns joint representations of code and text, making it suitable for tasks such as code search and documentation generation \cite{feng2020codebert}.
+In recent years, several Transformer-based models have been specifically adapted
+for programming languages. These models are typically pre-trained on large-scale
+code corpora and are capable of capturing both syntactic and semantic aspects of
+source code.
 
-GraphCodeBERT extends this approach by incorporating structural information from code, particularly data flow. By modeling relationships between variables and their dependencies, it captures deeper semantic information beyond token sequences \cite{guo2020graphcodebert}.
+One of the earliest influential models is CodeBERT, a bimodal Transformer
+trained on both natural language and programming language data. It learns joint
+representations of code and text, making it suitable for tasks such as code
+search and documentation generation \cite{feng2020codebert}.
 
-Another important model is CodeT5, a unified encoder–decoder Transformer designed for both code understanding and generation. It introduces identifier-aware pre-training objectives, allowing the model to better capture the semantics of variable names and improve performance across various tasks \cite{wang2021codet5}.
+GraphCodeBERT extends this approach by incorporating structural information from
+code, particularly data flow. By modeling relationships between variables and
+their dependencies, it captures deeper semantic information beyond token
+sequences \cite{guo2020graphcodebert}.
 
-More recent advances include large-scale generative models such as StarCoder and Qwen Coder, which follow a decoder-only architecture similar to large language models. These models are trained on massive code datasets and demonstrate strong performance in code generation and completion tasks.
+Another important model is CodeT5, a unified encoder–decoder Transformer
+designed for both code understanding and generation. It introduces
+identifier-aware pre-training objectives, allowing the model to better capture
+the semantics of variable names and improve performance across various tasks
+\cite{wang2021codet5}.
 
-Despite their success, Transformer-based models still face limitations. In particular, they often struggle with generalization across different datasets and may fail to fully capture deeper semantic relationships in complex code structures \cite{saberi2023model}.
+More recent advances include large-scale generative models such as StarCoder and
+Qwen Coder, which follow a decoder-only architecture similar to large language
+models. These models are trained on massive code datasets and demonstrate strong
+performance in code generation and completion tasks.
+
+Despite their success, Transformer-based models still face limitations. In
+particular, they often struggle with generalization across different datasets
+and may fail to fully capture deeper semantic relationships in complex code
+structures \cite{saberi2023model}.
