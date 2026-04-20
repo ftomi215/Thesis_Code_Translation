@@ -6,19 +6,19 @@ tasks, datasets, and evaluation protocols, enabling fair comparison between
 different approaches.
 
 CodeXGLUE also serves as a benchmark framework, offering predefined splits and
-evaluation metrics for code translation and related tasks \cite{lu2021codexglue}.
-Its standardized setup allows researchers to compare models under consistent
-conditions.
+evaluation metrics for code translation and related tasks
+\cite{lu2021codexglue}. Its standardized setup allows researchers to compare
+models under consistent conditions. %szb: lehetne részletesebb, pl. írd le, hogy ez nem execution based - ha jól értem ez a helyzet a kövi alapján
 
 More recently, execution-based benchmarks have gained importance in evaluating
-code translation systems. These benchmarks assess generated code by compiling and
-executing it against test cases, providing a more realistic measure of functional
-correctness. For example, datasets such as HumanEval and MBPP are widely used to
-evaluate code generation models using execution-based metrics \cite{chen2021codex,
-austin2021mbpp}.
+code translation systems. These benchmarks assess generated code by compiling
+and executing it against test cases, providing a more realistic measure of
+functional correctness. For example, datasets such as HumanEval and MBPP are
+widely used to evaluate code generation models using execution-based metrics
+\cite{chen2021codex, austin2021mbpp}. %szb: említheted a code generation benchmarkokat, de itt nem ezekről kell írni elsősorban, hanem a code translation benchmarkokról, pl. az általad használt codeeditorbench-ről
 
 In the context of code translation, execution-based evaluation is particularly
 important, as it captures whether the translated code behaves correctly rather
-than only measuring syntactic similarity. This approach aligns with recent trends
-in the field, where functional correctness is considered a more reliable indicator
-of model performance compared to traditional similarity-based metrics.
+than only measuring syntactic similarity. This approach aligns with recent
+trends in the field, where functional correctness is considered a more reliable
+indicator of model performance compared to traditional similarity-based metrics.

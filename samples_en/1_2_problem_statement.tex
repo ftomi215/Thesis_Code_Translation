@@ -1,5 +1,6 @@
 \section{Problem Statement}
 
+%szb: ez nekem túl ismétlős, lehetne kicsit lényegretörőbb a section bevezetése
 Recent advances in large language models have significantly improved the
 performance of automatic code translation systems, especially for common
 programming patterns and widely used language pairs. However, while these models
@@ -7,12 +8,14 @@ often produce syntactically correct and readable code, their functional
 correctness is not always guaranteed, particularly in more complex scenarios
 \cite{llm_limitations, correctness_llm}.
 
+%szb: kicsit fura a sorrend. Az előbb a kiértékelés hangzott másodlagos topic-ként, míg most ez a central
+%sztem ez így nemigen jó + az evaluation-t nem is igazán említeném itt, de biztos nem ennyire... Hiszen nem új benchmarkot mutatsz be.
 A central challenge in this domain is the evaluation of generated code. Widely
 used metrics such as BLEU measure token-level similarity between the generated
 and reference code \cite{bleu_metric}, but they do not reflect whether the code
 actually compiles or behaves correctly. CodeBLEU improves upon this by
-incorporating syntactic and semantic features, but it still does not fully capture
-functional correctness \cite{ren2020codebleu}.
+incorporating syntactic and semantic features, but it still does not fully
+capture functional correctness \cite{ren2020codebleu}.
 
 To address this issue, execution-based evaluation methods have been introduced,
 where generated programs are compiled and tested using predefined test cases.
@@ -23,11 +26,15 @@ In addition to evaluation challenges, the impact of fine-tuning on code
 translation performance is not fully understood. While fine-tuning is commonly
 used to adapt pre-trained models to specific tasks, its effectiveness depends on
 multiple factors, including the dataset, model architecture, and evaluation
-method. Therefore, systematic comparison between base and fine-tuned models is
-necessary.
+method. %szb: nem igaz, az effectiveness nem múlik a kiértékelési method-on. Helyette az igaz, hogy: az evaluation methdo becsli az effectiveness-t
+Therefore, systematic comparison between base and fine-tuned models is
+necessary. %szb: esetleg mások csináltak ilyesmit? Miben több/jobb/más a te munkád, mint másoké esetleg? Lehet említeni konkrétumokat
+% pl. sokan nem használnak teszt-alapú kiértékelőt, pl. sokan nem finetuneolnak, pl. sokan más adathalmazon finetuneolnak, ilyenek.
 
 This thesis focuses on the comparative evaluation of code translation models. It
 investigates how fine-tuning affects model performance, and compares different
 models using both similarity-based metrics (BLEU) and execution-based evaluation
-methods such as CodeEvalBench. The goal is to determine whether improvements
-observed in traditional metrics correspond to actual functional correctness.
+methods such as CodeEvalBench. %szb: még nem jutottam a végére, de: such as nem lehet itt. mindent le kell írni, nem csak példákat. ha meg ez az egyedüli ilyen evaluation, akkor a such as használata helytelen
+The goal %szb: lehetne ink. úgy fogalmazni, hogy "az eddigieken felül az is érdekes (uninvestigated) kérdés, hogy ezek a mérések hogy viszonyulnak egymáshoz"
+is to determine whether improvements observed in traditional metrics correspond
+to actual functional correctness.

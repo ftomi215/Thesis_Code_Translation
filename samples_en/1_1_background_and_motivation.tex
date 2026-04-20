@@ -13,8 +13,9 @@ systems.
 
 One of the main motivations behind code translation is the modernization of
 legacy systems. Many organizations still rely on outdated programming languages,
-which are difficult to maintain and integrate with modern technologies. Translating
-such systems reduces technical debt and enables reuse across platforms [1].
+which are difficult to maintain and integrate with modern technologies.
+Translating such systems reduces technical debt and enables reuse across
+platforms [1]. %szb: ez így helytelen, helyes: \cite{...}
 
 Traditional approaches relied on rule-based and compiler-driven techniques,
 including grammar-based parsing and abstract syntax tree (AST) transformations
@@ -23,14 +24,16 @@ complex systems.
 
 Recent advances in deep learning have introduced data-driven approaches that
 learn translation patterns from large-scale datasets [1]. The introduction of
-the Transformer architecture [5] and large language models (LLMs) has significantly
-improved performance in code-related tasks [6, 7]. Code-specific models such as
-CodeLlama and DeepSeek-Coder further enhance performance in programming tasks [8, 9].
+the Transformer architecture [5] and large language models (LLMs) has
+significantly improved performance in code-related tasks [6, 7]. Code-specific
+models such as CodeLlama and DeepSeek-Coder further enhance performance in
+programming tasks [8, 9].
 
 Despite these improvements, automatic code translation remains challenging due
-to strict syntactic and semantic requirements. Small errors can lead to compilation
-failures, and models still struggle with complex codebases [10, 11, 12].
+to strict syntactic and semantic requirements. Small errors can lead to
+compilation failures, and models still struggle with complex codebases [10, 11,
+12]. %szb: kicsit mondhatnál példákat: for examples .... a well known translator tool ... <insert miért szar>. Így hihetőbb lenne
 
 Another key challenge is evaluation. Traditional metrics such as BLEU do not
 reflect functional correctness, motivating the use of execution-based evaluation
-methods.
+methods. %szb: itt lehetnének hivatkozások ezekre plusz lehetne 1 ici-picit bőszavúbb ez a bekezdés, hogy legyen ideje az olvasónak megemészteni, megérteni

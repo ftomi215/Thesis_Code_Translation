@@ -1,5 +1,10 @@
 \chapter{Results}
 
+%szb: alapvetően érdekesek az eredmények és jók, viszont a tárgyalásuk helytelen.
+% results: tömören röviden az eredmények
+% discussion: részletesen azok értelmezéséről, stb.
+% apróság: ha már van agv min és max, lehetne medián érték is
+
 This chapter presents the results of the experimental evaluation of the selected
 code translation models. The performance of the base and fine-tuned variants of
 StarCoder2 and Qwen was analyzed using both similarity-based and
@@ -7,7 +12,7 @@ execution-based metrics.
 
 The evaluation includes BLEU scores as a measure of textual similarity between
 the generated and reference code, as well as execution-based results obtained
-using CodeEditorBench. This combination makes it possible to compare not only
+using CodeEditorBench. This combination makes it possible to compare not only %szb: lehet emlékeztetni az olvasót arra, hogy minek az eredményeit fogja most olvasni, de nem kell túltolni/túlmagyarázni/ismételni az érvelést
 how similar the generated translations are to the reference solutions, but also
 whether the translated code is functionally correct and executable.
 
@@ -15,7 +20,7 @@ The chapter also examines the effect of fine-tuning on both model families and
 compares the relationship between BLEU scores and execution-based evaluation
 results.
 
-\section{Overview of the Results}
+\section{Overview of the Results} %szb: nem szükséges az overview section, nyugodtan mehet egyből a results-ba
 
 \begin{table}[h]
 \centering
@@ -32,7 +37,7 @@ Compilation Errors & -26.4\% & -32.4\% \\
 \label{tab:relative_improvement}
 \end{table}
 
-The evaluation results show that both model families benefit from fine-tuning,
+The evaluation results show that both model families benefit from fine-tuning, %szb: ez nem result, ez már discussion. A results fejezet a nyers eredményeket kell tartalmazza. Jellemzően pár paragrafusnyi szöveg, pár táblázat, és ennyi. A discussiön-ben pedig értelmezed a result-okat
 although the magnitude of improvement differs between StarCoder2 and Qwen.
 Across all experiments, the fine-tuned variants achieved higher BLEU scores and
 produced more functionally correct translations than their corresponding base
@@ -70,6 +75,6 @@ errors. This observation confirms that similarity-based metrics alone are not
 sufficient for evaluating code translation systems and should be complemented by
 execution-based evaluation methods.
 
-Overall, the results indicate that fine-tuning improves both textual similarity
+Overall, the results indicate that fine-tuning improves both textual similarity %szb: az összes ilyen "overall" jellegű összefoglalás kikerülhet
 and functional correctness, and that Qwen2.5-Coder-3B-Instruct performs better
 than StarCoder2-3B in the Java-to-C++ translation task examined in this thesis.

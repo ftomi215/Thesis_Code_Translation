@@ -32,11 +32,12 @@ on tasks such as code summarization, translation, and defect detection
 
 In addition to encoder--decoder models, several decoder-only large language
 models have been proposed for code-related tasks. For example, StarCoder is a
-large-scale autoregressive model trained on a diverse corpus of source code,
-demonstrating strong performance in code generation, completion, and translation
-tasks \cite{starcoder}. Similarly, Qwen Coder models are
-designed for programming tasks and achieve competitive results across multiple
-benchmarks, including HumanEval and MBPP \cite{qwen_coder}.
+large-scale autoregressive %szb: vagy ne használd ezt a szót, vagy vezesd be. Plusz nem biztos, hogy itt ez annyira jó, mert az encoder-decoder-ek ugyanúgy autoregresszíven generálják a kimenetet, itt viszont úgy írod, mintha az autoregr. a decoder-only szinonímája lenne
+model trained on a diverse corpus of source code, demonstrating strong
+performance in code generation, completion, and translation tasks
+\cite{starcoder}. Similarly, Qwen Coder models are designed for programming
+tasks and achieve competitive results across multiple benchmarks, including
+HumanEval and MBPP \cite{qwen_coder}.
 
 Other approaches have explored multilingual and translation-specific settings.
 For instance, TransCoder demonstrated that Transformer-based models can perform

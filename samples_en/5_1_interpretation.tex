@@ -1,4 +1,5 @@
 \chapter{Discussion}
+%szb: nem írok részletesen ide, mert úgyis a resultsból átkerül ide csomó minden, amikor átdolgozod ezt a 2 fejezetet
 
 \section{Interpretation of the Results}
 
@@ -9,21 +10,23 @@ fewer compilation errors than the corresponding base models. This suggests that
 fine-tuning enables the models to better adapt to the specific characteristics of
 the Java-to-C++ translation task.
 
-One possible explanation for this improvement is that the fine-tuning process
-exposes the models to a large number of parallel Java and C++ examples from the
-XLCoST dataset. As a result, the models can learn common translation patterns,
-language-specific syntax, and frequently occurring structures. Previous studies
-have similarly shown that fine-tuning on code-specific datasets improves both
-syntactic correctness and functional performance in code-related tasks.
+One possible explanation %szb: nem értem, miért csak possible? hisz konkrétan ez a különbség a két modell között: a finetuning. Mi más magyarázná?
+for this improvement is that the fine-tuning process exposes the models to a
+large number of parallel Java and C++ examples from the XLCoST dataset. As a
+result, the models can learn common translation patterns, language-specific
+syntax, and frequently occurring structures. Previous studies have similarly
+shown that fine-tuning on code-specific datasets improves both syntactic
+correctness and functional performance in code-related tasks.
 
 The Qwen models consistently outperformed StarCoder2 in both BLEU score and
 execution-based evaluation. One likely reason is that Qwen2.5-Coder has been
 trained on a larger and more diverse code corpus and is more strongly optimized
 for programming-related tasks. It also benefits from instruction tuning, which
 helps it follow translation prompts more reliably and produce cleaner outputs.
-Recent benchmark studies have reported that Qwen-based models achieve strong
-performance on a wide range of code generation and translation tasks, often
-outperforming similarly sized alternatives.
+Recent benchmark studies %szb: missing cite
+have reported that Qwen-based models achieve strong performance on a wide range
+of code generation and translation tasks, often outperforming similarly sized
+alternatives.
 
 Despite the improvements achieved through fine-tuning, compilation errors
 remained the most common failure category for all models. This suggests that
@@ -43,9 +46,10 @@ between the generated and reference code, but does not consider whether the
 generated code is executable or semantically correct.
 
 This mismatch between BLEU and functional correctness has already been observed
-in earlier studies. Researchers have shown that different code implementations
-can be functionally equivalent while having very different textual forms.
-Similarly, code with high lexical overlap may still contain semantic or logical
-errors. As a result, execution-based evaluation is generally considered more
-reliable for code translation tasks because it directly measures whether the
-generated code compiles and behaves correctly.
+in earlier studies. %szb: missing cite...
+Researchers have shown that different code implementations can be functionally
+equivalent while having very different textual forms. Similarly, code with high
+lexical overlap may still contain semantic or logical errors. As a result,
+execution-based evaluation is generally considered more reliable for code
+translation tasks because it directly measures whether the generated code
+compiles and behaves correctly.

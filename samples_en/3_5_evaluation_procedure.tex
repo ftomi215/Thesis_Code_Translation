@@ -1,4 +1,5 @@
 \section{Evaluation Procedure}
+%szb: ugyanazok a gondolataim erről a section-ről, mint amiket az előbbiekben leírtam. Az egész section-ben csak ismételsz, nagyon rontja ez a thesis minőségét. Ha hosszt akarsz nö
 
 The evaluation process was designed to compare the performance of the base and
 fine-tuned models under identical conditions. All experiments use the same
@@ -28,7 +29,7 @@ only if it compiles correctly and produces the expected outputs for all tests.
 This provides a more realistic measure of correctness than token-level metrics
 alone.
 
-The CodeEditorBench evaluation was executed inside a Docker container using the
+The CodeEditorBench evaluation was executed inside a Docker container using the %szb: neeeeeeee megint a docker......... Ez ugye ai-generated?
 official benchmark image. The use of Docker ensures that all generated programs
 are tested under the same environment, including identical compiler versions,
 runtime dependencies, and operating system settings. This improves
@@ -48,7 +49,7 @@ incorrect memory handling, or logical inconsistencies in the translated code.
 Such qualitative analysis complements the numerical evaluation and helps explain
 differences between the models.
 
-The evaluation procedure therefore combines quantitative and qualitative
+The evaluation procedure therefore combines quantitative and qualitative %szb: az egész section egy ismétlés, kb. semmi újat nem mond, cserébe még az ismétlést is összefoglalod - sokkal egyenesebbre kellene straightforward-abbá kellene az egész method-ot alakítani
 analysis. BLEU provides a fast similarity-based measure, while CodeEditorBench
 assesses actual execution behavior. Combining these two approaches makes it
 possible to analyze whether high similarity scores correspond to correct and

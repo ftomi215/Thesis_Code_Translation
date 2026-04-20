@@ -5,6 +5,9 @@ the availability of high-quality training datasets. These datasets typically
 consist of parallel or aligned code snippets across different programming
 languages, enabling supervised learning of translation mappings.
 
+%szb: ez fura. CodeXGLUE-t benchmark-ként mutatod be, tehát ez alapján rossz section
+% de utána mégis úgy beszélsz róla, mintha trainingre is használható volna (pl. which can restrict model generalization)
+% felteszem azért van, mert van külön train meg test része a codexglue-nak... Ha valóban így van, akkor ez explicit kerüljön ide, és egyik aspektusáról itt, másikről a kövi fejezetben írj.
 One of the widely used resources is CodeXGLUE, a benchmark suite that includes
 multiple datasets for code intelligence tasks, including code translation
 \cite{lu2021codexglue}. It provides parallel code examples extracted from
@@ -17,7 +20,7 @@ introduced. For example, XLCoST (Cross-Lingual Code Snippet Dataset) provides
 fine-grained parallel code across multiple programming languages, supporting
 both supervised and cross-lingual learning scenarios \cite{zhu2022xlcost}. XLCoST
 contains aligned code snippets and covers multiple languages, making it suitable
-for training models that require multilingual understanding.
+for training models that require multilingual understanding. %szb: ez a vége semmitmondó nekem, kb. olyan mintha chatgpt befejezett volna random egy mondatot. A code translation alapból multilingual scenario, ilyen értelemben nincs olyan modell ami translationre használható lenne és nem igaz, hogy "requires multilingual understanding"
 
 Other datasets, such as CodeSearchNet, have also been used for pre-training
 code models. Although not specifically designed for translation, they provide
@@ -27,4 +30,4 @@ are often combined with smaller parallel datasets during fine-tuning.
 
 Despite these advances, obtaining large-scale, high-quality parallel datasets
 remains a major challenge. Many datasets are either synthetically generated or
-automatically aligned, which may introduce noise or reduce realism.
+automatically aligned, which may introduce noise or reduce realism. %szb: ilyet akkor szokás a related work egészének vagy részének végére írni, ha te ezzel foglalkozol mélyen. Ezzel implicit azt írod, hogy a jelenlegi adathalmazok szarok, de majd ha tovább olvassa az olvasó, akkor majd látja, hogy te ehhez képest mivel rukkolsz elő.

@@ -6,7 +6,8 @@ under a unified experimental setup, using both similarity-based and
 execution-based evaluation techniques.
 
 Code translation outputs are evaluated using BLEU score and the CodeEditorBench
-framework, which assesses model performance on practical coding tasks such as
+framework %szb: nyevltanilag fura: az "and" két egymással egyenrangú dolgot kell egymás mellé rendeljen. Holott az and baloldalán egy metrika (belu) áll, jobb oldalán pedig egy benchmark. Ugyanazon állatfaj kell legyen mindkét oldalon.
+, which assesses model performance on practical coding tasks such as
 translation and debugging, providing a more realistic measure of functional
 correctness.
 
@@ -16,10 +17,10 @@ pipeline, and evaluation procedure.
 \section{Experimental Setup}
 
 The experiments were designed to compare the performance of base and fine-tuned
-code translation models under identical conditions. Two open-source code-specific
-large language models were selected for evaluation: the
+code translation models under identical conditions. Two open-source
+code-specific large language models were selected for evaluation: the
 \texttt{bigcode/starcoder2-3b} model and the
-\texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model.
+\texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model. %szb: missing cite
 
 For both models, two experimental variants were prepared. The first
 variant used the original pre-trained model without additional task-specific
@@ -29,57 +30,59 @@ direct comparison between base and fine-tuned models, making it possible to
 analyze the impact of task-specific adaptation on translation quality.
 
 The experiments focus exclusively on Java-to-C++ translation. This direction was
-selected because both languages are widely used, differ in syntax and memory
-management. In
-addition, Java and C++ are both supported by the XLCoST dataset and the
-CodeEditorBench framework, allowing consistent evaluation across all models.
+selected because both languages are widely used, differ in syntax and memory %szb: valami jobb magyarázat esetleg?
+management. In addition, Java and C++ are both supported by the XLCoST dataset %szb: gondolom ez a te training dataset-ed, ez itt pl. elhangozhatna
+and the CodeEditorBench framework, allowing consistent evaluation across all
+models.
 
 The overall experimental pipeline consists of three main stages. First, the
 models are loaded and used to generate C++ translations from Java source code.
 Second, the generated outputs are compared against reference translations using
 BLEU score. Finally, the translated code is evaluated using the CodeEditorBench
-framework to assess functional correctness.
+framework to assess functional correctness. %szb: én most nem értem. A belu score-t is ugyanazokon a translationökön használod? mihez hasonlítod? eddig mintha elkülönült volna a kettő kiértékelési irány, most meg söszeolvadt
 
-Two separate notebooks were used for evaluating the base models. These notebooks
-load the selected model, iterate through the evaluation dataset, generate
-translations for each Java input sample, and compute both BLEU and
+Two separate notebooks were used for evaluating the base models. %szb: abszolút szükségtelen az implementation detail, főleg az nem, hogy notebookokat használsz pl. 
+These notebooks load the selected model, iterate through the evaluation dataset,
+generate translations for each Java input sample, and compute both BLEU and
 execution-based metrics. In addition, two further notebooks were prepared for
 fine-tuning. These notebooks load the XLCoST dataset, preprocess parallel Java
 and C++ code pairs, train the model using supervised fine-tuning, and then
-evaluate the resulting fine-tuned model using the same evaluation pipeline as the
-base models.
+evaluate the resulting fine-tuned model using the same evaluation pipeline as
+the base models.
 
 The XLCoST dataset was used as the primary training resource for the fine-tuned
 models. XLCoST contains parallel code snippets across multiple programming
 languages, including Java and C++, making it suitable for supervised code
-translation tasks \cite{zhu2022xlcost}. The training notebooks first extract the
-parallel Java--C++ pairs, then tokenize and prepare the code for model training.
-Fine-tuning is performed using parameter-efficient techniques in order to reduce
-hardware requirements and training time.
+translation tasks \cite{zhu2022xlcost}. %szb: túl későn van a cite
+The training notebooks first extract the parallel Java--C++ pairs, then tokenize
+and prepare the code for model training. Fine-tuning is performed using
+parameter-efficient techniques in order to reduce hardware requirements and
+training time.
 
 The StarCoder2-3B model was selected because it provides strong coding
 capabilities while remaining relatively lightweight compared to larger code
 models. StarCoder2 models are trained on trillions of tokens collected from
 large-scale code corpora. The 3B variant was trained on more than 3 trillion
-tokens and has been shown to outperform other code models of similar size
-\cite{starcoder2, starcoder2_hf}. 
+tokens and has been shown to outperform other code models of similar size %szb: valahogy írd oda, hogy mindezt persze a publikálásának idejében... Mert mára már nyílván vannak jobb modellek ebben a méretbne
+\cite{starcoder2, starcoder2_hf}. %szb: túl későn van a
 
 The Qwen2.5-Coder-3B-Instruct model was selected because it is specifically
 optimized for programming-related tasks and has demonstrated strong results on
 code generation and repair benchmarks \cite{qwen_coder}. The Qwen2.5-Coder
 series is trained on more than 5.5 trillion tokens and achieves competitive
-performance across a wide range of coding tasks \cite{qwen_coder, qwen_coder_report}.
+performance across a wide range of coding tasks \cite{qwen_coder,
+qwen_coder_report}.
 
 Execution-based evaluation was performed using the CodeEditorBench framework.
-CodeEditorBench evaluates model outputs in realistic coding scenarios,
-including translation tasks, by compiling and running generated code against
-predefined test cases \cite{codeeditorbench}. The evaluation environment was
-executed inside a Docker container using the official CodeEditorBench image.
-Using Docker ensured that all experiments were performed in a consistent and
-reproducible environment, avoiding issues related to missing dependencies,
-compiler versions, or operating system differences.
+CodeEditorBench evaluates model outputs in realistic coding scenarios, including
+translation tasks, by compiling and running generated code against predefined
+test cases \cite{codeeditorbench}. The evaluation environment was executed
+inside a Docker container using the official CodeEditorBench image. Using Docker
+ensured that all experiments were performed in a consistent and reproducible
+environment, avoiding issues related to missing dependencies, compiler versions,
+or operating system differences. %szb: sandboxing szokott a fő érv lenni a konténerben való futtatás kapcsán
 
-To ensure fair comparison, all models were evaluated on the same dataset split,
+To ensure fair comparison, all models were evaluated on the same dataset split, %szb: ne fogalmazz hományosan: ne azt írd, hogy same, hanem konkrétan írd le, hogy melyik ez a split, mi a prompts, stb. mindent. Úgy írd, hogy ha valaki ezt elolvassa, meg tudja ismételni a te kutatómunkádat kérdés nélkül
 with identical prompts, preprocessing steps, and evaluation settings. This makes
 it possible to directly compare the performance of the base and fine-tuned
 variants of both model families.

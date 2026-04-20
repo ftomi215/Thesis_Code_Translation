@@ -1,4 +1,5 @@
 \section{Relationship Between BLEU and Execution-Based Evaluation}
+%szb: ehhez szükgésges lenne statisztikai teszteket végezni: mekkora a korreláció? Ez python-ban nagyon egybszerű, csak egy pár sor kód.
 
 The experimental results show that BLEU score and execution-based evaluation
 are related, but the relationship between them is not always straightforward.
@@ -22,7 +23,7 @@ that fine-tuning often improved syntactic correctness enough for the code to
 compile, but some translations still failed to preserve the exact logic of the
 original program.
 
-The weak correlation between BLEU and semantic correctness has already been
+The weak correlation between BLEU and semantic correctness has already been %szb: cite missing
 observed in previous research. Studies have shown that BLEU often fails to
 reflect the true quality of translated code because multiple implementations can
 be functionally equivalent while having very different token sequences.
