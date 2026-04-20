@@ -1,4 +1,4 @@
-\section{Deep Learning for Code Translation}
+\section{Theoretical foundations}
 
 %SzB: Ez inkább theoretical foundations jelleg. Ami nem rossz egyáltalán, sőt
 % Lehet át lehetne nevezni a címet theoretical foundations and related work-re
@@ -6,39 +6,56 @@
 
 The emergence of deep learning has significantly transformed the field of code
 translation by enabling data-driven approaches that learn patterns directly from
-large-scale datasets. These methods are largely inspired by advances in neural
-machine translation (NMT), where sequence-to-sequence (seq2seq) models have
-become a dominant paradigm.
+large-scale datasets. These methods are largely inspired by advances in neural ma-
+chine translation (NMT), where sequence-to-sequence (seq2seq) models have become
+a dominant paradigm \cite{sutskever2014, cho2014}. Such models employ an encoder-decoder architecture
+based on recurrent neural networks (RNNs), where the encoder processes the input
+sequence into a fixed-length representation and the decoder generates the target
+sequence. These architectures were widely adopted in machine translation tasks
+and became the foundation of early neural translation systems \cite{bahdanau2015}.
 
-Early deep learning approaches to code translation relied on encoder–decoder
-architectures based on recurrent neural networks (RNNs), including Long
-Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) models. In these
-architectures, the encoder processes the input sequence and encodes it into a
-fixed-length vector representation, which is then used by the decoder to
-generate the target sequence \cite{seq2seq_original}. While effective in
-modeling sequential data, these models suffer from limitations when handling
-long sequences, as important information may be lost during encoding
-\cite{seq2seq_limitations}. 
+Early deep learning approaches to code translation relied on these RNN-based
+encoder-decoder architectures, including Long Short-Term Memory (LSTM) and
+Gated Recurrent Unit (GRU) models. While effective in modeling sequential data,
+these models suffer from limitations when handling long sequences, as important
+information may be lost during encoding due to the fixed-length representation
+\cite{bahdanau2015}.
 
-To address these limitations, the attention mechanism was introduced, allowing
-the model to dynamically focus on relevant parts of the input sequence during
-decoding. This significantly improved translation quality by overcoming the
-bottleneck of fixed-length representations and enabling better handling of
-long-range dependencies \cite{attention_bahdanau}. 
+Early works have also applied RNN-based encoder-decoder models directly to
+code-related tasks. For example, Balog et al. introduced DeepCoder, which uses
+neural networks to learn program representations and assist in program synthe-
+sis. Similarly, Alon et al. proposed code2seq, demonstrating that sequence-to-sequence models can learn meaningful representations of source code and be ap-
+plied to tasks such as code summarization and translation \cite{deepcoder, code2seq}.
 
-These neural machine translation techniques were later adapted to source code,
-where programs are treated as sequences of tokens similar to natural language.
-This adaptation enabled models to learn mappings between programming languages
-without relying on handcrafted rules. However, unlike natural language, source
-code has strict syntax and semantics, which introduces additional challenges for
-deep learning models.
+Such RNN-based encoder-decoder architectures were first successfully applied
+to machine translation tasks by Sutskever et al., who demonstrated that LSTM-based sequence-to-sequence models can achieve competitive translation performance
+on large-scale datasets \cite{sutskever2014}. Their approach directly maps input
+sentences to output translations using an end-to-end neural framework, achieving
+a BLEU score of 34.8 on the English–French translation task.
 
-Despite the improvements brought by attention mechanisms, RNN-based seq2seq
-models remain difficult to parallelize and scale efficiently. This limitation
-led to the development of the Transformer architecture, which relies entirely on
-attention mechanisms and eliminates recurrence, enabling more efficient training
-and improved performance in sequence modeling tasks \cite{vaswani2017}. 
+Similarly, Cho et al. proposed an RNN encoder-decoder model for statistical
+machine translation, showing that neural networks can learn phrase-level
+representations and improve translation quality \cite{cho2014}. These works
+established recurrent neural networks as a fundamental building block of early
+neural machine translation systems.
+
+Later, Bahdanau et al. introduced the attention mechanism on top of RNN-based
+models, enabling the system to dynamically focus on relevant parts of the input
+sequence during translation and significantly improving performance
+\cite{bahdanau2015}. Subsequent large-scale systems, such as Google Neural
+Machine Translation, were also based on RNN encoder-decoder architectures before
+the transition to Transformer-based models.
+
+To address the limitations of fixed-length representations, the attention mecha-
+nism was introduced, allowing the model to dynamically focus on relevant parts of
+the input sequence during decoding. This significantly improved translation quality
+by enabling better handling of long-range dependencies \cite{bahdanau2015}.
+
+Despite these improvements, RNN-based seq2seq models remain difficult to
+parallelize and scale efficiently. This limitation led to the development of the
+Transformer architecture, which relies entirely on attention mechanisms and elim-
+inates recurrence, enabling more efficient training and improved performance in
+sequence modeling tasks \cite{vaswani2017}.
 
 The introduction of Transformers marked a major shift in the field and laid the
-foundation for modern approaches to code translation, which are discussed in the
-following section.
+foundation for modern approaches to code translation.

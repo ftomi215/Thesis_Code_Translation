@@ -1,0 +1,85 @@
+\chapter{Methodology}
+
+This chapter describes the experimental methodology used to evaluate deep
+learning-based code translation models. The study focuses on comparing models
+under a unified experimental setup, using both similarity-based and
+execution-based evaluation techniques.
+
+Code translation outputs are evaluated using BLEU score and the CodeEditorBench
+framework, which assesses model performance on practical coding tasks such as
+translation and debugging, providing a more realistic measure of functional
+correctness.
+
+The following sections detail the experimental setup, models, dataset, translation
+pipeline, and evaluation procedure.
+
+\section{Experimental Setup}
+
+The experiments were designed to compare the performance of base and fine-tuned
+code translation models under identical conditions. Two open-source code-specific
+large language models were selected for evaluation: the
+\texttt{bigcode/starcoder2-3b} model and the
+\texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model.
+
+For both models, two experimental variants were prepared. The first
+variant used the original pre-trained model without additional task-specific
+adaptation. The second variant used a fine-tuned version of the same model,
+trained specifically for Java-to-C++ code translation. This setup enables a
+direct comparison between base and fine-tuned models, making it possible to
+analyze the impact of task-specific adaptation on translation quality.
+
+The experiments focus exclusively on Java-to-C++ translation. This direction was
+selected because both languages are widely used, differ in syntax and memory
+management. In
+addition, Java and C++ are both supported by the XLCoST dataset and the
+CodeEditorBench framework, allowing consistent evaluation across all models.
+
+The overall experimental pipeline consists of three main stages. First, the
+models are loaded and used to generate C++ translations from Java source code.
+Second, the generated outputs are compared against reference translations using
+BLEU score. Finally, the translated code is evaluated using the CodeEditorBench
+framework to assess functional correctness.
+
+Two separate notebooks were used for evaluating the base models. These notebooks
+load the selected model, iterate through the evaluation dataset, generate
+translations for each Java input sample, and compute both BLEU and
+execution-based metrics. In addition, two further notebooks were prepared for
+fine-tuning. These notebooks load the XLCoST dataset, preprocess parallel Java
+and C++ code pairs, train the model using supervised fine-tuning, and then
+evaluate the resulting fine-tuned model using the same evaluation pipeline as the
+base models.
+
+The XLCoST dataset was used as the primary training resource for the fine-tuned
+models. XLCoST contains parallel code snippets across multiple programming
+languages, including Java and C++, making it suitable for supervised code
+translation tasks \cite{zhu2022xlcost}. The training notebooks first extract the
+parallel Java--C++ pairs, then tokenize and prepare the code for model training.
+Fine-tuning is performed using parameter-efficient techniques in order to reduce
+hardware requirements and training time.
+
+The StarCoder2-3B model was selected because it provides strong coding
+capabilities while remaining relatively lightweight compared to larger code
+models. StarCoder2 models are trained on trillions of tokens collected from
+large-scale code corpora. The 3B variant was trained on more than 3 trillion
+tokens and has been shown to outperform other code models of similar size
+\cite{starcoder2, starcoder2_hf}. 
+
+The Qwen2.5-Coder-3B-Instruct model was selected because it is specifically
+optimized for programming-related tasks and has demonstrated strong results on
+code generation and repair benchmarks \cite{qwen_coder}. The Qwen2.5-Coder
+series is trained on more than 5.5 trillion tokens and achieves competitive
+performance across a wide range of coding tasks \cite{qwen_coder, qwen_coder_report}.
+
+Execution-based evaluation was performed using the CodeEditorBench framework.
+CodeEditorBench evaluates model outputs in realistic coding scenarios,
+including translation tasks, by compiling and running generated code against
+predefined test cases \cite{codeeditorbench}. The evaluation environment was
+executed inside a Docker container using the official CodeEditorBench image.
+Using Docker ensured that all experiments were performed in a consistent and
+reproducible environment, avoiding issues related to missing dependencies,
+compiler versions, or operating system differences.
+
+To ensure fair comparison, all models were evaluated on the same dataset split,
+with identical prompts, preprocessing steps, and evaluation settings. This makes
+it possible to directly compare the performance of the base and fine-tuned
+variants of both model families.

@@ -1,0 +1,28 @@
+\chapter{Conclusion}
+
+\section{Summary}
+
+This thesis investigated the effectiveness of large language models for
+Java-to-C++ code translation. Two code-specific model families, StarCoder2 and
+Qwen2.5-Coder, were evaluated in both their base and fine-tuned forms using
+BLEU score and execution-based evaluation with CodeEditorBench.
+
+The results showed that fine-tuning improved the performance of both models in
+terms of textual similarity and functional correctness. Among the evaluated
+models, the fine-tuned Qwen2.5-Coder model achieved the strongest overall
+performance, producing the highest BLEU score and the largest number of
+accepted solutions.
+
+The experiments also demonstrated that similarity-based metrics such as BLEU
+are not sufficient for evaluating code translation systems on their own.
+Several generated programs achieved relatively high BLEU scores while still
+failing to compile or execute correctly. This supports earlier research showing
+that execution-based evaluation provides a more reliable measure of functional
+correctness than token-level similarity metrics.
+
+Although the fine-tuned models performed substantially better than their base
+versions, the number of remaining compilation errors and wrong answers indicates
+that fully automated code translation is not yet reliable enough for practical
+use without human supervision. Current models can already support developers by
+generating initial translations, but human review is still necessary to ensure
+correctness, maintainability, and compatibility with the target language.

@@ -1,0 +1,76 @@
+```latex
+\section{Evaluation Methods for Code Translation}
+
+This section focuses on evaluation metrics used for code translation, rather
+than benchmark datasets themselves. While benchmarks define the evaluation
+setup, metrics determine how the quality of generated code is measured.
+
+Evaluation metrics for code translation can be broadly divided into
+similarity-based and execution-based approaches.
+
+Text-based metrics are derived from natural language processing and measure the
+similarity between generated and reference code at the token level. One of the
+most widely used metrics is BLEU, which evaluates n-gram overlap between the
+generated output and the reference translation \cite{bleu_metric}. BLEU is easy
+to compute and remains widely used in both natural language translation and
+code generation tasks. However, it does not account for syntactic structure,
+semantic equivalence, or executability. Different implementations of the same
+logic may receive very different BLEU scores, while code with high lexical
+similarity may still fail to compile or execute correctly
+\cite{tran2019ruby, evtikhiev2022bleu}.
+
+To address these limitations, CodeBLEU was introduced as an extension of BLEU
+specifically designed for code evaluation. In addition to n-gram overlap,
+CodeBLEU incorporates abstract syntax tree (AST) structure and data-flow
+information, providing a more comprehensive assessment of code quality
+\cite{ren2020codebleu}. Ren et al. showed that CodeBLEU correlates better with
+programmer judgments than BLEU across multiple code-related tasks, including
+code translation, code refinement, and text-to-code generation
+\cite{ren2020codebleu}. However, CodeBLEU still depends on similarity to a
+reference solution and may fail to capture whether the generated code is
+actually functionally correct.
+
+Other similarity-based metrics have also been proposed. For example,
+CrystalBLEU attempts to reduce the influence of frequently occurring code
+fragments, while CodeBERTScore uses learned code representations to estimate
+semantic similarity between generated and reference code. More recent work has
+also explored metrics such as CodeScore and ICE-Score, which use large language
+models to estimate the quality and correctness of generated code
+\cite{codescore2023, ice_score}. Although these methods often correlate better
+with human judgments than BLEU, they still do not fully replace direct
+execution-based testing.
+
+Execution-based evaluation methods assess whether the generated code behaves
+correctly by compiling and running it against predefined test cases. Metrics
+such as pass rate or pass@k directly measure functional correctness. These
+methods are particularly important for code translation because the main goal is
+not only to produce code that resembles the reference output, but also to
+preserve the original program behavior.
+
+Several recent studies have shown that models achieving high scores on
+similarity-based metrics do not necessarily perform well in execution-based
+evaluation. Huang et al. demonstrated that models with strong BLEU and
+CodeBLEU performance often fail when evaluated using execution-based metrics,
+highlighting the gap between surface-level similarity and true functional
+correctness \cite{huang2022exeds}. Similar findings have also been reported in
+other studies, which show that lexical overlap often correlates poorly with
+human judgments and program behavior \cite{evtikhiev2022bleu,
+tran2019ruby}.
+
+Despite their advantages, execution-based methods also have limitations. Their
+effectiveness depends heavily on the quality and coverage of the available test
+cases. A program may pass all tests while still containing hidden logical
+errors if the test suite is incomplete. In addition, execution-based evaluation
+is significantly more computationally expensive than similarity-based metrics,
+because it requires compilation, sandboxing, and repeated program execution
+\cite{huang2022exeds}. Existing execution benchmarks also typically focus on
+isolated functions or short code snippets rather than realistic multi-file
+software systems, which limits their ability to represent real-world code
+migration scenarios \cite{evaluation_limitations, llm_limitations}.
+
+These limitations indicate that there is still no universally reliable
+evaluation method for code translation. Similarity-based metrics are efficient
+but often fail to capture semantic correctness, while execution-based methods
+provide more realistic evaluation but remain expensive and dependent on the
+quality of the benchmark and test cases. This motivates the use of both types
+of evaluation in this thesis.

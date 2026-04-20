@@ -14,25 +14,35 @@ code corpora and are capable of capturing both syntactic and semantic aspects of
 source code.
 
 One of the earliest influential models is CodeBERT, a bimodal Transformer
-trained on both natural language and programming language data. It learns joint
-representations of code and text, making it suitable for tasks such as code
-search and documentation generation \cite{feng2020codebert}.
+trained on both natural language and programming language data. Feng et al.
+demonstrated that CodeBERT can learn joint representations of code and text,
+achieving strong performance on tasks such as code search and documentation
+generation \cite{feng2020codebert}.
 
 GraphCodeBERT extends this approach by incorporating structural information from
-code, particularly data flow. By modeling relationships between variables and
-their dependencies, it captures deeper semantic information beyond token
-sequences \cite{guo2020graphcodebert}.
+code, particularly data flow. Guo et al. showed that modeling relationships
+between variables and dependencies leads to improved performance over CodeBERT
+in multiple code understanding tasks \cite{guo2020graphcodebert}.
 
-Another important model is CodeT5, a unified encoder–decoder Transformer
-designed for both code understanding and generation. It introduces
-identifier-aware pre-training objectives, allowing the model to better capture
-the semantics of variable names and improve performance across various tasks
+Another important model is CodeT5, a unified encoder--decoder Transformer
+designed for both code understanding and generation. Wang et al. introduced
+identifier-aware pre-training objectives, significantly improving performance
+on tasks such as code summarization, translation, and defect detection
 \cite{wang2021codet5}.
 
-More recent advances include large-scale generative models such as StarCoder and
-Qwen Coder, which follow a decoder-only architecture similar to large language
-models. These models are trained on massive code datasets and demonstrate strong
-performance in code generation and completion tasks.
+In addition to encoder--decoder models, several decoder-only large language
+models have been proposed for code-related tasks. For example, StarCoder is a
+large-scale autoregressive model trained on a diverse corpus of source code,
+demonstrating strong performance in code generation, completion, and translation
+tasks \cite{starcoder}. Similarly, Qwen Coder models are
+designed for programming tasks and achieve competitive results across multiple
+benchmarks, including HumanEval and MBPP \cite{qwen_coder}.
+
+Other approaches have explored multilingual and translation-specific settings.
+For instance, TransCoder demonstrated that Transformer-based models can perform
+unsupervised translation between programming languages without parallel data,
+highlighting the potential of large-scale pre-training for code translation
+tasks \cite{roziere2020transcoder}.
 
 Despite their success, Transformer-based models still face limitations. In
 particular, they often struggle with generalization across different datasets

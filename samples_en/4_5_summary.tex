@@ -1,0 +1,29 @@
+\section{Summary of Findings}
+
+The experiments demonstrate that fine-tuning improves the performance of both
+evaluated model families in Java-to-C++ code translation. For both StarCoder2
+and Qwen, the fine-tuned variants achieved higher BLEU scores and a larger
+number of accepted solutions compared to the corresponding base models.
+
+Among the evaluated systems, the fine-tuned Qwen model achieved the strongest
+overall performance. It obtained the highest average BLEU score and the largest
+number of accepted translations in the execution-based evaluation. The
+fine-tuned StarCoder2 model also showed considerable improvement over its base
+variant, particularly in terms of reducing compilation errors and increasing the
+number of executable solutions.
+
+The results also highlight the importance of execution-based evaluation. While
+BLEU score was useful for measuring textual similarity between generated and
+reference code, it did not always reflect whether the translated programs were
+functionally correct. Several outputs with relatively high BLEU scores still
+failed to compile or produced incorrect results during testing. This finding is
+consistent with previous studies, which report that similarity-based metrics do
+not reliably capture semantic correctness in code-related tasks.
+
+Overall, the experiments indicate that fine-tuning can substantially improve
+both the syntactic quality and the functional correctness of translated code.
+However, the remaining compilation errors, runtime errors, and wrong answers
+show that current code translation models are still far from perfect. The
+results suggest that future research should focus not only on improving model
+architectures, but also on developing stronger evaluation methods that better
+reflect real-world correctness and robustness.

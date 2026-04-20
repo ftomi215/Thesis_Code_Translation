@@ -1,0 +1,39 @@
+\section{Practical Implications for Code Translation}
+
+The findings of this thesis suggest that modern code-specific large language
+models can already provide useful support for real-world code migration tasks.
+Both StarCoder2 and Qwen were able to generate syntactically valid and
+partially functional translations for a considerable portion of the evaluation
+dataset. Fine-tuning further improved performance, especially in terms of
+accepted solutions and reduced compilation errors.
+
+In practice, this means that such models can be used to accelerate software
+migration projects by generating an initial translation that developers can
+later refine. This may reduce the amount of manual effort required when
+translating repetitive or relatively simple code fragments between programming
+languages. For example, models may be particularly useful for translating small
+utility functions, algorithmic code, or boilerplate structures.
+
+However, the results also show that current models are not yet reliable enough for
+fully automated code migration. Even the best-performing model in this thesis still
+produced a substantial number of compilation errors, wrong answers, and runtime
+failures. Previous large-scale studies have similarly found that current LLM-based
+code translation systems frequently generate incorrect translations, with correct
+translation rates often remaining below 50\% depending on the model and language
+pair \cite{llm_limitations}. Large-scale empirical studies further report that
+LLM-based translation systems still struggle with complex programs, longer code
+fragments, and semantic preservation, making human supervision necessary in
+practical migration scenarios \cite{correctness_llm}.
+
+Human review therefore remains necessary. Developers must still verify whether
+the generated code compiles correctly, preserves the behavior of the original
+program, and follows best practices of the target language. This is especially
+important for larger codebases, where dependencies, project structure, and
+runtime context introduce additional complexity.
+
+Another important implication is that execution-based evaluation should be
+integrated into practical migration workflows. Instead of relying only on
+similarity-based metrics such as BLEU, generated translations should be tested
+using compilation and execution-based methods whenever possible. This can help
+identify semantic and logical errors that would otherwise remain hidden.
+

@@ -1,0 +1,30 @@
+\section{Training Datasets for Code Translation}
+
+The performance of deep learning models for code translation largely depends on
+the availability of high-quality training datasets. These datasets typically
+consist of parallel or aligned code snippets across different programming
+languages, enabling supervised learning of translation mappings.
+
+One of the widely used resources is CodeXGLUE, a benchmark suite that includes
+multiple datasets for code intelligence tasks, including code translation
+\cite{lu2021codexglue}. It provides parallel code examples extracted from
+open-source repositories, allowing models to learn mappings between programming
+languages. However, the size and diversity of parallel data in CodeXGLUE are
+limited, which can restrict model generalization.
+
+To address these limitations, larger and more diverse datasets have been
+introduced. For example, XLCoST (Cross-Lingual Code Snippet Dataset) provides
+fine-grained parallel code across multiple programming languages, supporting
+both supervised and cross-lingual learning scenarios \cite{zhu2022xlcost}. XLCoST
+contains aligned code snippets and covers multiple languages, making it suitable
+for training models that require multilingual understanding.
+
+Other datasets, such as CodeSearchNet, have also been used for pre-training
+code models. Although not specifically designed for translation, they provide
+large-scale code corpora that help models learn general representations of
+programming languages \cite{husain2019codesearchnet}. Such pre-training datasets
+are often combined with smaller parallel datasets during fine-tuning.
+
+Despite these advances, obtaining large-scale, high-quality parallel datasets
+remains a major challenge. Many datasets are either synthetically generated or
+automatically aligned, which may introduce noise or reduce realism.

@@ -1,0 +1,49 @@
+\section{Future Research Directions}
+
+Several directions can be explored in future work to further improve the quality
+and reliability of automatic code translation systems.
+
+First, future studies should evaluate additional programming language pairs.
+This thesis focused only on Java-to-C++ translation, but other language pairs
+may present different challenges due to differences in syntax, typing systems,
+memory management, or programming paradigms. Recent work has shown that
+translation difficulty can vary significantly depending on the selected source
+and target languages, and that some directions are inherently more difficult
+than others \cite{aljagthami2025prompt}.
+
+Another promising direction is the use of larger models. While 3B parameter
+models were selected in this thesis due to hardware limitations, larger code
+models may achieve better functional correctness and stronger generalization.
+Recent studies suggest that larger language models consistently outperform
+smaller ones on code translation tasks, particularly for more complex programs
+and language pairs \cite{yang2024llm, aljagthami2025prompt}.
+
+Future work could also compare additional evaluation metrics beyond BLEU and
+execution-based evaluation. Metrics such as CodeBLEU, CodeScore, chrF, or
+METEOR may provide further insight into syntactic quality, semantic similarity,
+and code structure. Prior work has shown that no single metric is sufficient
+for capturing all aspects of translation quality, motivating the use of
+multiple complementary evaluation methods \cite{evtikhiev2022bleu,
+codescore2023}.
+
+Another important research direction is prompt engineering. Recent studies have
+demonstrated that prompt wording, prompt language, and prompt detail can
+significantly influence translation quality. For example, detailed prompts were
+shown to outperform concise prompts, while prompt language also affected the
+quality of the generated translations \cite{aljagthami2025prompt}. Other work
+has further shown that prompt engineering can substantially improve the
+performance of large language models in code-related tasks \cite{chen2025prompt}.
+
+Future studies may also benefit from larger and more diverse training datasets,
+as well as more advanced fine-tuning strategies. For example, multi-stage
+fine-tuning, retrieval-augmented generation, and dataset generation methods
+that include execution feedback or intermediate reasoning steps may further
+improve translation quality \cite{chen2025dialogue, zhu2022xlcost}.
+
+Finally, future research should investigate multi-file and repository-level code
+translation. Most existing studies, including this thesis, focus on isolated
+functions or short code snippets. However, real-world software systems often
+contain dependencies across multiple files, libraries, and modules. Recent work
+suggests that repository-level translation remains a major challenge, but also
+offers significant potential for improving practical software migration
+scenarios \cite{zhang2025repository, bruneel2025pipeline}.

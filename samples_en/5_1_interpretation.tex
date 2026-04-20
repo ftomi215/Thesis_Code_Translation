@@ -1,0 +1,51 @@
+\chapter{Discussion}
+
+\section{Interpretation of the Results}
+
+The results indicate that fine-tuning has a positive effect on both similarity-based
+and execution-based evaluation metrics. For both StarCoder2 and Qwen, the
+fine-tuned variants achieved higher BLEU scores, more accepted solutions, and
+fewer compilation errors than the corresponding base models. This suggests that
+fine-tuning enables the models to better adapt to the specific characteristics of
+the Java-to-C++ translation task.
+
+One possible explanation for this improvement is that the fine-tuning process
+exposes the models to a large number of parallel Java and C++ examples from the
+XLCoST dataset. As a result, the models can learn common translation patterns,
+language-specific syntax, and frequently occurring structures. Previous studies
+have similarly shown that fine-tuning on code-specific datasets improves both
+syntactic correctness and functional performance in code-related tasks.
+
+The Qwen models consistently outperformed StarCoder2 in both BLEU score and
+execution-based evaluation. One likely reason is that Qwen2.5-Coder has been
+trained on a larger and more diverse code corpus and is more strongly optimized
+for programming-related tasks. It also benefits from instruction tuning, which
+helps it follow translation prompts more reliably and produce cleaner outputs.
+Recent benchmark studies have reported that Qwen-based models achieve strong
+performance on a wide range of code generation and translation tasks, often
+outperforming similarly sized alternatives.
+
+Despite the improvements achieved through fine-tuning, compilation errors
+remained the most common failure category for all models. This suggests that
+many generated translations still contained syntax mistakes, missing imports,
+incorrect type handling, or language-specific incompatibilities. One reason for
+this is that source code translation requires not only understanding the source
+program, but also producing fully valid code in the target language. Small
+mistakes in punctuation, memory handling, or language-specific constructs can
+cause the entire translation to fail.
+
+The experiments also demonstrate that BLEU and execution-based metrics do not
+always agree. In general, models with higher BLEU scores also achieved more
+accepted solutions, but the relationship was not perfect. Some translated
+programs achieved high BLEU scores while still failing to compile or producing
+incorrect outputs. This happens because BLEU measures token-level similarity
+between the generated and reference code, but does not consider whether the
+generated code is executable or semantically correct.
+
+This mismatch between BLEU and functional correctness has already been observed
+in earlier studies. Researchers have shown that different code implementations
+can be functionally equivalent while having very different textual forms.
+Similarly, code with high lexical overlap may still contain semantic or logical
+errors. As a result, execution-based evaluation is generally considered more
+reliable for code translation tasks because it directly measures whether the
+generated code compiles and behaves correctly.

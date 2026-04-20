@@ -1,94 +1,61 @@
-@article{code_translation_survey,
-  title={A Systematic Literature Review on Neural Code Translation},
-  author={Chen, X. and others},
-  year={2025}
-}
-
 @article{llm_limitations,
   title={Understanding the Effectiveness of Large Language Models in Code Translation},
-  author={Pan, R. and others},
-  year={2024}
+  author={Pan, Rangeet and Ibrahimzada, Ali Reza and Krishna, Rahul and Sankar, Divya and Wassi, Lambert Pouguem and Merler, Michele and Sobolev, Boris and Pavuluri, Raju and Sinha, Saurabh and Jabbarvand, Reyhaneh},
+  journal={CoRR},
+  volume={abs/2308.03109},
+  year={2023},
+  url={https://openreview.net/forum?id=V5krp15HEK}
 }
-
-
-@article{evaluation_limitations,
-  title={On the Evaluation of Neural Code Translation: Taxonomy and Benchmark},
-  author={Jiao, M. and others},
-  year={2023}
-}
-
-@article{correctness_llm,
-  title={LLM-Based Code Translation Needs Formal Compositional Reasoning},
-  author={Anshumaan, D. and others},
-  year={2025}
-}
-
-
-@misc{thesis_structure_general,
-  title={Typical Structure of a Thesis},
-  author={Various Authors},
-  year={2024},
-  note={Based on general academic thesis structure guidelines}
-}
-
 
 @misc{bleu_metric,
   title={BLEU: a Method for Automatic Evaluation of Machine Translation},
-  author={Papineni, Kishore and others},
-  year={2002}
+  author={Papineni, Kishore and Roukos, Salim and Ward, Todd and Zhu, Wei-Jing},
+  year={2002},
+  url={https://aclanthology.org/P02-1040.pdf}
 }
 
 @article{huang2022exeds,
   title={Execution-based Evaluation for Data Science Code Generation Models},
   author={Huang, Junjie and Wang, Chenglong and Zhang, Jipeng and others},
   journal={arXiv preprint arXiv:2211.09374},
-  year={2022}
+  year={2022},
+  url={https://aclanthology.org/2022.dash-1.5.pdf}
 }
 
 
-@article{rule_based_translation,
-  title={Rule-based Machine Translation},
+
+@book{rule_based_translation,
+  title={Statistical Machine Translation},
   author={Koehn, Philipp},
-  journal={Cambridge University Press},
+  publisher={Cambridge University Press},
   year={2010}
 }
-
-@inproceedings{transpiler_limitations,
-  title={Code Translation with Compiler Representations},
-  author={Szafraniec, Marc and others},
-  booktitle={arXiv preprint arXiv:2207.03578},
-  year={2022}
-}
-
-@article{static_analysis_translation,
-  title={Beyond Accuracy: Evaluating Code Translation Models},
-  author={Zhao, Y. and others},
-  journal={ScienceDirect},
-  year={2025}
-}
-
 
 @inproceedings{seq2seq_original,
   title={Sequence to Sequence Learning with Neural Networks},
   author={Sutskever, Ilya and Vinyals, Oriol and Le, Quoc V.},
-  booktitle={NeurIPS},
-  year={2014}
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2014},
+  url={https://proceedings.neurips.cc/paper_files/paper/2014/file/5a18e133cbf9f257297f410bb7eca942-Paper.pdf}
 }
 
 @article{seq2seq_limitations,
-  title={Learning Phrase Representations using RNN Encoder–Decoder},
-  author={Cho, Kyunghyun and others},
+  title={Learning Phrase Representations using RNN Encoder--Decoder for Statistical Machine Translation},
+  author={Cho, Kyunghyun and van Merri{\"e}nboer, Bart and Gulcehre, Caglar and Bahdanau, Dzmitry and Bougares, Fethi and Schwenk, Holger and Bengio, Yoshua},
   journal={arXiv preprint arXiv:1406.1078},
-  year={2014}
+  year={2014},
+  url={https://www.researchgate.net/publication/262877889_Learning_Phrase_Representations_using_RNN_Encoder-Decoder_for_Statistical_Machine_Translation}
 }
+
 
 @inproceedings{attention_bahdanau,
   title={Neural Machine Translation by Jointly Learning to Align and Translate},
   author={Bahdanau, Dzmitry and Cho, Kyunghyun and Bengio, Yoshua},
-  booktitle={ICLR},
+  booktitle={International Conference on Learning Representations},
   year={2015}
 }
 
+
 @inproceedings{vaswani2017,
   title={Attention Is All You Need},
   author={Vaswani, Ashish and others},
@@ -96,12 +63,12 @@
   year={2017}
 }
 
-
 @inproceedings{vaswani2017,
   title={Attention Is All You Need},
-  author={Vaswani, Ashish and others},
-  booktitle={NeurIPS},
-  year={2017}
+  author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2017},
+  url={https://arxiv.org/abs/1706.03762}
 }
 
 @inproceedings{feng2020codebert,
@@ -111,25 +78,43 @@
   year={2020}
 }
 
+@inproceedings{feng2020codebert,
+  title={CodeBERT: A Pre-Trained Model for Programming and Natural Languages},
+  author={Feng, Zhangyin and Guo, Daya and Tang, Duyu and Duan, Nan and Feng, Xiaocheng and Gong, Ming and Shou, Linjun and Qin, Bing and Liu, Ting and Jiang, Daxin and Zhou, Ming},
+  booktitle={Findings of the Association for Computational Linguistics: EMNLP 2020},
+  pages={1536--1547},
+  publisher={Association for Computational Linguistics},
+  year={2020},
+  url={https://aclanthology.org/2020.findings-emnlp.139/}
+}
+
+
 @inproceedings{guo2020graphcodebert,
   title={GraphCodeBERT: Pre-training Code Representations with Data Flow},
-  author={Guo, Daya and others},
-  booktitle={ICLR},
-  year={2021}
+  author={Guo, Daya and Ren, Shuo and Lu, Shuai and Feng, Zhangyin and Tang, Duyu and Liu, Shujie and Zhou, Long and Duan, Nan and Svyatkovskiy, Alexey and Fu, Shengyu and Tufano, Michele and Deng, Shao Kun and Clement, Colin and Drain, Dawn and Sundaresan, Neel and Yin, Jian and Jiang, Daxin and Zhou, Ming},
+  journal={arXiv preprint arXiv:2009.08366},
+  year={2020},
+  url={https://arxiv.org/pdf/2009.08366}
 }
+
 
 @inproceedings{wang2021codet5,
   title={CodeT5: Identifier-aware Unified Pre-trained Encoder-Decoder Models for Code Understanding and Generation},
-  author={Wang, Yue and others},
-  booktitle={EMNLP},
-  year={2021}
+  author={Wang, Yue and Wang, Weishi and Joty, Shafiq and Hoi, Steven C. H.},
+  booktitle={Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing},
+  pages={8696--8708},
+  publisher={Association for Computational Linguistics},
+  year={2021},
+  url={https://aclanthology.org/2021.emnlp-main.685/}
 }
+
 
 @article{saberi2023model,
   title={Model-Agnostic Syntactical Information for Pre-Trained Programming Language Models},
   author={Saberi, Iman and Fard, Fatemeh H.},
   journal={arXiv preprint arXiv:2303.06233},
-  year={2023}
+  year={2023},
+  url={https://arxiv.org/pdf/2303.06233}
 }
 
 
@@ -140,48 +125,405 @@
   year={2021}
 }
 
+@article{lu2021codexglue,
+  title={CodeXGLUE: A Machine Learning Benchmark Dataset for Code Understanding and Generation},
+  author={Lu, Shuai and Guo, Daya and Ren, Shuo and Huang, Junjie and Svyatkovskiy, Alexey and Blanco, Ambrosio and Clement, Colin B. and Drain, Dawn and Jiang, Daxin and Tang, Duyu and Zhou, Long and Shou, Linjun and Zhou, Ming and Duan, Nan and Sundaresan, Neel and Deng, Shao Kun and Fu, Shengyu and Liu, Shujie and Tufano, Michele and Gong, Ming},
+  journal={arXiv preprint arXiv:2102.04664},
+  year={2021},
+  url={https://arxiv.org/pdf/2102.04664}
+}
+
 @article{zhu2022xlcost,
   title={XLCoST: A Benchmark Dataset for Cross-Lingual Code Intelligence},
-  author={Zhu, Ming and Jain, Aneesh and Suresh, Karthik and others},
+  author={Zhu, Ming and Jain, Aneesh and Suresh, Karthik and Ravindran, Roshan and Tipirneni, Sindhu and Reddy, Chandan K.},
   journal={arXiv preprint arXiv:2206.08474},
-  year={2022}
+  year={2022},
+  url={https://arxiv.org/pdf/2206.08474}
 }
 
 
 
 @article{ren2020codebleu,
   title={CodeBLEU: a Method for Automatic Evaluation of Code Synthesis},
-  author={Ren, Shuo and Guo, Daya and Lu, Shuai and others},
+  author={Ren, Shuo and Guo, Daya and Lu, Shuai and Zhou, Long and Liu, Shujie and Tang, Duyu and Sundaresan, Neel and Zhou, Ming and Duan, Nan},
   journal={arXiv preprint arXiv:2009.10297},
-  year={2020}
-}
-
-@article{huang2022exeds,
-  title={Execution-based Evaluation for Data Science Code Generation Models},
-  author={Huang, Junjie and Wang, Chenglong and Zhang, Jipeng and others},
-  journal={arXiv preprint arXiv:2211.09374},
-  year={2022}
+  year={2020},
+  url={https://arxiv.org/pdf/2009.10297}
 }
 
 
-
-@article{gong2026trace,
-  title={TRACE: Evaluating Execution Efficiency of LLM-Based Code Translation},
-  author={Gong, Zhihao and Sun, Zeyu and Huang, Dong and others},
-  journal={arXiv preprint arXiv:2603.16479},
-  year={2026}
-}
-
-@article{ren2020codebleu,
-  title={CodeBLEU: a Method for Automatic Evaluation of Code Synthesis},
-  author={Ren, Shuo and Guo, Daya and Lu, Shuai and others},
-  journal={arXiv preprint arXiv:2009.10297},
-  year={2020}
-}
 
 @article{evtikhiev2022bleu,
   title={Out of the BLEU: How Should We Assess Quality of the Code Generation Models?},
   author={Evtikhiev, Mikhail and Bogomolov, Egor and Sokolov, Yaroslav and Bryksin, Timofey},
   journal={arXiv preprint arXiv:2208.03133},
-  year={2022}
+  year={2022},
+  url={https://arxiv.org/pdf/2208.03133}
 }
+
+@misc{antlr,
+  title={ANTLR 4 Reference},
+  author={Parr, Terence},
+  year={2013},
+  publisher={Pragmatic Bookshelf}
+}
+
+
+@article{evaluation_limitations,
+  title={On the Evaluation of Neural Code Translation: Taxonomy and Benchmark},
+  author={Jiao, Mingsheng and Yu, Tingrui and Li, Xuan and Qiu, Guanjie and Gu, Xiaodong and Shen, Beijun},
+  journal={arXiv preprint arXiv:2308.08961},
+  year={2023},
+  url={https://arxiv.org/pdf/2308.08961}
+}
+
+@article{correctness_llm,
+  title={LLM-Based Code Translation Needs Formal Compositional Reasoning},
+  author={Anshumaan, Divyam and Chajed, Tej and Chandrasekaran, Varun and Cheung, Alvin and Choudhary, Sarthak and Godbole, Adwait and Jha, Somesh and Palumbo, Nils and Polgreen, Elizabeth and Seshia, Sanjit A. and Zhou, Tianyang},
+  year={2025},
+  url={https://openreview.net/pdf?id=wGj8LU2EOf}
+}
+
+
+
+@article{llm_survey,
+  title={A Survey on Large Language Models for Code},
+  author={Jiang, J. and others},
+  year={2024}
+}
+
+@article{llm_survey,
+  title={A Survey on Large Language Models for Code Generation},
+  author={Jiang, Juyong and Wang, Fan and Shen, Jiasi and Kim, Sungju and Kim, Sunghun},
+  journal={ACM Transactions on Software Engineering and Methodology},
+  year={2025},
+  url={https://arxiv.org/pdf/2406.00515}
+}
+
+
+@article{deepseek_coder,
+  title={DeepSeek-Coder: When the Large Language Model Meets Programming -- The Rise of Code Intelligence},
+  author={Guo, Daya and Zhu, Qihao and Yang, Dejian and Xie, Zhenda and Dong, Kai and Zhang, Wentao and Chen, Guanting and Bi, Xiao and Wu, Y. and Li, Y. K. and Luo, Fuli and Xiong, Yingfei and Liang, Wenfeng},
+  journal={arXiv preprint arXiv:2401.14196},
+  year={2024},
+  url={https://arxiv.org/pdf/2401.14196}
+}
+
+
+@misc{rbmt,
+  title={Rule-Based Machine Translation},
+  author={Wikipedia Contributors},
+  howpublished={Wikipedia},
+  url={https://en.wikipedia.org/wiki/Rule-based_machine_translation},
+  note={Rule-based machine translation (RBMT) is a classical machine translation approach based on manually defined linguistic rules, bilingual dictionaries, and grammar mappings between source and target languages}
+}
+
+@article{traditional_translation_survey,
+  title={Code Translation with Compiler Representations},
+  author={Szafraniec, Marc and Roziere, Baptiste and Leather, Hugh and Charton, Francois and Labatut, Patrick and Synnaeve, Gabriel},
+  journal={arXiv preprint arXiv:2207.03578},
+  year={2022},
+  url={https://arxiv.org/pdf/2207.03578}
+}
+
+@article{transpiler_ast,
+  title={Source-to-Source Translation and Software Engineering},
+  author={David A. Plaisted},
+  year={2013},
+  url={https://content.scirp.org/pdf/JSEA_2013042910293100.pdf}
+}
+
+@article{ngst2,
+  title={Automated Transpilation of Imperative to Functional Code using Neural-Guided Program Synthesis},
+  author={Mariano, B. and others},
+  year={2022},
+  url={https://arxiv.org/pdf/2203.09452}
+}
+
+@article{txl,
+  title={The TXL Programming Language},
+  author={Cordy, James R.},
+  year={2006},
+  url={https://txl.ca/txl-index.html}
+}
+
+@article{rascal,
+  title={The Rascal Meta-Programming Language},
+  author={Klint, Paul and others},
+  year={2009},
+  url={https://www.rascal-mpl.org}
+}
+
+@article{transpiler_survey,
+  title={Transpilers: A Systematic Mapping Review of Their Usage in Software Engineering},
+  author={Bastidas Fuertes, A. and others},
+  year={2023},
+  url={https://www.mdpi.com/2076-3417/13/6/3667}
+}
+
+
+
+@article{deepcoder,
+  title={DeepCoder: Learning to Write Programs},
+  author={Balog, Matej and others},
+  year={2017},
+  url={https://openreview.net/pdf?id=ByldLrqlx}
+}
+
+@article{code2seq,
+  title={code2seq: Generating Sequences from Structured Representations of Code},
+  author={Alon, Uri and others},
+  year={2018},
+  url={https://openreview.net/pdf?id=H1gKYo09tX}
+}
+
+
+@article{starcoder,
+  title={StarCoder: may the source be with you!},
+  author={Li, Raymond and others},
+  journal={Transactions on Machine Learning Research},
+  year={2023},
+  url={https://openreview.net/pdf?id=KoFOg41haE}
+}
+
+@article{qwen_coder,
+  title={Qwen2.5-Coder Technical Report},
+  author={Qwen Team},
+  journal={arXiv preprint},
+  year={2024},
+  url={https://arxiv.org/pdf/2409.12186}
+}
+
+@article{roziere2020transcoder,
+  title={Unsupervised Translation of Programming Languages},
+  author={Roziere, Baptiste and others},
+  journal={NeurIPS},
+  year={2020},
+  url={https://arxiv.org/pdf/2006.03511}
+}
+
+
+
+
+@inproceedings{husain2019codesearchnet,
+  title={CodeSearchNet Challenge: Evaluating the State of Semantic Code Search},
+  author={Husain, Hamel and others},
+  booktitle={ICLR},
+  year={2019},
+  url={https://www.semanticscholar.org/reader/fbe25e4f069a19dc63daca27b7c98cff338663b9}
+}
+
+@article{chen2021codex,
+  title={Evaluating Large Language Models Trained on Code},
+  author={Chen, Mark and others},
+  year={2021},
+  url={https://arxiv.org/pdf/2107.03374}
+}
+
+@article{austin2021mbpp,
+  title={Program Synthesis with Large Language Models},
+  author={Austin, Jacob and others},
+  year={2021},
+  url={https://www.semanticscholar.org/reader/a38e0f993e4805ba8a9beae4c275c91ffcec01df}
+}
+
+
+@article{transformer_limits,
+  title={On Limitations of the Transformer Architecture},
+  author={Binghui Peng, Srini Narayanan, Christos Papadimitriou},
+  year={2024},
+  url={https://arxiv.org/pdf/2402.08164}
+}
+
+@article{long_context_llm,
+  title={Lost in the Middle: How Language Models Use Long Contexts},
+  author={Liu, Nelson F. and others},
+  year={2023},
+  url={https://aclanthology.org/2024.tacl-1.9.pdf}
+}
+
+
+@article{starcoder2,
+  title={StarCoder2 and The Stack v2: The Next Generation},
+  author={Lozhkov, Anton and others},
+  journal={arXiv preprint arXiv:2402.19173},
+  year={2024},
+  url={https://arxiv.org/pdf/2402.19173}
+}
+
+@misc{starcoder2_hf,
+  title={bigcode/starcoder2-3b Model Card},
+  author={BigCode},
+  year={2024},
+  howpublished={Hugging Face},
+  note={Trained on more than 3 trillion tokens across 17 programming languages},
+  url={https://huggingface.co/bigcode/starcoder2-3b}
+}
+
+
+@misc{qwen_coder_report,
+  title={Qwen2.5-Coder Model Card},
+  author={Qwen Team},
+  year={2024},
+  howpublished={Hugging Face},
+  note={Qwen2.5-Coder models are trained on more than 5.5 trillion tokens},
+  url={https://huggingface.co/Qwen/Qwen2.5-Coder-32B}
+}
+
+@article{codeeditorbench,
+  title={CodeEditorBench: Evaluating Code Editing Capability of Large Language Models},
+  author={Guo, Jiawei and others},
+  journal={arXiv preprint arXiv:2404.03543},
+  year={2024},
+  url={https://arxiv.org/pdf/2404.03543,https://github.com/CodeEditorBench/CodeEditorBench}
+}
+
+
+@article{peft_code,
+  title={Delving into Parameter-Efficient Fine-Tuning in Code Change Learning: An Empirical Study},
+  author={Liu, Shuo and Keung, Jacky and Yang, Zhen and others},
+  journal={arXiv preprint arXiv:2402.06247},
+  year={2024},
+  url={https://arxiv.org/pdf/2402.06247}
+}
+
+@misc{lora_modules,
+  title={LoRA Supported Modules},
+  author={Together AI},
+  year={2024},
+  note={Typical target modules include q\_proj, k\_proj, v\_proj, o\_proj, gate\_proj, up\_proj, and down\_proj}
+}
+
+@misc{qwen_lora,
+  title={LoRA Fine-tuning - Qwen Documentation},
+  author={Qwen Team},
+  year={2025},
+  note={Qwen recommends LoRA and QLoRA for efficient fine-tuning of Qwen2.5-Coder models},
+  url={https://mintlify.wiki/QwenLM/Qwen/finetuning/lora}
+}
+
+@misc{qwen_lora_repo,
+  title={Fine-Tuning Qwen2.5-Coder-3B-Instruct with LoRA},
+  author={Zeng, Yijin},
+  year={2025},
+  note={Experiments indicate that LoRA ranks of 8 and 16 provide stable fine-tuning performance},
+  url={https://huggingface.co/docs/optimum-neuron/training_tutorials/finetune_qwen3}
+}
+
+
+@article{tran2019ruby,
+  title={Does BLEU Score Work for Code Migration?},
+  author={Tran, Ngoc and Tran, Hieu and Nguyen, Son and Nguyen, Hoan and Nguyen, Tien N.},
+  journal={arXiv preprint arXiv:1906.04903},
+  year={2019},
+  url={https://arxiv.org/pdf/1906.04903}
+}
+
+@article{codescore2023,
+  title={CodeScore: Evaluating Code Generation by Learning Code Execution},
+  author={Dong, Yihong and Ding, Jiazheng and Jiang, Xue and Li, Ge and Li, Zhuo and Jin, Zhi},
+  journal={arXiv preprint arXiv:2301.09043},
+  year={2023},
+  url={https://openreview.net/pdf/e6e11b18ee748e3bdbad68e8b1a200fa1721c8ca.pdf}
+}
+
+@inproceedings{ice_score,
+  title={ICE-Score: Instructing Large Language Models to Evaluate Code},
+  author={Zhuo, Terry Yue and others},
+  booktitle={Findings of EACL},
+  year={2024},
+  url={https://aclanthology.org/2024.findings-eacl.148.pdf}
+}
+
+@article{hu2021lora,
+  title={LoRA: Low-Rank Adaptation of Large Language Models},
+  author={Hu, Edward J. and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Lu and Chen, Weizhu},
+  journal={arXiv preprint arXiv:2106.09685},
+  year={2021},
+  url={https://arxiv.org/pdf/2106.09685}
+}
+
+@article{mhumaneval,
+  title={mHumanEval -- A Multilingual Benchmark to Evaluate Large Language Models for Code Generation},
+  author={Raihan, Nishat and Anastasopoulos, Antonios and Zampieri, Marcos},
+  journal={arXiv preprint arXiv:2410.15037},
+  year={2025},
+  url={https://aclanthology.org/2025.naacl-long.570.pdf}
+}
+
+
+@article{aljagthami2025prompt,
+  title={Evaluating Large Language Models for Code Translation: Effects of Prompt Language and Prompt Design},
+  author={Aljagthami, Aamer and Banabila, Mohammed and Alshehri, Musab and Kabini, Mohammed and Alahmadi, Mohammad D.},
+  journal={arXiv preprint arXiv:2509.12973},
+  year={2025},
+  url={https://arxiv.org/pdf/2509.12973}
+}
+
+@article{yang2024llm,
+  title={Exploring and Unleashing the Power of Large Language Models in Automated Code Translation},
+  author={Yang, Z. and others},
+  journal={ACM Computing Surveys},
+  year={2024},
+  url={https://arxiv.org/pdf/2404.14646}
+}
+
+@article{chen2025prompt,
+  title={Unleashing the Potential of Prompt Engineering for Large Language Models},
+  author={Chen, B. and others},
+  journal={Nature Machine Intelligence},
+  year={2025},
+  url={https://arxiv.org/pdf/2310.14735}
+}
+
+@article{chen2025dialogue,
+  title={Beyond Code Pairs: Dialogue-Based Data Generation for LLM Code Translation},
+  author={Chen, Le and Xu, Nuo and Chen, Winson and others},
+  journal={arXiv preprint arXiv:2512.03086},
+  year={2025},
+  url={https://arxiv.org/pdf/2512.03086}
+}
+
+@article{zhang2025repository,
+  title={Scalable, Validated Code Translation of Entire Projects using Large Language Models},
+  author={Zhang, Hanliang and David, Cristina and Wang, Meng and Paulsen, Brandon and Kroening, Daniel},
+  year={2025},
+  url={https://arxiv.org/pdf/2412.08035}
+}
+
+@article{bruneel2025pipeline,
+  title={Automated Code Translation using an Engineering-Driven Pipeline Approach of Language Models},
+  author={Bruneel, Tibo and L{\"o}we, Welf and Ericsson, Morgan and Perez-Palacin, Diego and Nordqvist, Jonas},
+  journal={CEUR Workshop Proceedings},
+  year={2025},
+  url={https://ceur-ws.org/Vol-4109/paper5.pdf}
+}
+
+@inproceedings{bahdanau2015,
+  title={Neural Machine Translation by Jointly Learning to Align and Translate},
+  author={Bahdanau, Dzmitry and others},
+  year={2015},
+  url={https://arxiv.org/pdf/1409.0473}
+}
+
+@inproceedings{sutskever2014,
+  title={Sequence to Sequence Learning with Neural Networks},
+  author={Sutskever, Ilya and Vinyals, Oriol and Le, Quoc},
+  year={2014},
+  url={https://proceedings.neurips.cc/paper_files/paper/2014/file/5a18e133cbf9f257297f410bb7eca942-Paper.pdf}
+}
+
+@inproceedings{cho2014,
+  title={Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation},
+  author={Cho, Kyunghyun and others},
+  year={2014},
+  url={https://aclanthology.org/D14-1179.pdf}
+}
+
+
+
+
+
+
+
+

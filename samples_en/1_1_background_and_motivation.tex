@@ -1,4 +1,5 @@
-\section{Background and Motivation}
+\chapter{Introduction}
+\label{ch:intro}
 
 Modern software systems are becoming increasingly complex, often consisting of
 multiple components written in different programming languages. This diversity
@@ -8,56 +9,28 @@ challenge of translating or migrating code between programming languages to
 ensure maintainability, scalability, and long-term sustainability of software
 systems.
 
+\section{Background and Motivation}
+
 One of the main motivations behind code translation is the modernization of
 legacy systems. Many organizations still rely on outdated programming languages,
-which are difficult to maintain and integrate with modern technologies.
-Translating such systems into newer languages can significantly reduce technical
-debt and improve system performance. Additionally, code translation enables
-cross-platform development and reuse of existing solutions, reducing development
-time and cost. This problem has gained increasing importance due to the growing
-demand for multi-language software development \cite{code_translation_survey}.
+which are difficult to maintain and integrate with modern technologies. Translating
+such systems reduces technical debt and enables reuse across platforms [1].
 
-Traditionally, code translation has been performed manually or through
-rule-based tools. These approaches rely on handcrafted mappings between
-programming languages
-%SzB: Erre kéne pár hivatkozás, mondjuk vagy 3 sztem, which are often difficult to generalize and maintain. 
-As software systems grow in size and complexity, these methods become less
-practical. In recent years, deep learning-based approaches have emerged as a
-promising alternative. These methods treat code translation similarly to natural
-language translation, allowing models to learn patterns directly from
-large-scale datasets \cite{code_translation_survey}.
+Traditional approaches relied on rule-based and compiler-driven techniques,
+including grammar-based parsing and abstract syntax tree (AST) transformations
+[2, 3, 4]. While precise, these methods are difficult to maintain and scale to
+complex systems.
 
-The introduction of transformer-based architectures %SzB: Inkább: The introduction of the Transformer \cite{2017-es transzformer cikk}
-has significantly advanced the field. %SzB: És akkor még folytatnám, hogy és akkor ez alapján jöttek az LLM-ek, és ahhoz is jöhet egy pár hivatkozás. Meg aztán írhatod a kódspecifikus llm-eket is kifejezetten (codellama, deepseekcoder, stb), ezeket is hivatkozva
-Modern models are capable of capturing both syntactic and semantic relationships
-in code, enabling more accurate translations.
-%SzB: Kéne cikk hivatkozás ami ezt állítja
-These models are typically trained on large corpora of source code and leverage
-transfer learning to adapt to specific tasks.
-%SzB: Mire gondolsz these models alatt? Be kéne hivatkozni, meg konkretizálni, hogy milyen taskokra gondolsz
-As a result, they can generalize across different programming languages and even
-handle previously unseen scenarios.
-%SzB: Fura: az előbb azt írod, hogy transfer learninggel specializálják a modelleket általánosságban, melynek eredményeként általánosabbá válnak. Ez ellentmondásosan hangzik
+Recent advances in deep learning have introduced data-driven approaches that
+learn translation patterns from large-scale datasets [1]. The introduction of
+the Transformer architecture [5] and large language models (LLMs) has significantly
+improved performance in code-related tasks [6, 7]. Code-specific models such as
+CodeLlama and DeepSeek-Coder further enhance performance in programming tasks [8, 9].
 
-Despite these advancements, automatic code translation remains a challenging
-task. Unlike natural language, programming languages require strict syntactic
-correctness and precise semantic preservation. Even small errors can lead to
-compilation failures or incorrect program behavior. Furthermore, differences in
-programming paradigms, libraries, and runtime environments introduce additional
-complexity. Studies have shown that current large language models still struggle
-to reliably generate correct translations, especially for complex or large-scale
-codebases \cite{llm_limitations}. %SzB: studies-t többes szomba tetted, de csak 1 hivatkozás van. legyen több hivatkozás
+Despite these improvements, automatic code translation remains challenging due
+to strict syntactic and semantic requirements. Small errors can lead to compilation
+failures, and models still struggle with complex codebases [10, 11, 12].
 
-Another important challenge is evaluation. Traditional metrics, such as
-token-level similarity, do not adequately capture the functional correctness of
-translated code. As a result, recent research has shifted towards
-execution-based evaluation methods, where translated programs are tested using
-predefined test cases. These approaches provide a more realistic assessment of
-model performance but also highlight the limitations of current techniques.
-
-%All in all nem elég formális. Meg szerintem felesleges ez az összefoglaló jellegű section
-All in all, the rapid development of deep learning and large language models has
-created new opportunities for automating code translation. However, significant
-challenges remain, particularly in ensuring correctness, scalability, and
-robustness. These challenges motivate further research in this area and form the
-foundation of this thesis.
+Another key challenge is evaluation. Traditional metrics such as BLEU do not
+reflect functional correctness, motivating the use of execution-based evaluation
+methods.

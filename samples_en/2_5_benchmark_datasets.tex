@@ -1,0 +1,24 @@
+\section{Benchmark Datasets and Evaluation for Code Translation}
+
+In addition to training datasets, benchmark datasets play a crucial role in the
+evaluation of code translation models. These benchmarks provide standardized
+tasks, datasets, and evaluation protocols, enabling fair comparison between
+different approaches.
+
+CodeXGLUE also serves as a benchmark framework, offering predefined splits and
+evaluation metrics for code translation and related tasks \cite{lu2021codexglue}.
+Its standardized setup allows researchers to compare models under consistent
+conditions.
+
+More recently, execution-based benchmarks have gained importance in evaluating
+code translation systems. These benchmarks assess generated code by compiling and
+executing it against test cases, providing a more realistic measure of functional
+correctness. For example, datasets such as HumanEval and MBPP are widely used to
+evaluate code generation models using execution-based metrics \cite{chen2021codex,
+austin2021mbpp}.
+
+In the context of code translation, execution-based evaluation is particularly
+important, as it captures whether the translated code behaves correctly rather
+than only measuring syntactic similarity. This approach aligns with recent trends
+in the field, where functional correctness is considered a more reliable indicator
+of model performance compared to traditional similarity-based metrics.

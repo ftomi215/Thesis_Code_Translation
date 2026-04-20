@@ -54,8 +54,6 @@
 \tableofcontents
 \cleardoublepage
 
-\chapter{Introduction}
-\label{ch:intro}
 
 %SzB: az intro ne rögtön subsectionnel kezdődjön. Legyen bevezető szöveg. Ez
 %minden chapterre igaz. Meg a section-ökre is: ha van section, ne kezdődjüön
@@ -75,14 +73,9 @@
 
 \input{samples_en/1_4_research_questions.tex}
 
-\textcolor{red}{
-\input{samples_en/1_5_structure}
+
 \cleardoublepage
-}
 
-
-\chapter{Related work}
-\label{ch:rel_work}
 
 
 \input{samples_en/2_1_traditional.tex}
@@ -91,48 +84,52 @@
 \input{samples_en/2_2_deep_learning.tex}
 
 \input{samples_en/2_3_transformers.tex}
-\input{samples_en/2_4_dataset.tex}
-
-\input{samples_en/2_5_evaluation.tex}
-
-\input{samples_en/2_6_limitations.tex}
-
-\input{samples_en/2_7_summary_and_research_gap.tex}
-
+\input{samples_en/2_4_training_datasets.tex}
+\input{samples_en/2_5_benchmark_datasets.tex}
+\input{samples_en/2_6_evaluation.tex}
 \cleardoublepage
 
+
+\input{samples_en/3_1_experimental_setup.tex}
+\input{samples_en/3_2_datasets.tex}
+\input{samples_en/3_3_models_used.tex}
+\input{samples_en/3_4_code_translation_pipeline.tex}
+\input{samples_en/3_5_evaluation_procedure.tex}
+\cleardoublepage
+
+
+\input{samples_en/4_1_Overview.tex}
+\input{samples_en/4_2_bleu.tex}
+\input{samples_en/4_3_execution_based.tex}
+\input{samples_en/4_4_relationship.tex}
+\input{samples_en/4_5_summary.tex}
+\cleardoublepage
+
+\input{samples_en/5_1_interpretation.tex}
+\input{samples_en/5_2_relation.tex}
+\input{samples_en/5_3_practica_implications.tex}
+\input{samples_en/5_4_limitations}
+\input{samples_en/5_5_future.tex}
+\cleardoublepage
+
+
+\input{samples_en/6_1_Conclusion.tex}
+
+
+
+\cleardoublepage
 % Bibliography (mandatory)
 \phantomsection
 \addcontentsline{toc}{chapter}{\biblabel}
 \printbibliography[title=\biblabel]
 \cleardoublepage
 
-% List of figures (optional) - useful over 3-5 figures
-\phantomsection
-\addcontentsline{toc}{chapter}{\lstfigurelabel}
-\listoffigures
-\cleardoublepage
 
 % List of tables (optional) - useful over 3-5 tables
 \phantomsection
 \addcontentsline{toc}{chapter}{\lsttablelabel}
 \listoftables
 \cleardoublepage
-
-% List of algorithms (optional) - useful over 3-5 algorithms
-\phantomsection
-\addcontentsline{toc}{chapter}{\lstalgorithmlabel}
-\listofalgorithms
-\cleardoublepage
-
-% List of codes (optional) - useful over 3-5 code samples
-\phantomsection
-\addcontentsline{toc}{chapter}{\lstcodelabel}
-\lstlistoflistings
-\cleardoublepage
-
-% List of symbols (optional)
-%\printnomenclature
 
 
 

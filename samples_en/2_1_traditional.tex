@@ -1,3 +1,17 @@
+\chapter{Related Work}
+\label{ch:rel_work}
+
+This chapter reviews the main approaches to automatic code translation, starting
+from traditional rule-based techniques to modern deep learning-based methods.
+First, classical approaches based on handcrafted rules and compiler techniques
+are presented. Then, the theoretical foundations of neural approaches are
+introduced, followed by a discussion of Transformer-based models for code
+understanding and generation.
+
+Finally, the chapter summarizes the datasets and evaluation methodologies used
+in code translation research, with a particular focus on execution-based
+evaluation methods that are central to this thesis.
+
 \section{Traditional Approaches to Code Translation}
 
 %SzB: több hivatkozás kellene. Meg konkrétabb beszámoló részek is kellenek.
@@ -6,35 +20,39 @@
 % és akkor ebből sok...
 
 Before the rise of data-driven methods, code translation was primarily addressed
-using rule-based and compiler-driven techniques. %hivatkoás hiányzik innen. mindent azonnal alá kell támasztani
-Rule-based approaches rely on manually defined transformation rules that map
-constructs between programming languages. These systems are typically based on
-pattern matching and linguistic or syntactic rules, ensuring deterministic and
-interpretable outputs. However, creating and maintaining such rules requires
-significant manual effort and does not scale well to complex or evolving
-codebases \cite{rule_based_translation}. %ez a hivatkozás szövegkörnyezet alapján a manual effort nagyságáról és a skálázhatóság nehézségéről szól. Ha így van, maradhat.
-%SzB: kb. ugyanazt olvasom itt, mint az introba. Introban rövidíteni kellene
+using rule-based and compiler-driven techniques \cite{rule_based_translation,
+antlr, transpiler_survey}. Rule-based approaches rely on manually defined
+transformation rules that map constructs between programming languages, often
+using pattern matching and syntax-driven transformations. For example, tools
+such as ANTLR-based translators use grammar definitions to parse source code
+into abstract syntax trees (ASTs), which are then transformed into target
+language representations \cite{antlr}. Similarly, source-to-source translators
+such as TXL provide rule-based transformation systems where programs are
+rewritten using explicitly defined transformation rules \cite{txl}. Another
+example is Rascal, a meta-programming language designed for source code analysis
+and transformation using declarative rules \cite{rascal}.
 
-Another class of traditional solutions includes compiler-based %Szb: biztos jó itt? A compiler-based és compiler-driven nem ugyanaz? Nem látom a különbséget a név alapján. Valami itt kell
-approaches and transpilers. These methods convert source code from one language
-to another using intermediate representations such as abstract syntax trees
-(ASTs) or compiler-level structures. While transpilers can provide reliable
-translations for well-defined patterns, they often depend on handcrafted rules
-and syntactic mappings, which limits their flexibility and may result in
-unnatural or suboptimal code \cite{transpiler_limitations}. Furthermore,
-handling semantic differences between programming languages remains a
-significant challenge.
+Such systems are closely related to classical rule-based machine translation,
+where linguistic rules and dictionaries are explicitly defined \cite{rbmt}.
 
-In addition, static analysis-based approaches have been used to support code
-translation by examining program structure, control flow, and dependencies.
-These techniques aim to preserve correctness by analyzing the behavior of the
-source program before generating the target code. Despite their advantages,
-static methods struggle to capture all semantic nuances of modern software
-systems and are often insufficient when dealing with complex or highly dynamic
-code \cite{static_analysis_translation}.
+Another class of traditional solutions is source-to-source compilation
+(transpilation). For example, Wang et al. describe rule-based code translation
+systems that transform source programs using intermediate representations such
+as abstract syntax trees (ASTs), enabling deterministic transformations between
+languages \cite{traditional_translation_survey}. Similarly, modern transpilers
+follow a structured pipeline where the source code is parsed into an AST,
+transformed, and then regenerated in the target language, ensuring algorithmic
+equivalence \cite{transpiler_ast}. These approaches can produce reliable results
+for well-defined patterns, but their performance is limited when handling more
+complex or less structured code.
 
-In general, traditional approaches provide precise and predictable results but
-lack scalability and generalizability capabilities. These limitations have led
-to the increasing adoption of learning-based methods, which are discussed in the
-following sections.
-%Szb: ne foglalj mindent össze
+In addition, several works have shown that handcrafted rule-based systems are
+expensive to develop and difficult to scale. For instance, Mariano et al.
+demonstrate that rule-based transpilation approaches can only handle stylized
+code patterns and struggle with more general programs, highlighting their lack
+of scalability \cite{ngst2}. This limitation becomes more pronounced as software
+systems grow in size and complexity.
+
+As a result, traditional approaches, while precise and interpretable, are
+generally limited in their ability to generalize across diverse programming
+languages and real-world codebases.

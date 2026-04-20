@@ -3,9 +3,10 @@
 The primary objective of this thesis is to investigate the effectiveness of deep
 learning-based approaches for automatic source code translation, with a
 particular focus on the impact of model fine-tuning and evaluation
-methodologies. While pre-trained models provide strong baseline performance, %SZB: miért pont a pretrained modelleket emeled ki? Sztem a pretrainelt és finetuned modellek még annál is jobban
-it remains an open question to what extent fine-tuning can improve translation
-quality in terms of both syntactic accuracy and functional correctness.
+methodologies. While modern large language models achieve strong performance in
+code-related tasks, it remains an open question to what extent fine-tuning can
+further improve translation quality in terms of both syntactic accuracy and
+functional correctness.
 
 To address this, the thesis aims to analyze and compare the performance of base
 and fine-tuned models on code translation tasks. In addition, multiple models
@@ -14,37 +15,15 @@ strengths, limitations, and differences in behavior.
 
 A key objective of this work is to examine the relationship between traditional
 similarity-based evaluation metrics and execution-based evaluation methods.
-%SzB: ez új nekem, de nagyon jó ötlet megvizsgálni pl. a korrelációt a kettő közt, meg pl. statisztiokai teszteket végezni. Ilyesmit már csináltak, érdemes behivatkozni őket. És kicsit jobban kiemelni ezt az aspektust
 Metrics such as BLEU are widely used due to their simplicity and efficiency, but
 they do not necessarily reflect whether the generated code is correct from a
-functional perspective. Therefore, this thesis places strong emphasis on
-execution-based evaluation, where the generated code is compiled and tested
-using predefined test cases. %SzB: ezt már írtad
+functional perspective \cite{bleu_metric}. Prior work has shown that similarity-
+based metrics often correlate poorly with functional correctness, motivating the
+use of execution-based evaluation methods \cite{evaluation_limitations,
+huang2022exeds}. In this context, this thesis also investigates the relationship
+between these evaluation approaches.
 
-To achieve these goals, the thesis includes the implementation of a practical
-code translation pipeline. %SzB: nem, mert a thesis csak egy pdf, nem kell csatolmányt feltenni
-This involves selecting an appropriate dataset,
-preparing the data for training, and applying fine-tuning techniques to adapt
-the model to the translation task. Special attention is given to ensuring that
-the experimental setup reflects realistic conditions and allows for fair
-comparison between models. %SzB: hogyan?
-
-Another important objective is the analysis of the results obtained during
-evaluation. %SzB: ezt így nem szokás. ez nem egy objective. A kiértékelés csak egy kötelező része a munkafolyamatnak, nem egy különálló célja.
-This includes identifying common error types, such as syntactic
-errors, semantic inconsistencies, and logical mistakes in the translated code.
-Understanding these errors provides insight into the limitations of current
-models and helps to explain differences between base and fine-tuned performance.
-
-%SzB: nem kell summary, hanem az egészet le kell rövidíteni. Valahol a lenti és az efeletti között lenne félúton az ideális hossz
-In summary, the objectives of this thesis can be formulated as follows:
-
-\begin{itemize}
-    \item To compare the performance of base and fine-tuned code translation models.
-    \item To evaluate multiple models using both similarity-based (BLEU) and execution-based methods.
-    \item To investigate whether fine-tuning improves functional correctness of translated code.
-    \item To analyze common error patterns in generated translations. %SzB: EZt sztem fentebb nem írtad, fura, hogy megjelenik a summary-ben
-    \item {\color{red}
-    To assess the effectiveness of execution-based evaluation tools such as CodeEvalBench.
-    }
-\end{itemize}
+To achieve these goals, the thesis defines an experimental setup in which models
+are trained and evaluated on a common dataset, using consistent preprocessing and
+evaluation procedures. This ensures a fair comparison between models and between
+base and fine-tuned variants.

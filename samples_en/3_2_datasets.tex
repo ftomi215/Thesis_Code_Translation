@@ -1,0 +1,72 @@
+\section{Dataset}
+
+Two different datasets were used in this work: one dataset for model training
+and fine-tuning, and a separate dataset for evaluation.
+
+\subsection{Training Dataset}
+
+The fine-tuned models were trained using the XLCoST dataset. XLCoST
+(Cross-Lingual Code Snippet Dataset) is a large-scale benchmark designed for
+cross-lingual code intelligence tasks, including code translation, code
+summarization, and code search \cite{zhu2022xlcost}.
+
+XLCoST contains parallel code snippets in seven programming languages:
+C++, Java, Python, C\#, JavaScript, PHP, and C. In addition, the dataset also
+includes aligned English descriptions. The dataset provides both snippet-level
+and program-level parallel examples, making it suitable for supervised code
+translation tasks. Given a code sample in one language, the dataset often
+contains the same implementation in several other programming languages
+\cite{zhu2022xlcost}.
+
+For this thesis, only the Java-to-C++ portion of XLCoST was used. The training
+notebooks load the original dataset splits and filter them to retain only Java
+source code and the corresponding C++ target code. These code pairs are then
+formatted into instruction-style prompts and used for supervised fine-tuning.
+
+The Java-to-C++ translation direction was selected because both languages are
+widely used, differ significantly in syntax and memory management, and are
+commonly included in code translation benchmarks. In addition, Java and C++
+examples are well represented in XLCoST, allowing the fine-tuned models to
+learn from a sufficiently large number of aligned training examples.
+
+One of the main advantages of XLCoST is its multilingual nature. Unlike smaller
+translation datasets that only support one or two language pairs, XLCoST
+contains fine-grained parallel data across multiple languages and supports ten
+different cross-lingual tasks. The dataset contains more than one million
+parallel code pairs across all supported languages, making it one of the
+largest publicly available datasets for cross-lingual code intelligence
+\cite{zhu2022xlcost}. 
+
+\subsection{Evaluation Dataset}
+
+A separate evaluation dataset was used to assess model performance after
+training. Instead of evaluating only on the original XLCoST test split, this
+thesis uses the CodeEditorBench framework for execution-based evaluation.
+
+CodeEditorBench is a benchmark designed to evaluate code editing capabilities
+of large language models in realistic software engineering scenarios
+\cite{codeeditorbench}. It includes tasks such as debugging, code polishing,
+requirement switching, and code translation. Unlike traditional benchmarks that
+focus only on token-level similarity, CodeEditorBench evaluates whether the
+generated code behaves correctly when executed.
+
+For the purposes of this thesis, only the code translation subset of
+CodeEditorBench was used. The models receive Java input code and are required
+to generate the corresponding C++ translation. The generated output is then
+compiled and tested using the execution framework provided by
+CodeEditorBench.
+
+The evaluation process was performed inside a Docker container using the
+official CodeEditorBench environment. This ensures that all generated code is
+tested under consistent conditions, including the same compiler versions,
+runtime dependencies, and execution settings.
+
+In addition to execution-based evaluation, BLEU score was also computed for the
+generated translations. This makes it possible to compare similarity-based and
+execution-based evaluation methods on the same set of examples.
+
+Using separate datasets for training and evaluation helps reduce the risk of
+data leakage and provides a more realistic assessment of model performance.
+While XLCoST is primarily used to teach the model how to translate code,
+CodeEditorBench is used to measure whether the translated code is actually
+correct and executable.
