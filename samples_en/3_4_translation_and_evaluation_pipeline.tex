@@ -2,31 +2,31 @@
 
 The translation and evaluation process followed a consistent pipeline for both
 the base and fine-tuned models. First, Java--C++ code pairs were loaded from
-XLCoST and was filtered to retain
-only Java-to-C++ translation examples. The Java code served as the input, while
-the corresponding C++ code was used as the target output.
+XLCoST and was filtered to retain only Java-to-C++ translation examples. The
+Java code served as the input, while the corresponding C++ code was used as the
+target output.
 
 The selected code pairs were then converted into an instruction-style prompt
-format suitable for causal language models. During training, the
-expected C++ translation was appended to the prompt so that the model could
-learn the mapping between the two programming languages. Prompt-based training
-has become common in code translation because it aligns well with
-instruction-tuned large language models and improves the consistency of the
-generated outputs \cite{aljagthami2025prompt}.
+format suitable for causal language models. During training, the expected C++
+translation was appended to the prompt so that the model could learn the mapping
+between the two programming languages. Prompt-based training has become common
+in code translation because it aligns well with instruction-tuned large language
+models and improves the consistency of the generated outputs
+\cite{aljagthami2025prompt}.
 
 After preprocessing, the models generated C++ translations from the Java input
-code samples contained in the CodeEditorBench dataset. The generated outputs were then
-post-processed to remove markdown code fences, explanations, and any additional
-text outside the generated C++ code.
+code samples contained in the CodeEditorBench dataset. The generated outputs
+were then post-processed to remove markdown code fences, explanations, and any
+additional text outside the generated C++ code.
 
-The generated translations were evaluated using both similarity-based and
-execution-based approaches. First, BLEU score was computed by comparing the
-generated C++ output against the reference \texttt{target\_code} solution from
-the evaluation dataset.
+The generated translations were %szb: nem csak ide írom, de a módszerről ink. jelen időbe kéne írni sztem. Itt még csak leírod mit kell csinálni, aztán a results az, amiben már múlt idő bejöhet.
+evaluated using both similarity-based and execution-based approaches. First,
+BLEU score was computed by comparing the generated C++ output against the
+reference \texttt{target\_code} solution from the evaluation dataset.
 
 Execution-based evaluation was then performed using the CodeEditorBench
 framework.
 
-For each model, both BLEU scores and execution-based metrics were collected.
-The results were compared across the base and fine-tuned variants of StarCoder2
-and Qwen in order to analyze the effect of fine-tuning.
+For each model, both BLEU scores and execution-based metrics were collected. The
+results were compared across the base and fine-tuned variants of StarCoder2 and
+Qwen in order to analyze the effect of fine-tuning.

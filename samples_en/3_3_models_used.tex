@@ -29,7 +29,7 @@ Qwen2.5-Coder-3B-Instruct & 3.09B & 32,768 & 5.5T+ & Yes \\
 \label{tab:model_overview}
 \end{table}
 
-\subsection{Base Models}
+\subsection{Base Models} %szb: ne használd a base modellt, mert a qwen modell instruction-tuned. Lehet, hogy csak simán hagyd el a subsection-öket
 
 The first set of experiments used the original pre-trained versions of both
 models without additional task-specific training.
@@ -52,14 +52,17 @@ tokens. Qwen2.5-Coder models are optimized for programming-related tasks such
 as code generation, reasoning, debugging, and repair \cite{qwen_coder,
 qwen_coder_report}.
 
+%szb: itt elgondolkoztam... A prompt-od, amit fentebb írsz, nem instrukciós kérdés/válaszos jellegű... Ez nyílván okés starcoderhez, de a qwencodert ugye a saját chat template-jével promptolod kiértékeléskor meg tanításkor?
+
 \subsection{Fine-Tuned Models}
 
 In addition to the original pre-trained models, fine-tuned variants of both
-StarCoder2 and Qwen2.5-Coder were prepared for the Java-to-C++ translation
-task. Fine-tuning was performed using Low-Rank Adaptation (LoRA), which adds
-small trainable matrices to selected layers of the model while keeping the
-original weights frozen \cite{hu2021lora}. This significantly reduces the
-number of trainable parameters and makes fine-tuning more efficient.
+StarCoder2 and Qwen2.5-Coder %szb: légy következetes a nevekben, a méret és a tuning is a név része - főleg azért, hogy nehogy azt higgye az olvasó, hogy it ttényleg a base-modelről van szó (hiszen annak a nevében ugyancsak nincs ott az instruct szócska)
+were prepared for the Java-to-C++ translation task. Fine-tuning was performed
+using Low-Rank Adaptation (LoRA), which adds small trainable matrices to
+selected layers of the model while keeping the original weights frozen
+\cite{hu2021lora}. This significantly reduces the number of trainable parameters
+and makes fine-tuning more efficient.
 
 Both models were fine-tuned using 4-bit quantization together with LoRA, which
 corresponds to the QLoRA approach. In this setup, the original model weights

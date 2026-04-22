@@ -6,37 +6,46 @@ particular focus on the effect of fine-tuning and the reliability of different
 evaluation methods. Although modern large language models already perform well
 on many code-related tasks, it is still unclear to what extent fine-tuning can
 improve translation quality in terms of both syntactic accuracy and functional
-correctness.
+correctness. %szb: ez miért unclear? indokolni kéne, pl. kevés study van róluk, kevés benchmark, vagy ilyesmik - és persze beciteolni azokat, amik vannak, vagy mégjobb, beciteolni azt, hogy más unclear-nak nevezi ezt
 
-To address this problem, the thesis compares base and fine-tuned versions of
+To address this problem, the thesis compares base and fine-tuned versions of %szb: lehetne egyértelműség kedvéért kicsit explicitebb, hogy miben hasonlítod őket össze
 multiple code-oriented language models under the same experimental conditions.
-The models are fine-tuned on the Java-to-C++ portion of the XLCoST dataset and
-evaluated on the CodeEditorBench benchmark using consistent preprocessing,
-prompting, and evaluation procedures. This setup makes it possible to compare
-different model architectures as well as the impact of fine-tuning in a fair
-and reproducible way.
+The models are fine-tuned on the Java-to-C++ portion of the XLCoST dataset %szb: cite lemaradt 
+and evaluated on the CodeEditorBench benchmark %szb: cite lemaradt
+using consistent preprocessing, prompting, and evaluation procedures. This setup
+makes it possible to compare different model architectures as well as the impact %szb: itt nem kéne már picit explicitebbnek lenni? nem tudom...
+of fine-tuning in a fair and reproducible way.
 
-A further objective is to investigate the relationship between
-similarity-based metrics and execution-based evaluation methods. Previous
-studies have shown that metrics such as BLEU often correlate poorly with
-functional correctness, motivating the use of execution-based evaluation
-\cite{evaluation_limitations, huang2022exeds}. This thesis therefore examines
-both types of evaluation in order to obtain a more complete picture of code
-translation quality.
+A further objective is to investigate the relationship between similarity-based
+metrics and execution-based evaluation methods. Previous studies have shown that
+metrics such as BLEU often correlate poorly with functional correctness,
+motivating the use of execution-based evaluation \cite{evaluation_limitations,
+huang2022exeds}. This thesis therefore examines both types of evaluation in
+order to obtain a more complete picture of code translation quality. %szb: le kéne írni, hogyan történik az examination
 
 Based on these objectives, the thesis is guided by the following research
 questions:
 
+%szb: amúgy most elgondolkoztam... az RQ1 meg 2 az nem ugyanaz?
+% hisz egy translation akkor helyes, ha megőrzi a működést. A modell translation effectiveness-t pedig úgy mérjük, hogy ez hánszor történik
 \begin{itemize}
-    \item \textbf{RQ1: How effective are deep learning models in translating
+    \item \textbf{RQ1: How effective are deep learning models in translating %szb: lehetne konkretizálni, hogy llm, hisz az van fókuszban
     source code between programming languages?}
 
-    \item \textbf{RQ2: To what extent do these models preserve the functional
-    correctness of the original code?}
+    \item \textbf{RQ2: To what extent do these models preserve the functional %szb: nem tudom, hogy a preserve biztos jó szó-e... Esetleg transfer behaviour? vagy ilyesmi? am maradhat ha nincs jó ötlet
+    correctness of the original code?} 
 
     \item \textbf{RQ3: How effective are execution-based evaluation methods
-    compared to traditional similarity-based metrics?}
+    compared to traditional similarity-based metrics?} %szb: nem jó sztem a szóhasználat: effective a modellekre használandó sztem, itt inkább az a kérdés, hogy:
+    %a tradicionális metrikák mennyire jók, illetve hogyan viszonyulnak az execution-based metrikákhoz?
+    %kb ez, nem? nem biztos
 
     \item \textbf{RQ4: What types of errors are most commonly produced by deep
     learning models during code translation?}
 \end{itemize}
+%ja, és hiányolom a finetuning aspektusát is a rq-kból
+%kicsit szkeptikus vagyok ezekkel a kérdésekkel kapcsolatban, bocsána,t hogy csak most írom. javaslok alternatívákat:
+% 1 - how effective are current small language models in code translation
+% 2 - to what extent can fine tuning improve their translation abilities
+% 3 - What types of errors are most commonly produced
+% 4 - How well do traditional metrics (such as bleu) estimate the effectiveness of translation llms and how do they relate to execution-based evaluation

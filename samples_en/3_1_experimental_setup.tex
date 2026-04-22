@@ -1,17 +1,17 @@
 \chapter{Methodology}
 
-This chapter describes the experimental methodology used to evaluate deep
-learning-based code translation models. The study focuses on comparing models
-under a unified experimental setup, using both similarity-based and
-execution-based evaluation techniques.
+This chapter describes the experimental methodology %szb: sztem nem kell experimental csak methodology
+used to evaluate deep learning-based code translation models. The study focuses
+on comparing models under a unified experimental setup, using both
+similarity-based and execution-based evaluation techniques.
 
 Code translation outputs are evaluated using BLEU score as a similarity-based
-metric, while functional correctness is assessed with the CodeEditorBench
-framework, which assesses model performance on practical coding tasks such as
-translation and debugging, providing a more realistic measure of functional
-correctness.
+metric, while functional correctness %szb: mintha szembeállítanád, mintha ez nem vonatkozna a Code translation outputs kategóriába. De igen, hisz ezekkel is ezt értékeled
+is assessed with the CodeEditorBench framework, which assesses model performance
+on practical coding tasks such as translation and debugging, providing a more
+realistic measure of functional correctness.
 
-The following sections detail the experimental setup, models, dataset, translation
+The following sections detail the experimental setup, models, dataset, translation %szb: jelzők jöhetnének: milyen models (finethined), milyen dataset? (training) ilyesmi
 pipeline, and evaluation procedure.
 
 \section{Experimental Setup}
@@ -23,25 +23,28 @@ code-specific large language models were selected for evaluation: the
 \texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model \cite{qwen_coder}.
 
 For both models, two experimental variants were prepared. The first
-variant used the original pre-trained model without additional task-specific
-adaptation. The second variant used a fine-tuned version of the same model,
-trained specifically for Java-to-C++ code translation. This setup enables a
-direct comparison between base and fine-tuned models, making it possible to
-analyze the impact of task-specific adaptation on translation quality.
+variant used the original pre-trained model %szb: ez így megtévesztő, ugyanis az általad használt Qwen az már finetuneolt modell, így kicsit fura original pre-trained-ként jellemezni. Ink azt írd, hogy original models without any custom/specific funetuning/posttraining for code-transformation, vagy vmi ilyesmi, és akk egyértelmű, hogy itt a te saját finetuningodra gondolsz
+without additional task-specific adaptation. The second variant used a
+fine-tuned version of the same model, trained specifically for Java-to-C++ code
+translation. This setup enables a direct comparison between base %szb: ugyanígy, ne hívd base modellnek, mert az sokszor azt jelenti, hogy a nem instrukciókövetésr ehangolt modell
+and fine-tuned models, making it possible to analyze the impact of task-specific
+adaptation on translation quality.
 
 
-The experiments focus exclusively on Java-to-C++ translation. This direction
-was selected because Java and C++ represent two widely used but substantially
+The experiments focus exclusively on Java-to-C++ translation. This direction was
+selected because Java and C++ represent two widely used but substantially
 different programming languages. Java relies on automatic garbage collection,
 the Java Virtual Machine and higher-level abstractions, while C++ requires
-manual memory management and provides lower-level control over system resources. These differences make Java-to-C++ translation more challenging than translation between more closely related languages. 
-In addition, the XLCoST dataset used for fine-tuning in this thesis contains aligned Java and
-C++ code pairs, and the CodeEditorBench framework supports evaluation of this
-language pair, allowing consistent comparison across all models.
+manual memory management and provides lower-level control over system resources.
+These differences make Java-to-C++ translation more challenging than translation
+between more closely related languages. In addition, the XLCoST dataset used for
+fine-tuning in this thesis contains aligned Java and C++ code pairs, and the
+CodeEditorBench framework supports evaluation of this language pair, allowing
+consistent comparison across all models.
 
 The experimental workflow consisted of two main phases. In the first phase, the
-base models were evaluated directly on the Java-to-C++ translation task in
-order to measure their original performance without additional task-specific
+base models were evaluated directly on the Java-to-C++ translation task in order
+to measure their original performance without additional task-specific
 adaptation. For each Java input sample, the model generated a C++ translation.
 The generated output was then compared against the reference
 \texttt{target\_code} provided in the CodeEditorBench dataset in order to
@@ -54,19 +57,22 @@ translation and evaluated again using the identical procedure. This made it
 possible to directly compare the performance of the base and fine-tuned
 variants.
 
-The XLCoST dataset \cite{zhu2022xlcost} was used as the primary training
-resource for the fine-tuned models. XLCoST contains aligned code snippets
-across multiple programming languages, including Java and C++, making it
-suitable for supervised code translation tasks. The Java--C++ pairs were first
-extracted and transformed into instruction-based prompts, then tokenized and
-prepared for training. Fine-tuning was performed using parameter-efficient
-methods in order to reduce hardware requirements and training time while still
-allowing the models to adapt to the translation task.
+The XLCoST dataset \cite{zhu2022xlcost} %szb: elég csak első említéskor hivatkozni - ez mindenre is igaz
+was used as the primary training resource for the fine-tuned models. XLCoST
+contains aligned code snippets across multiple programming languages, including
+Java and C++, making it suitable for supervised code translation tasks. The
+Java--C++ pairs were first extracted and transformed into instruction-based
+prompts, then tokenized and prepared for training. Fine-tuning was performed
+using parameter-efficient methods in order to reduce hardware requirements and
+training time while still allowing the models to adapt to the translation task.
 
-The StarCoder2-3B model \cite{starcoder2, starcoder2_hf} was selected because it provides strong coding capabilities while remaining relatively lightweight compared to larger code
-models. StarCoder2 models are trained on trillions of tokens collected from
-large-scale code corpora. The 3B variant was trained on more than 3 trillion
-tokens and, at the time of its release, outperformed several other code models of similar size.
+%szb: ez a kövi 2 bekezdés mehetne 1be, és akkor valahogy úgy bevezetni inkább, hogy "As mentioned above, one of the two models selected for the experiments is StarCoder, ... which was selected"
+The StarCoder2-3B model \cite{starcoder2, starcoder2_hf} was selected because it
+provides strong coding capabilities while remaining relatively lightweight
+compared to larger code models. StarCoder2 models are trained on trillions of
+tokens collected from large-scale code corpora. The 3B variant was trained on
+more than 3 trillion tokens and, at the time of its release, outperformed
+several other code models of similar size.
 
 The Qwen2.5-Coder-3B-Instruct model was selected because it is specifically
 optimized for programming-related tasks and has demonstrated strong results on
@@ -129,7 +135,7 @@ of 1024 tokens were used for all models. During inference, generation was
 performed with a maximum of 900 new tokens, a repetition penalty of 1.10,
 \texttt{top\_p=0.95}, and \texttt{temperature=0.2}. Greedy decoding was used
 with \texttt{do\_sample=False} in order to ensure deterministic outputs across
-repeated runs.
+repeated runs. %szb: picit fura, ha nemnulla a temperature, akkor a do\_sample true szokott lenni. De mostmár ne értékeld persze újra ki az egészet... De lehet, hogy kivenném a do_sample-t, nehogy kérdéseket vessen fel.
 
 After generation, all outputs were postprocessed using the same cleaning
 pipeline. This step removed markdown code fences, duplicated prompt fragments,

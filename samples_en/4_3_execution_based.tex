@@ -27,12 +27,14 @@ Qwen Fine-Tuned & 168 & 96 & 9 & 219 \\
 \end{table}
 
 The number of accepted solutions increased significantly after fine-tuning for
-both model families.
+both model families. %szb: ugyanaz, amit az előbb írtam
 
 For StarCoder2, the number of accepted translations increased from 55 for the
 base model to 133 for the fine-tuned model. This corresponds to an improvement
 of approximately 142\%. At the same time, the number of compilation errors
 decreased from 390 to 287.
+
+%szb: ezekből a részekből (egész results) abszolút hivatkoznak a hivatkozások, vagyis olyanok hogy Table X shows the results of ...
 
 The Qwen models achieved stronger performance overall. The base Qwen model
 produced 101 accepted solutions, while the fine-tuned version reached 168
@@ -42,6 +44,10 @@ Compilation errors also decreased substantially, from 324 to 219.
 Compilation error remained the most frequent failure type for all evaluated
 models. Even after fine-tuning, compilation errors represented the largest
 portion of failed translations. 
+
+%szb: fura, mert efelett már írsz az error type-kről, majd a kövi subsection-ban is. Ha már mindenképp ketté akarjuk bontani, akk a következőképpen: 
+%- puszta eredmények, melyik modell hogy teljesített, minden error-t egyként kezelve
+% - rontások különböző fajtái (error types)
 
 
 

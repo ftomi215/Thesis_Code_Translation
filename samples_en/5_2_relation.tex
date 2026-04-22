@@ -1,5 +1,8 @@
 \section{Relation to Previous Research}
 
+%szb: ennél sokkal sokkal sokkal precízebb és pontosabb vizsgálat elvárt:
+% melyik munka mit mondott, te ehhez képest mit vettél észre, hogy viszonyul egymáshoz a két eredmény: egyetért? uyanazt mondja? ellenkezőt mond? hasonlót mond? Nem lehet csak így a levegőbe beszélni. 
+
 The findings of this thesis are generally consistent with the literature reviewed
 in Chapter~\ref{ch:rel_work}. Previous studies have shown that fine-tuning can
 substantially improve the performance of code generation and translation models
@@ -12,13 +15,15 @@ state-of-the-art performance on multiple programming benchmarks, including
 HumanEval and MBPP \cite{qwen_coder}.
 
 The experiments also support previous findings regarding the limitations of
-BLEU as an evaluation metric for code-related tasks. BLEU measures token
-overlap between the generated and reference outputs, but multiple
-implementations of the same program can be functionally equivalent while having
-very different textual representations. Earlier studies found that BLEU often
-correlates only weakly with semantic correctness and human judgment in code
-translation tasks \cite{tran2019ruby, evtikhiev2022bleu}. Recent research
-therefore increasingly emphasizes execution-based evaluation, where generated
-programs are compiled and tested against predefined test cases, as a more
-reliable measure of functional correctness \cite{codescore2023, ice_score}.
+BLEU as an evaluation metric for code-related tasks. %szb: lemaradtak a konkrétumok: previous findings konkrétan mit mondott erről, és te mit mondasz?
+BLEU measures token overlap between the generated and reference outputs, but
+multiple implementations of the same program can be functionally equivalent
+while having very different textual representations. %szb: itt már nincs helye a bleu újbóli bevezetésének. Itt azt kell tárgyalni, hogy mások mit mondtak erről a témáról, és az hogyan viszonyul a te findingjaiddal
+Earlier studies found that BLEU often correlates only weakly with semantic
+correctness and human judgment in code translation tasks \cite{tran2019ruby,
+evtikhiev2022bleu}. %szb: itt pl. le lehetne írni, hogy mások milyen korrelációt találtak (számszerűen, pontosan), és te mennyit. Szignifikáns a korreláció a statisztikai tesztek alapján? cikkek és te ugyanazt találtad?
+Recent research therefore increasingly emphasizes execution-based evaluation,
+where generated programs are compiled and tested against predefined test cases,
+as a more reliable measure of functional correctness \cite{codescore2023,
+ice_score}.
 

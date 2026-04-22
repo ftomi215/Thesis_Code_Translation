@@ -1,7 +1,7 @@
 \chapter{Limitations of the Study}
 
-This study has several limitations that should be considered when interpreting
-the results.
+This study has several %szb: azért nem mondanám several-nak... Don't be too harsh
+limitations that should be considered when interpreting the results.
 
 First, the experiments focused only on Java-to-C++ translation. Although this
 language pair is representative because of the syntactic and semantic
@@ -11,14 +11,14 @@ substantially depending on the source and target languages, particularly when
 the languages differ in programming paradigm or available training data
 \cite{llm_limitations}.
 
-Second, only two models were evaluated: StarCoder2 and
-Qwen2.5-Coder. Although these are strong open-source code models, other models
-such as CodeLlama, DeepSeek-Coder, or larger proprietary systems may exhibit
-different behavior. Prior work suggests that larger models generally achieve
-better functional correctness, but they also require substantially more
-computational resources \cite{llm_survey}. This means that the observed results
-may partly reflect the limitations of the selected model size rather than the
-overall capability of large language models.
+Second, only two models were evaluated: StarCoder2 and Qwen2.5-Coder. Although
+these are strong open-source code models, other models such as CodeLlama,
+DeepSeek-Coder, or larger proprietary systems may exhibit different behavior.
+Prior work suggests that larger models generally achieve better functional
+correctness, but they also require substantially more computational resources
+\cite{llm_survey}. This means that the observed results may partly reflect the
+limitations of the selected model size rather than the overall capability of
+large language models.
 
 Another limitation is that the fine-tuning process relied exclusively on the
 XLCoST dataset. While XLCoST provides aligned Java and C++ code examples, it
@@ -29,14 +29,16 @@ on model performance, especially for code-related tasks \cite{zhu2022xlcost}.
 The evaluation process also has limitations. Only one execution-based benchmark,
 CodeEditorBench, was used to assess functional correctness. Although
 CodeEditorBench provides realistic evaluation scenarios, other benchmarks such
-as xCodeEval \cite{xcodeeval}, CodeTransOcean \cite{codetransocean}, RepoTransBench \cite{repotransbench}, TRACY \cite{tracy_benchmark} or PolyHumanEval \cite{mhumaneval} may produce different results because they
-focus on different types of tasks and evaluation criteria.
-Therefore, the conclusions of this thesis are limited to the
-specific benchmark setup that was used.
+as xCodeEval \cite{xcodeeval}, CodeTransOcean \cite{codetransocean},
+RepoTransBench \cite{repotransbench}, TRACY \cite{tracy_benchmark} or
+PolyHumanEval \cite{mhumaneval} may produce different results because they
+%szb: most nem olvastam a related work-öt újra, de ezek mindegyikére egyesével kitérsz részletesen, ugye? ha nem, akkor nagyon fontos lenne, hogy ez meglegyen.
+focus on different types of tasks and evaluation criteria. Therefore, the
+conclusions of this thesis are limited to the specific benchmark setup that was
+used.
 
-Finally, hardware limitations may have influenced the quality of the
-fine-tuning process. Due to memory and computational constraints, only 3B
-parameter models were used and parameter-efficient fine-tuning techniques were
-applied. Larger models and longer training schedules may have achieved better
-results, but they would require significantly more computational resources
-\cite{hu2021lora}.
+Finally, hardware limitations may have influenced the quality of the fine-tuning
+process. Due to memory and computational constraints, only 3B parameter models
+were used and parameter-efficient fine-tuning techniques were applied. Larger
+models and longer training schedules may have achieved better results, but they
+would require significantly more computational resources \cite{hu2021lora}.

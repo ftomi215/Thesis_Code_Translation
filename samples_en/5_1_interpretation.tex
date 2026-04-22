@@ -15,7 +15,7 @@ large number of parallel Java and C++ examples from the XLCoST dataset. As a
 result, the models can learn common translation patterns, language-specific
 syntax, and frequently occurring structures. Previous studies have similarly
 shown that fine-tuning on code-specific datasets improves both syntactic
-correctness and functional performance in code-related tasks.
+correctness and functional performance in code-related tasks. %szb: cite lemaradt
 
 The Qwen models consistently outperformed StarCoder2 in both BLEU score and
 execution-based evaluation. One likely reason is that Qwen2.5-Coder has been
@@ -27,17 +27,19 @@ have reported that Qwen-based models achieve strong performance on a wide range
 of code generation and translation tasks, often outperforming similarly sized
 alternatives.
 
-Despite the improvements achieved through fine-tuning, compilation errors
-remained the most common failure category for all models. This suggests that
-many generated translations still contained syntax mistakes, missing imports,
-incorrect type handling, or language-specific incompatibilities. One reason for
-this is that source code translation requires not only understanding the source
-program, but also producing fully valid code in the target language. Small
-mistakes in punctuation, memory handling, or language-specific constructs can
-cause the entire translation to fail.
+Despite %szb: miért despite? ez a két állítás nincs egymással ellentétben
+the improvements achieved through fine-tuning, compilation errors remained the
+most common failure category for all models. This suggests that many generated %szb: nyelvtanilag itt a this a következőre hat vissza = "compilation errors remained the most common failure category". Így viszont nem helyes, hisz abból, hogy a hibák közt megállapítod a legggyakrabban előforduló hibát, még nem következik, hogy ez gyakran fordul elő. Ha 100 emberből 97 magyar, és a nem magyarok közt a legtöbb (2) ember német, az nem jelenti azt, hogy sok német van az emberek közt.
+translations still contained syntax mistakes %szb: sose hallottam így, inkább syntax error
+, missing imports, incorrect type handling, or language-specific
+incompatibilities. One reason for this is that source code translation requires
+not only understanding the source program, but also producing fully valid code
+in the target language. Small mistakes in punctuation, memory handling, or
+language-specific constructs can cause the entire translation to fail.
 
 \subsection{Relationship Between BLEU and Execution-Based Evaluation}
 %szb: ehhez szükgésges lenne statisztikai teszteket végezni: mekkora a korreláció? Ez python-ban nagyon egybszerű, csak egy pár sor kód.
+%szb: ezt nem néztem újra, mert ez úgyis át lesz írva ha megvannak a statisztikai tesztek.
 
 The experimental results show that BLEU score and execution-based evaluation
 are related, but the relationship between them is not always straightforward.
