@@ -10,6 +10,8 @@
 % The minted package is also supported for source highlighting
 % See elteikthesis_minted.tex for example
 %\usepackage[newfloat]{minted}
+\usepackage{listings}
+\usepackage{pdfpages}
 
 % Document's metadata
 \title{Source Code Translation Between Programming Languages Using Deep Learning} % title
@@ -48,11 +50,12 @@
 % Title page (mandatory)
 \maketitle
 % Topic declaration page (mandatory) - can also be attached instead
-%\includepdf{topicdeclaration.pdf}
+\includepdf[pages=-]{samples_en/0_Thesis_Topic_Registration_Form.pdf}
 
 % Table of contents (mandatory)
 \tableofcontents
 \cleardoublepage
+
 
 
 %SzB: az intro ne rögtön subsectionnel kezdődjön. Legyen bevezető szöveg. Ez
@@ -71,9 +74,6 @@
 \input{samples_en/1_3_objectives.tex}
 
 
-\input{samples_en/1_4_research_questions.tex}
-
-
 \cleardoublepage
 
 
@@ -86,36 +86,33 @@
 \input{samples_en/2_3_transformers.tex}
 \input{samples_en/2_4_training_datasets.tex}
 \input{samples_en/2_5_benchmark_datasets.tex}
-\input{samples_en/2_6_evaluation.tex}
 \cleardoublepage
 
 
 \input{samples_en/3_1_experimental_setup.tex}
 \input{samples_en/3_2_datasets.tex}
 \input{samples_en/3_3_models_used.tex}
-\input{samples_en/3_4_code_translation_pipeline.tex}
-\input{samples_en/3_5_evaluation_procedure.tex}
+\input{samples_en/3_4_translation_and_evaluation_pipeline.tex}
 \cleardoublepage
 
 
 \input{samples_en/4_1_Overview.tex}
 \input{samples_en/4_2_bleu.tex}
 \input{samples_en/4_3_execution_based.tex}
-\input{samples_en/4_4_relationship.tex}
-\input{samples_en/4_5_summary.tex}
+
 \cleardoublepage
 
 \input{samples_en/5_1_interpretation.tex}
 \input{samples_en/5_2_relation.tex}
 \input{samples_en/5_3_practica_implications.tex}
-\input{samples_en/5_4_limitations}
-\input{samples_en/5_5_future.tex}
+
+\cleardoublepage
+\input{samples_en/6_1_limitations}
 \cleardoublepage
 
-
-\input{samples_en/6_1_Conclusion.tex}
-
-
+\input{samples_en/7_1_Conclusion.tex}
+\cleardoublepage
+\input{samples_en/8_1_future.tex}
 
 \cleardoublepage
 % Bibliography (mandatory)

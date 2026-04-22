@@ -1,48 +1,24 @@
 \section{Relation to Previous Research}
 
-%szb: fontos megjegyezni, hogy a te eredményeid are in line with másokéval, viszont ez 1-2 bekezdés, nem egy egész fejezet. Vedd ki az ismétléseket
-
 The findings of this thesis are generally consistent with the literature reviewed
-in Chapter 2 %szb: ref-fel hivatkozz más chaptert
-. Previous studies have shown that fine-tuning can significantly
-improve the performance of code generation and translation models by adapting
-them to a specific task or dataset. The improvements observed in this thesis,
-particularly in terms of BLEU score and execution-based correctness, support
-this conclusion.
-
-The stronger performance of the Qwen models is also consistent with recent
-research on code-specific large language models. Prior studies report that
-Qwen-based models achieve competitive or state-of-the-art results on multiple
-programming tasks, including code generation, repair, and translation. The
-results of this thesis confirm that such models can also perform well in
-Java-to-C++ code translation, especially when fine-tuned on parallel code
-datasets.
+in Chapter~\ref{ch:rel_work}. Previous studies have shown that fine-tuning can
+substantially improve the performance of code generation and translation models
+by adapting them to a specific task or dataset. The improvements observed in
+this thesis, particularly in terms of BLEU score, accepted solutions, and
+compilation success, support this conclusion. Similarly, the stronger
+performance of the Qwen models is consistent with recent benchmark studies,
+which report that Qwen2.5-Coder achieves state-of-the-art or near
+state-of-the-art performance on multiple programming benchmarks, including
+HumanEval and MBPP \cite{qwen_coder}.
 
 The experiments also support previous findings regarding the limitations of
-BLEU as an evaluation metric for code-related tasks. BLEU was originally
-designed for natural language translation and measures token overlap between the
-generated and reference outputs. However, multiple implementations of the same
-program can be functionally equivalent while having very different textual
-representations. As a result, BLEU often correlates only weakly with semantic
-correctness and human judgment in code generation tasks
-\cite{tran2019ruby, evtikhiev2022bleu}.
+BLEU as an evaluation metric for code-related tasks. BLEU measures token
+overlap between the generated and reference outputs, but multiple
+implementations of the same program can be functionally equivalent while having
+very different textual representations. Earlier studies found that BLEU often
+correlates only weakly with semantic correctness and human judgment in code
+translation tasks \cite{tran2019ruby, evtikhiev2022bleu}. Recent research
+therefore increasingly emphasizes execution-based evaluation, where generated
+programs are compiled and tested against predefined test cases, as a more
+reliable measure of functional correctness \cite{codescore2023, ice_score}.
 
-Earlier studies have reported that metrics such as BLEU and CodeBLEU may fail
-to distinguish between syntactically similar but semantically incorrect code and
-functionally correct code with different structure. Tran et al. showed that
-BLEU has weak correlation with the semantic correctness of translated code and
-reported a correlation coefficient of 0.583, compared to 0.775 for their
-proposed RUBY metric \cite{tran2019ruby}. Similarly, Evtikhiev et al. found
-that traditional similarity-based metrics often correlate poorly with human
-assessment when differences between models are relatively small
-\cite{evtikhiev2022bleu}. CodeScore was proposed specifically because
-match-based metrics are unable to capture functional equivalence reliably
-\cite{codescore2023}.
-
-Recent work increasingly emphasizes execution-based evaluation as a more
-reliable approach for assessing generated code. Execution-based methods directly
-measure whether the generated code compiles and behaves correctly when executed
-against predefined test cases. Several recent studies argue that functional
-correctness should be considered the primary evaluation criterion for code
-generation and translation systems, rather than relying only on token-level
-similarity \cite{codescore2023, ice_score}.

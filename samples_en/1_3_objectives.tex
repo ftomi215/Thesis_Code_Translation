@@ -1,29 +1,42 @@
-\section{Objectives}
+\section{Objectives and Research Questions}
 
-The primary objective of this thesis is to investigate the effectiveness of deep
+The main objective of this thesis is to investigate the effectiveness of deep
 learning-based approaches for automatic source code translation, with a
-particular focus on the impact of model fine-tuning and evaluation
-methodologies. While modern large language models achieve strong performance in
-code-related tasks, it remains an open question to what extent fine-tuning can
-further improve translation quality in terms of both syntactic accuracy and
-functional correctness.
+particular focus on the effect of fine-tuning and the reliability of different
+evaluation methods. Although modern large language models already perform well
+on many code-related tasks, it is still unclear to what extent fine-tuning can
+improve translation quality in terms of both syntactic accuracy and functional
+correctness.
 
-To address this, the thesis aims to analyze and compare the performance of base
-and fine-tuned models on code translation tasks. In addition, multiple models
-are evaluated under the same conditions in order to better understand their
-strengths, limitations, and differences in behavior. %szb: fura. azt gondolnám, azért van multiple model kértékelve, hogy jobban megértsük a finetuneolás hatékonyságát, nempedig azért, hogy a modellek tulajdonságait jobban megértsük
+To address this problem, the thesis compares base and fine-tuned versions of
+multiple code-oriented language models under the same experimental conditions.
+The models are fine-tuned on the Java-to-C++ portion of the XLCoST dataset and
+evaluated on the CodeEditorBench benchmark using consistent preprocessing,
+prompting, and evaluation procedures. This setup makes it possible to compare
+different model architectures as well as the impact of fine-tuning in a fair
+and reproducible way.
 
-A key objective of this work is to examine the relationship between traditional
-similarity-based evaluation metrics and execution-based evaluation methods.
-Metrics such as BLEU are widely used due to their simplicity and efficiency, but
-they do not necessarily reflect whether the generated code is correct from a
-functional perspective \cite{bleu_metric}. Prior work has shown that similarity-
-based metrics often correlate poorly with functional correctness, motivating the
-use of execution-based evaluation methods \cite{evaluation_limitations,
-huang2022exeds}. In this context, this thesis also investigates the relationship
-between these evaluation approaches.
+A further objective is to investigate the relationship between
+similarity-based metrics and execution-based evaluation methods. Previous
+studies have shown that metrics such as BLEU often correlate poorly with
+functional correctness, motivating the use of execution-based evaluation
+\cite{evaluation_limitations, huang2022exeds}. This thesis therefore examines
+both types of evaluation in order to obtain a more complete picture of code
+translation quality.
 
-To achieve these goals, the thesis defines an experimental setup in which models
-are trained and evaluated on a common dataset, %szb: nem common, hanem konkrétum kellene
-using consistent preprocessing and evaluation procedures. This ensures a fair
-comparison between models and between base and fine-tuned variants.
+Based on these objectives, the thesis is guided by the following research
+questions:
+
+\begin{itemize}
+    \item \textbf{RQ1: How effective are deep learning models in translating
+    source code between programming languages?}
+
+    \item \textbf{RQ2: To what extent do these models preserve the functional
+    correctness of the original code?}
+
+    \item \textbf{RQ3: How effective are execution-based evaluation methods
+    compared to traditional similarity-based metrics?}
+
+    \item \textbf{RQ4: What types of errors are most commonly produced by deep
+    learning models during code translation?}
+\end{itemize}

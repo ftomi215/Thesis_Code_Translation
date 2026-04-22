@@ -15,25 +15,48 @@ One of the main motivations behind code translation is the modernization of
 legacy systems. Many organizations still rely on outdated programming languages,
 which are difficult to maintain and integrate with modern technologies.
 Translating such systems reduces technical debt and enables reuse across
-platforms [1]. %szb: ez így helytelen, helyes: \cite{...}
+platforms \cite{yang2024llm, bruneel2025pipeline}.
 
 Traditional approaches relied on rule-based and compiler-driven techniques,
 including grammar-based parsing and abstract syntax tree (AST) transformations
-[2, 3, 4]. While precise, these methods are difficult to maintain and scale to
+\cite{antlr, transpiler_survey, traditional_translation_survey}. While precise, these methods are difficult to maintain and scale to
 complex systems.
 
 Recent advances in deep learning have introduced data-driven approaches that
-learn translation patterns from large-scale datasets [1]. The introduction of
-the Transformer architecture [5] and large language models (LLMs) has
-significantly improved performance in code-related tasks [6, 7]. Code-specific
+learn translation patterns from large-scale datasets \cite{code_translation_survey, llm_survey}. The introduction of
+the Transformer architecture \cite{vaswani2017} and large language models (LLMs) has
+significantly improved performance in code-related tasks \cite{brown2020gpt3, llm_survey}. Code-specific
 models such as CodeLlama and DeepSeek-Coder further enhance performance in
-programming tasks [8, 9].
+programming tasks \cite{codellama, deepseek_coder}.
 
-Despite these improvements, automatic code translation remains challenging due
-to strict syntactic and semantic requirements. Small errors can lead to
-compilation failures, and models still struggle with complex codebases [10, 11,
-12]. %szb: kicsit mondhatnál példákat: for examples .... a well known translator tool ... <insert miért szar>. Így hihetőbb lenne
+Despite these improvements, automatic code translation remains challenging.
+Programming languages require strict syntactic correctness and precise
+semantic preservation. Even small mistakes may lead to compilation failures,
+runtime errors, or incorrect program behavior. Existing studies show that
+large language models often generate code that appears plausible but still
+contains logical or semantic errors \cite{llm_limitations,
+correctness_llm}. Models also struggle when code depends on larger project
+context, external libraries, or multiple source files
+\cite{evaluation_limitations, long_context_llm}. %szb: kicsit mondhatnál példákat: for examples .... a well known translator tool ... <insert miért szar>. Így hihetőbb lenne
 
-Another key challenge is evaluation. Traditional metrics such as BLEU do not
-reflect functional correctness, motivating the use of execution-based evaluation
-methods. %szb: itt lehetnének hivatkozások ezekre plusz lehetne 1 ici-picit bőszavúbb ez a bekezdés, hogy legyen ideje az olvasónak megemészteni, megérteni
+Even existing Java-to-C++ translators such as J2C \cite{j2c_tool} frequently require manual
+post-processing. J2C attempts to convert Java code into compilable C++ code,
+but the generated output still depends on manual handling of Java runtime
+libraries and missing dependencies \cite{traditional_translation_survey}. More
+generally, transcompilers often preserve the structure of the original code,
+but the resulting translations may not follow target-language conventions and
+typically require additional manual corrections before they can compile or
+execute correctly \cite{roziere2020transcoder, traditional_translation_survey}.
+
+Another important challenge is evaluation. Traditional metrics such as BLEU
+measure token-level similarity between generated and reference code, but do
+not indicate whether the generated program is actually correct or executable
+\cite{bleu_metric, tran2019ruby}. Multiple studies have shown that models
+with high BLEU scores may still fail to compile or produce incorrect outputs
+during execution \cite{evtikhiev2022bleu, huang2022exeds}. Because of this,
+recent research increasingly relies on execution-based evaluation methods,
+where generated programs are compiled and tested against predefined test
+cases \cite{huang2022exeds, codescore2023}. These methods provide a more
+realistic measure of functional correctness, although they are also more
+computationally expensive and dependent on the quality of the available test
+cases.

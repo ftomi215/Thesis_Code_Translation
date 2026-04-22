@@ -8,31 +8,6 @@ compiles and produces the expected outputs.
 
 \subsection{Accepted Solutions and Compilation Errors}
 
-The number of accepted solutions increased significantly after fine-tuning for
-both model families.
-
-For StarCoder2, the number of accepted translations increased from 55 for the
-base model to 133 for the fine-tuned model. This corresponds to an improvement
-of approximately 142\%. At the same time, the number of compilation errors
-decreased from 390 to 287.
-
-The Qwen models achieved stronger performance overall. The base Qwen model
-produced 101 accepted solutions, while the fine-tuned version reached 168
-accepted solutions. This represents an improvement of approximately 66.3\%.
-Compilation errors also decreased substantially, from 324 to 219.
-
-Compilation error remained the most frequent failure type for all evaluated
-models. Even after fine-tuning, compilation errors represented the largest
-portion of failed translations. This suggests that many generated outputs still
-contained syntax errors, missing headers, incompatible language constructs, or
-incorrect memory handling.
-
-When comparing the two models, Qwen consistently produced fewer
-compilation errors and more accepted solutions than StarCoder2. This indicates
-that Qwen was generally more successful at generating syntactically valid and
-compilable C++ code.
-
-
 \begin{table}[htbp]
 \centering
 \caption{Execution-based evaluation results}
@@ -51,39 +26,29 @@ Qwen Fine-Tuned & 168 & 96 & 9 & 219 \\
 }
 \end{table}
 
+The number of accepted solutions increased significantly after fine-tuning for
+both model families.
+
+For StarCoder2, the number of accepted translations increased from 55 for the
+base model to 133 for the fine-tuned model. This corresponds to an improvement
+of approximately 142\%. At the same time, the number of compilation errors
+decreased from 390 to 287.
+
+The Qwen models achieved stronger performance overall. The base Qwen model
+produced 101 accepted solutions, while the fine-tuned version reached 168
+accepted solutions. This represents an improvement of approximately 66.3\%.
+Compilation errors also decreased substantially, from 324 to 219.
+
+Compilation error remained the most frequent failure type for all evaluated
+models. Even after fine-tuning, compilation errors represented the largest
+portion of failed translations. 
+
+
+
+
+
+
 \subsection{Other Error Types}
-
-In addition to accepted solutions and compilation errors, several other failure
-categories appeared during evaluation.
-
-Wrong Answer (OJ\_WA) was the second most common error type. For StarCoder2,
-the number of wrong answers increased from 57 in the base model to 75 after
-fine-tuning. Similarly, Qwen increased from 63 to 96 wrong answers after
-fine-tuning.
-
-This increase can be explained by the reduction in compilation errors. After
-fine-tuning, more generated programs were able to compile successfully, which
-made it possible for them to proceed to execution-based testing. As a result,
-some programs that would previously have failed during compilation instead
-failed due to incorrect logic or incomplete functionality.
-
-Runtime Error (OJ\_RE) occurred relatively infrequently. For StarCoder2, runtime
-errors increased from 4 to 13 after fine-tuning, while for Qwen they decreased
-from 15 to 9. This suggests that the fine-tuned Qwen model was more robust in
-handling edge cases and avoiding runtime failures such as invalid memory access
-or division by zero.
-
-Time Limit Exceeded (OJ\_TL) errors were rare for all models, indicating that
-most generated solutions were computationally efficient enough to finish within
-the allowed execution time. Presentation errors and output limit errors also
-occurred only occasionally and had limited influence on the overall results.
-
-Overall, the execution-based evaluation demonstrates that fine-tuning improves
-functional correctness for both model families. However, the results also show
-that many remaining errors are related to logic and semantic correctness rather
-than simple syntax issues. This confirms that generating compilable code is only
-one aspect of successful code translation, while preserving the exact behavior
-of the original program remains a more difficult challenge.
 
 \begin{table}[htbp]
 \centering
@@ -102,3 +67,22 @@ Qwen Fine-Tuned & 10 & 5 & 3 \\
 \end{tabular}%
 }
 \end{table}
+
+In addition to accepted solutions and compilation errors, several other failure
+categories appeared during evaluation.
+
+Wrong Answer (OJ\_WA) was the second most common error type. For StarCoder2,
+the number of wrong answers increased from 57 in the base model to 75 after
+fine-tuning. Similarly, Qwen increased from 63 to 96 wrong answers after
+fine-tuning.
+
+Runtime Error (OJ\_RE) occurred relatively infrequently. For StarCoder2, runtime
+errors increased from 4 to 13 after fine-tuning, while for Qwen they decreased
+from 15 to 9. 
+
+Time Limit Exceeded (OJ\_TL) errors were rare for all models, indicating that
+most generated solutions were computationally efficient enough to finish within
+the allowed execution time. Presentation errors and output limit errors also
+occurred only occasionally and had limited influence on the overall results.
+
+

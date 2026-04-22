@@ -5,33 +5,6 @@ translations and the reference outputs. For each model, the BLEU score was
 calculated for every translated sample and then averaged across the entire
 evaluation dataset.
 
-\subsection{Comparison of Base and Fine-Tuned Models}
-
-The results show that fine-tuning improved the average BLEU score for both
-model families.
-
-For StarCoder2, the average BLEU score increased from 0.122 for the base model
-to 0.189 for the fine-tuned model. This corresponds to an improvement of
-approximately 54.6\%. In addition, the maximum BLEU score increased from 0.922
-to 0.981, indicating that the fine-tuned model was able to produce translations
-that were much closer to the reference solutions in the best-performing cases.
-
-Similarly, the Qwen model also benefited from fine-tuning. The average BLEU
-score increased from 0.178 for the base model to 0.217 for the fine-tuned
-model, which corresponds to an improvement of approximately 22.1\%. The maximum
-BLEU score also increased substantially, from 0.780 to 0.980.
-
-Although both models improved after fine-tuning, the relative gain was larger
-for StarCoder2. This suggests that the original StarCoder2 model had more room
-for improvement on the Java-to-C++ translation task.
-
-The minimum BLEU scores remained very low for all models, indicating that there
-were still some translation examples for which the generated code differed
-significantly from the reference output. In particular, the minimum BLEU score
-of the fine-tuned StarCoder2 model was close to zero, which suggests that some
-samples still produced highly incorrect translations despite the overall
-improvement.
-
 \begin{table}[htbp]
 \centering
 \caption{BLEU score results for base and fine-tuned models}
@@ -48,29 +21,17 @@ Qwen Fine-Tuned & 0.217 & 0.002 & 0.980 \\
 \end{tabular}
 \end{table}
 
-\subsection{Comparison of StarCoder and Qwen}
+For StarCoder2, the average BLEU score increased from 0.122 for the base model
+to 0.189 for the fine-tuned model. This corresponds to an improvement of
+approximately 54.6\%. In addition, the maximum BLEU score increased from 0.922
+to 0.981, indicating that the fine-tuned model was able to produce translations
+that were much closer to the reference solutions in the best-performing cases.
 
-When comparing the two model families, Qwen consistently achieved higher BLEU
-scores than StarCoder2 in both the base and fine-tuned settings.
+Similarly, the Qwen model also benefited from fine-tuning. The average BLEU
+score increased from 0.178 for the base model to 0.217 for the fine-tuned
+model, which corresponds to an improvement of approximately 22.1\%. The maximum
+BLEU score also increased substantially, from 0.780 to 0.980.
 
-Among the base models, Qwen achieved an average BLEU score of 0.178, while
-StarCoder2 reached only 0.122. This indicates that the Qwen base model produced
-translations that were closer to the reference outputs even before fine-tuning.
+The minimum BLEU scores remained very low for all models.
 
-The same trend can be observed after fine-tuning. The fine-tuned Qwen model
-achieved the highest average BLEU score of all evaluated models, reaching 0.217,
-while the fine-tuned StarCoder2 model achieved 0.189.
 
-The maximum BLEU scores of the fine-tuned models were very similar, with both
-models reaching values close to 0.98. This suggests that both fine-tuned models
-were capable of producing nearly perfect translations in certain cases.
-
-However, the higher average BLEU score of Qwen indicates that it was more
-consistent across the entire evaluation dataset. In contrast, StarCoder2 showed
-greater variability, with lower minimum BLEU scores and a wider gap between its
-best and worst outputs.
-
-Overall, the BLEU results suggest that Qwen is stronger than StarCoder2 for the
-Java-to-C++ translation task examined in this thesis. Fine-tuning improved both
-models, but the fine-tuned Qwen model achieved the strongest overall
-performance.

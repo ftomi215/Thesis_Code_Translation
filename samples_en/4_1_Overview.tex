@@ -10,17 +10,6 @@ code translation models. The performance of the base and fine-tuned variants of
 StarCoder2 and Qwen was analyzed using both similarity-based and
 execution-based metrics.
 
-The evaluation includes BLEU scores as a measure of textual similarity between
-the generated and reference code, as well as execution-based results obtained
-using CodeEditorBench. This combination makes it possible to compare not only %szb: lehet emlékeztetni az olvasót arra, hogy minek az eredményeit fogja most olvasni, de nem kell túltolni/túlmagyarázni/ismételni az érvelést
-how similar the generated translations are to the reference solutions, but also
-whether the translated code is functionally correct and executable.
-
-The chapter also examines the effect of fine-tuning on both model families and
-compares the relationship between BLEU scores and execution-based evaluation
-results.
-
-\section{Overview of the Results} %szb: nem szükséges az overview section, nyugodtan mehet egyből a results-ba
 
 \begin{table}[h]
 \centering
@@ -37,44 +26,6 @@ Compilation Errors & -26.4\% & -32.4\% \\
 \label{tab:relative_improvement}
 \end{table}
 
-The evaluation results show that both model families benefit from fine-tuning, %szb: ez nem result, ez már discussion. A results fejezet a nyers eredményeket kell tartalmazza. Jellemzően pár paragrafusnyi szöveg, pár táblázat, és ennyi. A discussiön-ben pedig értelmezed a result-okat
-although the magnitude of improvement differs between StarCoder2 and Qwen.
-Across all experiments, the fine-tuned variants achieved higher BLEU scores and
-produced more functionally correct translations than their corresponding base
-models.
 
-Among the evaluated models, the Qwen family consistently achieved better
-performance than the StarCoder2 family. The base Qwen model outperformed the
-base StarCoder2 model in both BLEU score and execution-based evaluation, while
-the fine-tuned Qwen model achieved the strongest overall performance in the
-experiments.
 
-The average BLEU score increased from approximately 0.122 to 0.189 for
-StarCoder2 after fine-tuning, while Qwen improved from approximately 0.178 to
-0.217. These results indicate that fine-tuning improved the similarity between
-the generated code and the reference translations for both model families.
 
-The execution-based evaluation shows an even clearer effect of fine-tuning. The
-number of accepted solutions increased substantially for both models. The base
-StarCoder2 model produced 55 accepted solutions, while the fine-tuned variant
-achieved 133 accepted solutions. Similarly, the Qwen base model achieved 101
-accepted solutions, whereas the fine-tuned Qwen model reached 168 accepted
-solutions.
-
-Compilation errors remained the most common failure category across all
-experiments. However, fine-tuning significantly reduced the number of
-compilation failures. For StarCoder2, compilation errors decreased from 390 to
-287, while for Qwen they decreased from 324 to 219. This suggests that
-fine-tuning not only improves lexical similarity, but also helps the models
-generate more syntactically valid and compilable code.
-
-At the same time, the results also show that higher BLEU scores do not always
-correspond to correct execution. Some translated programs achieved relatively
-high BLEU scores but still failed due to compilation, runtime, or logical
-errors. This observation confirms that similarity-based metrics alone are not
-sufficient for evaluating code translation systems and should be complemented by
-execution-based evaluation methods.
-
-Overall, the results indicate that fine-tuning improves both textual similarity %szb: az összes ilyen "overall" jellegű összefoglalás kikerülhet
-and functional correctness, and that Qwen2.5-Coder-3B-Instruct performs better
-than StarCoder2-3B in the Java-to-C++ translation task examined in this thesis.

@@ -1,24 +1,104 @@
-\section{Benchmark Datasets and Evaluation for Code Translation}
+\section{Benchmark Datasets and Evaluation Methods for Code Translation}
 
-In addition to training datasets, benchmark datasets play a crucial role in the
-evaluation of code translation models. These benchmarks provide standardized
-tasks, datasets, and evaluation protocols, enabling fair comparison between
-different approaches.
+Benchmark datasets play a crucial role in the evaluation of code translation
+models because they provide standardized tasks, datasets, and evaluation
+protocols, enabling fair comparison between different approaches.
 
-CodeXGLUE also serves as a benchmark framework, offering predefined splits and
-evaluation metrics for code translation and related tasks
-\cite{lu2021codexglue}. Its standardized setup allows researchers to compare
-models under consistent conditions. %szb: lehetne részletesebb, pl. írd le, hogy ez nem execution based - ha jól értem ez a helyzet a kövi alapján
+One of the most widely used benchmark frameworks is CodeXGLUE, which includes
+multiple tasks related to code understanding and generation, including
+code-to-code translation \cite{lu2021codexglue}. For translation tasks,
+CodeXGLUE provides predefined train, validation, and test splits, making it
+possible to compare models under consistent conditions. However, the evaluation
+in CodeXGLUE is mainly based on similarity metrics such as BLEU and exact match
+rather than execution-based testing. As a result, models can achieve strong
+benchmark performance even if the generated code is not functionally correct.
 
-More recently, execution-based benchmarks have gained importance in evaluating
-code translation systems. These benchmarks assess generated code by compiling
-and executing it against test cases, providing a more realistic measure of
-functional correctness. For example, datasets such as HumanEval and MBPP are
-widely used to evaluate code generation models using execution-based metrics
-\cite{chen2021codex, austin2021mbpp}. %szb: említheted a code generation benchmarkokat, de itt nem ezekről kell írni elsősorban, hanem a code translation benchmarkokról, pl. az általad használt codeeditorbench-ről
+Similarity-based metrics are derived from natural language processing and
+measure the similarity between generated and reference code at the token level.
+One of the most widely used metrics is BLEU, which evaluates n-gram overlap
+between the generated output and the reference translation
+\cite{bleu_metric, chen2021codex, austin2021mbpp}. BLEU is easy to compute and
+widely used in both natural language translation and code generation tasks.
+However, it does not account for syntactic structure, semantic equivalence, or
+executability. Different implementations of the same logic may receive very
+different BLEU scores, while code with high lexical similarity may still fail
+to compile or execute correctly \cite{tran2019ruby, evtikhiev2022bleu}.
 
-In the context of code translation, execution-based evaluation is particularly
-important, as it captures whether the translated code behaves correctly rather
-than only measuring syntactic similarity. This approach aligns with recent
-trends in the field, where functional correctness is considered a more reliable
-indicator of model performance compared to traditional similarity-based metrics.
+To address these limitations, CodeBLEU was introduced as an extension of BLEU
+specifically designed for measuring code similarity. In addition to n-gram
+overlap, CodeBLEU incorporates abstract syntax tree (AST) structure and
+data-flow information, providing a more comprehensive assessment of code quality
+\cite{ren2020codebleu}. Ren et al. showed that CodeBLEU correlates better with
+programmer judgments than BLEU across multiple code-related tasks, including
+code translation, code refinement, and text-to-code generation. However,
+CodeBLEU still depends on similarity to a reference solution and may fail to
+capture whether the generated code is actually functionally correct.
+
+Other similarity-based metrics have also been proposed. CrystalBLEU attempts to
+reduce the influence of frequently occurring code fragments \cite{crystalbleu},
+while CodeBERTScore uses learned code representations to estimate semantic
+similarity between generated and reference code. More recent work has explored
+metrics such as CodeScore and ICE-Score, which use large language models to
+estimate the quality and correctness of generated code
+\cite{codescore2023, ice_score}. Although these methods often correlate better
+with human judgments than BLEU, they still do not fully replace direct
+execution-based testing.
+
+More recently, execution-based benchmarks have become increasingly important in
+code translation research. These benchmarks assess generated code by compiling
+and executing it against predefined test cases, providing a more realistic
+measure of functional correctness. In contrast to similarity-based benchmarks,
+execution-based evaluation makes it possible to determine whether the translated
+program preserves the behavior of the original code.
+
+Although benchmarks such as HumanEval and MBPP are primarily designed for code
+generation rather than translation, they helped popularize execution-based
+evaluation by measuring whether generated code passes hidden test cases
+\cite{chen2021codex, austin2021mbpp}. In the context of code translation,
+specialized benchmarks such as CodeEditorBench provide a more suitable
+evaluation environment because they include editing and translation tasks in
+addition to execution-based testing \cite{codeeditorbench}. CodeEditorBench
+evaluates whether translated programs compile successfully and produce the
+expected outputs, making it more appropriate for assessing code translation
+quality than token-level similarity metrics alone.
+
+Other execution-based benchmarks have also been proposed for code translation.
+For example, CodeTransOcean provides multilingual datasets and evaluation
+protocols for a wide range of programming languages, including execution-based
+evaluation through Debugging Success Rate@K \cite{codetransocean}. Similarly,
+xCodeEval supports multilingual execution-based evaluation across multiple code
+tasks, including translation \cite{xcodeeval}. More recent benchmarks such as
+RepoTransBench focus on repository-level code translation, where complete
+projects rather than isolated functions are translated and tested
+\cite{repotransbench}. Finally, benchmarks such as TRACY evaluate not only
+functional correctness but also the runtime efficiency of translated code
+\cite{tracy_benchmark}.
+
+Several recent studies have shown that models achieving high scores on
+similarity-based metrics do not necessarily perform well in execution-based
+evaluation. Huang et al. demonstrated that models with strong BLEU and
+CodeBLEU performance often fail when evaluated using execution-based metrics,
+highlighting the gap between surface-level similarity and true functional
+correctness \cite{huang2022exeds}. Similar findings have also been reported in
+other studies, which show that lexical overlap often correlates poorly with
+human judgments and program behavior \cite{evtikhiev2022bleu,
+tran2019ruby}.
+
+Despite their advantages, execution-based methods also have limitations. Their
+effectiveness depends heavily on the quality and coverage of the available test
+cases. A program may pass all tests while still containing hidden logical
+errors if the test suite is incomplete. In addition, execution-based evaluation
+is significantly more computationally expensive than similarity-based metrics,
+because it requires compilation, sandboxing, and repeated program execution
+\cite{huang2022exeds}. Existing execution benchmarks also typically focus on
+isolated functions or short code snippets rather than realistic multi-file
+software systems, which limits their ability to represent real-world code
+migration scenarios \cite{evaluation_limitations, llm_limitations}.
+
+These limitations indicate that no single evaluation method is sufficient for
+capturing all aspects of code translation quality. Similarity-based metrics are
+useful for measuring lexical and structural similarity, while execution-based
+methods provide insight into functional correctness. However, each approach has
+its own limitations and may emphasize different aspects of model performance. To
+obtain a more complete and fine-grained picture of translation quality, this
+thesis uses both similarity-based and execution-based evaluation methods.

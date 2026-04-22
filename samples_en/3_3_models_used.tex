@@ -38,120 +38,56 @@ The \texttt{bigcode/starcoder2-3b} model is a decoder-only Transformer model
 with approximately 3 billion parameters. It is part of the StarCoder2 family
 and was trained on more than 3 trillion tokens collected from large-scale code
 repositories and software-related text sources. The model supports 17
-programming languages, uses Grouped Query Attention, and provides a context
-window of up to 16,384 tokens \cite{starcoder2}. It is also trained using the
-Fill-in-the-Middle objective, which improves its ability to generate code within
-existing code contexts.
-
-In the notebook used for the StarCoder2 base model, the
-\texttt{AutoTokenizer} and \texttt{AutoModelForCausalLM} classes from the
-\texttt{transformers} library are used to load the model checkpoint. The model
-is loaded in 4-bit quantized mode in order to reduce GPU memory usage. The
-notebook iterates through the Java input samples, constructs a prompt asking the
-model to translate the given Java code into C++, and generates the output using
-sampling-based decoding.
+programming languages and provides a context window of up to 16,384 tokens
+\cite{starcoder2, starcoder2_hf}. At the time of its release, StarCoder2-3B
+outperformed several other code models of similar size on standard programming
+benchmarks.
 
 The \texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model is also a decoder-only
-Transformer model, but unlike StarCoder2, it is instruction-tuned for coding
-tasks. The model contains approximately 3.09 billion parameters and supports a
-context length of up to 32,768 tokens. Qwen2.5-Coder models were trained on
-more than 5.5 trillion tokens and are optimized for programming-related tasks
-such as code generation, reasoning, debugging, and repair
-\cite{qwen_coder}. The model architecture uses RoPE positional encoding,
-SwiGLU activation functions, RMSNorm normalization, and Grouped Query
-Attention.
-
-The Qwen base notebook follows a similar structure to the StarCoder2 notebook.
-The tokenizer and model are loaded from Hugging Face using the
-\texttt{transformers} library. Java input snippets are inserted into a prompt
-template that explicitly asks the model to return only the translated C++ code.
-The model output is then post-processed to remove unnecessary explanations or
-markdown formatting before evaluation.
-
-For both base models, the notebooks use the same evaluation dataset, the same
-translation direction (Java to C++), and equivalent prompting strategies. This
-ensures that differences in BLEU score or execution-based evaluation can be
-attributed primarily to the model architecture rather than to differences in
-preprocessing or prompt design.
+Transformer model with approximately 3.09 billion parameters. Unlike
+StarCoder2, it is instruction-tuned for coding tasks, which makes it more
+suitable for prompt-based code generation and translation. The model supports a
+context length of up to 32,768 tokens and was trained on more than 5.5 trillion
+tokens. Qwen2.5-Coder models are optimized for programming-related tasks such
+as code generation, reasoning, debugging, and repair \cite{qwen_coder,
+qwen_coder_report}.
 
 \subsection{Fine-Tuned Models}
 
 In addition to the original pre-trained models, fine-tuned variants of both
 StarCoder2 and Qwen2.5-Coder were prepared for the Java-to-C++ translation
-task. The fine-tuning process was designed to adapt the general coding
-capabilities of the models to a specific translation direction and dataset.
+task. Fine-tuning was performed using Low-Rank Adaptation (LoRA), which adds
+small trainable matrices to selected layers of the model while keeping the
+original weights frozen \cite{hu2021lora}. This significantly reduces the
+number of trainable parameters and makes fine-tuning more efficient.
 
-The XLCoST dataset was used as the primary source of parallel Java and C++
-examples. The training notebooks load the dataset splits, filter the examples
-to retain only Java-to-C++ pairs, and convert them into an instruction-based
-format suitable for causal language modeling. Each training sample contains a
-prompt with the Java source code and an expected response containing the
-corresponding C++ translation.
+Both models were fine-tuned using 4-bit quantization together with LoRA, which
+corresponds to the QLoRA approach. In this setup, the original model weights
+remain frozen and quantized, while only the LoRA adapter weights are updated
+during training. This substantially reduces GPU memory usage and makes it
+possible to fine-tune billion-parameter models on consumer-grade hardware. The
+models were loaded in 4-bit mode and trained using mixed precision and gradient
+checkpointing in order to further reduce memory requirements.
 
-The training prompt follows an instruction-style format similar to the one used
-during inference. A typical sample consists of a task description such as
-``Translate the following Java code into C++'' followed by the Java input code.
-The reference C++ code is appended as the target sequence during training. This
-format allows the model to learn both the structure of the prompt and the
-desired output format.
-
-Both fine-tuning pipelines use parameter-efficient fine-tuning techniques based
-on Low-Rank Adaptation (LoRA). LoRA introduces trainable low-rank matrices into
-selected linear layers of the model while keeping the original model weights
-frozen. This approach significantly reduces GPU memory usage and training time
-compared to full fine-tuning, while still allowing the model to adapt to the
-translation task \cite{hu2021lora, peft_code}.
-
-The fine-tuning notebooks use quantized loading through the
-\texttt{bitsandbytes} library. The base models are loaded in 4-bit mode using
-QLoRA-style quantization, which further reduces memory consumption and makes it
-possible to fine-tune 3B parameter models on consumer-grade GPUs. The notebooks
-also use \texttt{prepare\_model\_for\_kbit\_training()} to enable stable
-training on quantized weights.
-
-For the StarCoder2 fine-tuning notebook, the
-\texttt{bigcode/starcoder2-3b} model is loaded using
-\texttt{AutoModelForCausalLM} together with a 4-bit quantization configuration.
-The tokenizer is initialized with the end-of-sequence token as the padding
-token. The LoRA configuration is then applied to the attention and projection
-layers of the model. Typical target modules include
+The same LoRA configuration was used for both models. The low-rank dimension
+was set to $r = 8$, the LoRA scaling factor to $\alpha = 16$, and the dropout
+rate to 0.05. The adapters were applied to both the attention and feed-forward
+layers of the models, specifically to the
 \texttt{q\_proj}, \texttt{k\_proj}, \texttt{v\_proj},
 \texttt{o\_proj}, \texttt{gate\_proj}, \texttt{up\_proj}, and
-\texttt{down\_proj}, which are commonly used in LoRA-based fine-tuning
-\cite{lora_modules}. The training setup uses a relatively small batch size
-combined with gradient accumulation in order to simulate a larger effective
-batch size without exceeding GPU memory limits.
+\texttt{down\_proj} modules. Applying LoRA to both attention and feed-forward
+layers is a common approach because it provides stronger adaptation than using
+attention layers alone \cite{lora_modules, hu2021lora}.
 
-The StarCoder2 notebook also uses a maximum sequence length of approximately
-1024 tokens, which is sufficient for most code samples in the selected dataset.
-The model is trained for multiple epochs with a learning rate in the range of
-$10^{-4}$ to $2 \times 10^{-4}$, which is common for LoRA-based fine-tuning of
-large language models. During training, the model learns only the LoRA adapter
-weights, while the original model parameters remain frozen.
+The maximum sequence length during training was set to 1024 tokens. Both models
+were trained for two epochs using a learning rate of $10^{-4}$, cosine learning
+rate scheduling, a warmup ratio of 0.03, and gradient accumulation with 16
+steps. The effective batch size per device was 1. These settings were selected
+to balance training stability and GPU memory consumption.
 
-The Qwen fine-tuning notebook follows a very similar structure. The
-\texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model is loaded together with its
-tokenizer and quantization settings. Because Qwen is already instruction-tuned,
-the training prompt format is naturally compatible with the model architecture.
-The notebook sets the tokenizer padding token to the end-of-sequence token and
-loads the model in 4-bit mode using \texttt{BitsAndBytesConfig}.
-
-LoRA adapters are applied to the main attention and feed-forward layers of the
-Qwen model. The training configuration includes a low-rank dimension typically
-between 8 and 16, a LoRA scaling factor, and dropout to reduce overfitting.
-Prior work has shown that LoRA ranks of 8 and 16 often provide a good trade-off
-between parameter efficiency and performance \cite{qwen_lora, qwen_lora_repo}.
-The notebook also uses gradient accumulation, mixed precision training, and
-multiple training epochs in order to improve convergence.
-
-After training, the LoRA adapters are saved separately from the original model.
-During evaluation, the adapter weights are loaded on top of the original base
-model, allowing the fine-tuned version to be used without modifying the base
-checkpoint itself. This approach is particularly useful because it enables
-multiple fine-tuned variants to be stored efficiently and reused for different
-tasks.
-
-Once training is completed, both fine-tuned models are evaluated using the same
-pipeline as the base models. The generated C++ translations are compared against
-reference outputs using BLEU score and are also evaluated with the
-CodeEditorBench framework to measure functional correctness.
+For both models, the training data was converted into an instruction-style
+format in which the model received a Java source code snippet together with a
+prompt asking for the corresponding C++ translation. During training, only the
+target C++ response tokens contributed to the loss, while the prompt portion
+was masked out. This setup allows the models to focus on learning the desired
+translation output format rather than memorizing the prompt structure.

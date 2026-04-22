@@ -1,18 +1,17 @@
 \chapter{Conclusion}
 
-\section{Summary}
-%szb: nem kell setion, csak a chapter
-
 This thesis investigated the effectiveness of large language models for
 Java-to-C++ code translation. Two code-specific model families, StarCoder2 and
 Qwen2.5-Coder, were evaluated in both their base and fine-tuned forms using
 BLEU score and execution-based evaluation with CodeEditorBench.
 
 The results showed that fine-tuning improved the performance of both models in
-terms of textual similarity and functional correctness. Among the evaluated %szb: ne azon legyen a hangsúly, hogy melyik teljesített jobban, hanem az elsődlegesen vizsgált aspektusokon
-models, the fine-tuned Qwen2.5-Coder model achieved the strongest overall
-performance, producing the highest BLEU score and the largest number of accepted
-solutions.
+terms of textual similarity and functional correctness. This
+suggests that task-specific adaptation is an effective way to improve code
+translation quality, even when relatively small parameter-efficient fine-tuning
+methods are used. The experiments also showed that different model families do
+not benefit equally from fine-tuning, indicating that architecture and
+pre-training strategy can strongly influence the final translation performance.
 
 The experiments also demonstrated that similarity-based metrics such as BLEU are
 not sufficient for evaluating code translation systems on their own. Several
