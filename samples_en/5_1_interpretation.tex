@@ -1,5 +1,4 @@
 \chapter{Discussion}
-%szb: nem írok részletesen ide, mert úgyis a resultsból átkerül ide csomó minden, amikor átdolgozod ezt a 2 fejezetet
 
 \section{Interpretation of the Results}
 
@@ -15,63 +14,87 @@ large number of parallel Java and C++ examples from the XLCoST dataset. As a
 result, the models can learn common translation patterns, language-specific
 syntax, and frequently occurring structures. Previous studies have similarly
 shown that fine-tuning on code-specific datasets improves both syntactic
-correctness and functional performance in code-related tasks. %szb: cite lemaradt
+correctness and functional performance in code-related tasks \cite{peft_code, hu2021lora, zhu2022xlcost}.
 
 The Qwen models consistently outperformed StarCoder2 in both BLEU score and
 execution-based evaluation. One likely reason is that Qwen2.5-Coder has been
 trained on a larger and more diverse code corpus and is more strongly optimized
 for programming-related tasks. It also benefits from instruction tuning, which
 helps it follow translation prompts more reliably and produce cleaner outputs.
-Recent benchmark studies %szb: missing cite
-have reported that Qwen-based models achieve strong performance on a wide range
-of code generation and translation tasks, often outperforming similarly sized
-alternatives.
 
-Despite %szb: miért despite? ez a két állítás nincs egymással ellentétben
-the improvements achieved through fine-tuning, compilation errors remained the
-most common failure category for all models. This suggests that many generated %szb: nyelvtanilag itt a this a következőre hat vissza = "compilation errors remained the most common failure category". Így viszont nem helyes, hisz abból, hogy a hibák közt megállapítod a legggyakrabban előforduló hibát, még nem következik, hogy ez gyakran fordul elő. Ha 100 emberből 97 magyar, és a nem magyarok közt a legtöbb (2) ember német, az nem jelenti azt, hogy sok német van az emberek közt.
-translations still contained syntax mistakes %szb: sose hallottam így, inkább syntax error
-, missing imports, incorrect type handling, or language-specific
-incompatibilities. One reason for this is that source code translation requires
+
+Compilation errors remained the most common failure category for all models.
+Across the evaluated samples, a substantial portion of incorrect outputs failed
+during the compilation stage. These errors included syntax issues, missing
+imports, incorrect type usage, and incompatibilities between source and target
+language constructs. One reason for this is that source code translation requires
 not only understanding the source program, but also producing fully valid code
 in the target language. Small mistakes in punctuation, memory handling, or
 language-specific constructs can cause the entire translation to fail.
 
+
+
+
 \subsection{Relationship Between BLEU and Execution-Based Evaluation}
-%szb: ehhez szükgésges lenne statisztikai teszteket végezni: mekkora a korreláció? Ez python-ban nagyon egybszerű, csak egy pár sor kód.
-%szb: ezt nem néztem újra, mert ez úgyis át lesz írva ha megvannak a statisztikai tesztek.
 
-The experimental results show that BLEU score and execution-based evaluation
-are related, but the relationship between them is not always straightforward.
-In general, models with higher average BLEU scores also achieved more accepted
-solutions in CodeEditorBench. For example, the fine-tuned Qwen model obtained
-the highest BLEU score and also produced the highest number of accepted
-translations. Similarly, the fine-tuned StarCoder2 model improved both in BLEU
-score and execution-based performance compared to its base version.
+To examine the relationship between similarity-based and execution-based
+evaluation more precisely, a correlation analysis was performed between BLEU
+score and two binary execution-based outcomes: accepted solution and compilation
+success. The accepted solution variable was set to 1 when the generated program
+passed all tests, and 0 otherwise. Compilation success was set to 1 when the
+generated program did not result in a compilation error, and 0 otherwise.
 
-However, the results also reveal that higher BLEU scores do not always imply
-better functional correctness. In several cases, generated code achieved a
-relatively high BLEU score while still failing to compile or producing incorrect
-outputs during testing. This happens because BLEU measures token-level overlap
-between the generated code and the reference solution, but does not consider
-whether the translated code is executable or semantically correct.
+Both Pearson and Spearman correlations were computed. Pearson correlation was
+used to measure the linear association between BLEU and the execution-based
+outcomes, while Spearman correlation was used to measure whether higher BLEU
+scores generally correspond to better-ranked execution outcomes. The results are
+shown in Table~\ref{tab:bleu_execution_correlation}.
 
-This effect can also be observed in the difference between compilation errors
-and wrong answers. Fine-tuned models produced fewer compilation errors and more
-accepted solutions, but they also produced more wrong answers. This suggests
-that fine-tuning often improved syntactic correctness enough for the code to
-compile, but some translations still failed to preserve the exact logic of the
-original program.
+\begin{table}[b]
+\centering
+\caption{Correlation between BLEU score and execution-based outcomes}
+\begin{tabular}{lcccc}
+\hline
+Execution-based outcome & Pearson $r$ & Pearson $p$ & Spearman $\rho$ & Spearman $p$ \\
+\hline
+Accepted solution & 0.510 & $1.85 \times 10^{-101}$ & 0.368 & $4.46 \times 10^{-50}$ \\
+Compilation success & 0.372 & $4.81 \times 10^{-51}$ & 0.509 & $6.12 \times 10^{-101}$ \\
+\hline
+\end{tabular}
+\label{tab:bleu_execution_correlation}
+\end{table}
 
-The weak correlation between BLEU and semantic correctness has already been observed in previous research \cite{tran2019ruby, evtikhiev2022bleu}. Studies have shown that BLEU often fails to
-reflect the true quality of translated code because multiple implementations can
-be functionally equivalent while having very different token sequences.
-Similarly, code with high lexical similarity may still contain semantic or
-logical errors that prevent correct execution.
+The correlation results show a statistically significant positive relationship
+between BLEU score and both execution-based outcomes. In both cases, the
+$p$-values are far below 0.001, which means that the null hypothesis of no
+correlation can be rejected. Therefore, higher BLEU scores are not completely
+independent from execution-based success: outputs with higher BLEU scores are
+generally more likely to compile successfully and to be accepted.
 
+However, the strength of the correlations also shows that BLEU is not a fully
+reliable proxy for functional correctness. The correlation between BLEU and
+accepted solutions is moderate according to Pearson correlation ($r = 0.510$),
+but weaker according to Spearman correlation ($\rho = 0.368$). This suggests that
+although BLEU has some relationship with final correctness, the ranking of
+solutions by BLEU does not consistently match the ranking implied by accepted
+execution results. In practical terms, a higher BLEU score increases the
+likelihood of a correct translation, but it does not guarantee that the generated
+program passes the test cases.
 
-The results of this thesis therefore support the idea that execution-based
-evaluation is more reliable than BLEU for measuring the quality of code
-translation systems. BLEU remains useful as a fast and simple similarity-based
-metric, but it should be used together with execution-based methods rather than
-as the only evaluation criterion.
+The relationship between BLEU and compilation success shows a slightly different
+pattern. The Pearson correlation is lower ($r = 0.372$), while the Spearman
+correlation is stronger ($\rho = 0.509$). This indicates a moderate monotonic
+relationship: translations with higher BLEU scores are generally more likely to
+compile, but the relationship is still far from deterministic. This is consistent
+with the observation that fine-tuned models produced fewer compilation errors,
+but still generated many wrong answers. In other words, fine-tuning often helped
+the models produce syntactically more valid C++ code, but syntactic validity did
+not always imply semantic correctness.
+
+Therefore, the results support the use of BLEU only as an auxiliary metric.
+Execution-based evaluation remains necessary because it directly checks whether
+the generated C++ program compiles and produces the expected output. A complete
+evaluation of code translation systems should therefore combine similarity-based
+metrics with execution-based testing, rather than relying on BLEU as the sole
+indicator of translation quality.
+

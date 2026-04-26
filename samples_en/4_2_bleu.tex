@@ -3,36 +3,49 @@
 BLEU score was used to measure the similarity between the generated C++
 translations and the reference outputs. For each model, the BLEU score was
 calculated for every translated sample and then averaged across the entire
-evaluation dataset.
+evaluation dataset. Table~\ref{tab:bleu_results} presents the BLEU score statistics for the evalated models.
 
-%szb: sztem legyen itt a medián is, ne csak az avg. Sztem sokkal többet mond a medián, mint a min és max pl. Meg akár szórás is jöhet...
-\begin{table}[htbp]
-\centering
-\caption{BLEU score results for base and fine-tuned models}
-\label{tab:bleu_results}
-\begin{tabular}{lccc}
-\hline
-Model & Average BLEU & Minimum BLEU & Maximum BLEU \\
-\hline
-StarCoder2 Base & 0.122 & 0.002 & 0.922 \\
-StarCoder2 Fine-Tuned & 0.189 & 0.000 & 0.981 \\
-Qwen Base & 0.178 & 0.005 & 0.780 \\
-Qwen Fine-Tuned & 0.217 & 0.002 & 0.980 \\
-\hline
-\end{tabular}
-\end{table}
 
-For StarCoder2, the average BLEU score increased from 0.122 for the base model
+
+For starcoder2-3b , the average BLEU score increased from 0.122 for the base model
 to 0.189 for the fine-tuned model. This corresponds to an improvement of
 approximately 54.6\%. In addition, the maximum BLEU score increased from 0.922
 to 0.981, indicating that the fine-tuned model was able to produce translations
 that were much closer to the reference solutions in the best-performing cases.
 
-Similarly, the Qwen model also benefited from fine-tuning. The average BLEU
+Similarly, the Qwen2.5-Coder-3B-Instruct model also benefited from fine-tuning. The average BLEU
 score increased from 0.178 for the base model to 0.217 for the fine-tuned
 model, which corresponds to an improvement of approximately 22.1\%. The maximum
 BLEU score also increased substantially, from 0.780 to 0.980.
 
-The minimum BLEU scores remained very low for all models. %szb: 1 bekezdés = legalább 2-3 mondat
+The minimum BLEU scores remained very low for all models, with values close to
+zero in each case. This indicates that for some samples the generated outputs
+have very low similarity to the reference solutions.
 
+The median BLEU scores differ from the average values across all models. For
+StarCoder2-3b, the median decreased from 0.070 for the base model to 0.063 after
+fine-tuning. For Qwen2.5-Coder-3B-Instruct, the median decreased from 0.120 to
+0.043 after fine-tuning.
 
+The standard deviation values show noticeable variation in BLEU scores across
+samples. For StarCoder2-3b, the standard deviation increased from 0.165 to 0.256
+after fine-tuning. Similarly, for Qwen2.5-Coder-3B-Instruct, the standard
+deviation increased from 0.156 to 0.244.
+
+\begin{table}[t]
+\centering
+\caption{BLEU score results for base and fine-tuned models}
+\label{tab:bleu_results}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccc}
+\hline
+Model & Average BLEU & Median BLEU & Minimum BLEU & Maximum BLEU & Std. Dev. \\
+\hline
+starcoder2-3b & 0.122 & 0.070 & 0.002 & 0.922 & 0.165 \\
+starcoder2-3b Fine-Tuned & 0.189 & 0.063 & 0.000 & 0.981 & 0.256 \\
+Qwen2.5-Coder-3B-Instruct & 0.178 & 0.120 & 0.005 & 0.780 & 0.156 \\
+Qwen2.5-Coder-3B-Instruct Fine-Tuned & 0.217 & 0.043 & 0.002 & 0.980 & 0.244 \\
+\hline
+\end{tabular}
+}
+\end{table}

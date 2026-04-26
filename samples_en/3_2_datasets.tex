@@ -1,13 +1,12 @@
 \section{Dataset}
 
-Two different datasets were used in this work: one dataset for model training
+Two different datasets are used in this work: one dataset for model training
 and a separate dataset for evaluation.
 
 \subsection{Training Dataset}
 
-The fine-tuned models were trained using the XLCoST dataset. %szb: The models were fine-tuned using the ...
-XLCoST (Cross-Lingual Code Snippet Dataset) %szb: elég az első említéskor feloldani a rövidítést
-is a large-scale benchmark designed for cross-lingual code intelligence tasks,
+The fine-tuned models are trained using the XLCoST dataset.
+XLCoST is a large-scale benchmark designed for cross-lingual code intelligence tasks,
 including code translation, code summarization, and code search
 \cite{zhu2022xlcost}.
 
@@ -17,56 +16,36 @@ includes aligned English descriptions. The dataset provides both snippet-level
 and program-level parallel examples, making it suitable for supervised code
 translation tasks. Given a code sample in one language, the dataset often
 contains the same implementation in several other programming languages
-\cite{zhu2022xlcost}. %szb: már többször nem írom le, de tényleg elég az első említéskor
+\cite{zhu2022xlcost}. :contentReference[oaicite:0]{index=0}
 
-For this thesis, only the code translation portion of XLCoST was used,
-specifically the Java-to-C++ translation pairs. For the training the original
+For this thesis, only the code translation portion of XLCoST is used,
+specifically the Java-to-C++ translation pairs. For training, the original
 dataset splits are loaded and filtered to retain only Java source code and the
 corresponding C++ target code. These code pairs are then formatted into
 instruction-style prompts and used for supervised fine-tuning.
 
-%szb: szerintem ez a magyarázat már volt korábban, ha nem pont ez, akkor érdemes összevonni, hogy ne több helyen legyen ugyanaz vagy kb ugyanaz
-The Java-to-C++ translation direction was selected because both languages are
-widely used, differ significantly in syntax and memory management, and are
-commonly included in code translation benchmarks. In addition, Java and C++
-examples are well represented in XLCoST, allowing the fine-tuned models to
-learn from a sufficiently large number of aligned training examples.
-
 \subsection{Evaluation Dataset}
 
-A separate evaluation dataset was used to assess model performance after
+A separate evaluation dataset is used to assess model performance after
 training. Although XLCoST provides predefined train, validation, and test
-splits, it was not used for the final evaluation in this thesis because XLCoST
+splits, it is not used for the final evaluation in this thesis because XLCoST
 does not include executable test cases or expected runtime outputs. As a result,
 it is suitable for similarity-based evaluation using BLEU or CodeBLEU, but it
-does not support execution-based evaluation of functional correctness. XLCoST
-was therefore used only for fine-tuning, while the final evaluation was
+does not support execution-based evaluation of functional correctness.
+Therefore, XLCoST is used only for fine-tuning, while the final evaluation is
 performed on CodeEditorBench \cite{codeeditorbench}.
 
 CodeEditorBench is a benchmark designed to evaluate code editing capabilities of
 large language models in realistic software engineering scenarios. It includes
 tasks such as debugging, code polishing, requirement switching, and code
-translation. Unlike traditional benchmarks that focus only on token-level
-similarity, CodeEditorBench evaluates whether the generated code behaves
-correctly when executed.
+translation, covering diverse programming tasks and complexity levels
+\cite{codeeditorbench}. :contentReference[oaicite:1]{index=1}
 
 For the purposes of this thesis, only the code translation subset of
-CodeEditorBench was used. The models receive Java input code and are required to
+CodeEditorBench is used. The models receive Java input code and are required to
 generate the corresponding C++ translation. The generated output is then
 compiled and tested using the execution framework provided by CodeEditorBench.
 
-
-In addition to execution-based evaluation, BLEU score was also computed for the
+In addition to execution-based evaluation, BLEU score is also computed for the
 generated translations. This makes it possible to compare similarity-based and
 execution-based evaluation methods on the same set of examples.
-
-Using separate datasets for training and evaluation helps reduce the risk of
-data leakage and provides a more realistic assessment of model performance.
-While XLCoST is primarily used to teach the model how to translate code, %szb: eddigre már szerintem felfogta az olvasó, hogy a melyik a training és melyik a validation, nem fontos megismételni/összefoglalni
-CodeEditorBench is used to measure whether the translated code is actually
-correct and executable.
-
-%szb: elfelejtetted leírni XLCoST test split-en való kiértékelést
-% ... közben picit előretekerttem, mintha az xlcoston mégse értékeltél volna ki? 
-% amit írsz (Instead of evaluating only on the original XLCoST test split) azt jelenti, hogy "ahelyett, hogy csak xlcoston értékelnék ki, máson IS kiértékelek" - akkor az Only használata hibás
-% ill. valahogy indokolni kéne, hogy miért döntöttél úgy, hogy az amúgy straightforwardnak tűnő test set-en való kiértékelést kihagyod.

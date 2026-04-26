@@ -65,14 +65,26 @@ quality than token-level similarity metrics alone.
 Other execution-based benchmarks have also been proposed for code translation.
 For example, CodeTransOcean provides multilingual datasets and evaluation
 protocols for a wide range of programming languages, including execution-based
-evaluation through Debugging Success Rate@K \cite{codetransocean}. Similarly,
-xCodeEval supports multilingual execution-based evaluation across multiple code
-tasks, including translation \cite{xcodeeval}. More recent benchmarks such as
-RepoTransBench focus on repository-level code translation, where complete
-projects rather than isolated functions are translated and tested
-\cite{repotransbench}. Finally, benchmarks such as TRACY evaluate not only
-functional correctness but also the runtime efficiency of translated code
-\cite{tracy_benchmark}.
+evaluation through Debugging Success Rate@K \cite{codetransocean}. The benchmark
+contains function-level and algorithmic code snippets collected from programming
+tasks, typically focusing on well-defined input–output behavior.
+
+Similarly, xCodeEval supports multilingual execution-based evaluation across
+multiple code tasks, including translation \cite{xcodeeval}. It includes a mix
+of programming problems and function-level implementations, where correctness is
+evaluated by running the generated code against test cases.
+
+More recent benchmarks such as RepoTransBench focus on repository-level code
+translation, where complete projects rather than isolated functions are
+translated and tested \cite{repotransbench}. These datasets include multi-file
+codebases with dependencies, build configurations, and interactions between
+modules, making them closer to real-world software systems.
+
+Finally, benchmarks such as TRACY evaluate not only functional correctness but
+also the runtime efficiency of translated code \cite{tracy_benchmark}. TRACY
+typically includes performance-sensitive code segments, such as algorithms and
+computational routines, where both correctness and execution efficiency are
+measured.
 
 Several recent studies have shown that models achieving high scores on
 similarity-based metrics do not necessarily perform well in execution-based

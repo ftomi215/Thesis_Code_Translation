@@ -9,7 +9,14 @@ challenge of translating or migrating code between programming languages to
 ensure maintainability, scalability, and long-term sustainability of software
 systems.
 
-%szb: az intro legelejének szerintem össze kéne foglalni pármondatban, hogy mi a szakdoga területe. Ennél kicsit konkrétabban, mert itt bár a fordítást bevezeted, de azt még nem, hogy LLM-mel csinálod. Nem feltétlen hogy te (még), hanem hogy ez is lehetséges opció
+In recent years, this problem has increasingly been addressed using deep
+learning, particularly Large Language Models (LLMs). These models are capable
+of understanding programming languages as structured text and can automatically
+generate or translate code between languages based on learned patterns
+\cite{llm_limitations}. Unlike traditional rule-based or compiler-based
+approaches, LLM-based methods rely on large-scale training data and can capture
+both syntactic and semantic aspects of code, making them a promising solution
+for automatic code translation \cite{aljagthami2025prompt}.
 
 \section{Background and Motivation}
 
@@ -19,8 +26,7 @@ which are difficult to maintain and integrate with modern technologies.
 Translating such systems reduces technical debt and enables reuse across
 platforms \cite{yang2024llm, bruneel2025pipeline}.
 
-Traditional approaches relied %szb: sztem ink jelen idő, mert a trad-ok még mindig erre relyolnak
-on rule-based and compiler-driven techniques, including grammar-based parsing
+Traditional approaches rely on rule-based and compiler-driven techniques, including grammar-based parsing
 and abstract syntax tree (AST) transformations \cite{antlr, transpiler_survey,
 traditional_translation_survey}. While precise, these methods are difficult to
 maintain and scale to complex systems.
@@ -28,11 +34,9 @@ maintain and scale to complex systems.
 Recent advances in deep learning have introduced data-driven approaches that
 learn translation patterns from large-scale datasets
 \cite{code_translation_survey, llm_survey}. The introduction of the Transformer
-architecture \cite{vaswani2017} and large language models %szb: sztem captialized betűk kellenének
-(LLMs) has significantly improved performance in code-related tasks
-\cite{brown2020gpt3, llm_survey}. Code-specific models such as CodeLlama and
-DeepSeek-Coder further enhance performance in programming tasks \cite{codellama,
-deepseek_coder}. %szb: konkrétan ott kéne hivatkozni a modelleket, ahol említed, tehát a CodeLlama és DSC nevek után egyesével
+architecture \cite{vaswani2017} and LLMs has significantly improved performance in code-related tasks
+\cite{brown2020gpt3}. Code-specific models such as CodeLlama \cite{codellama} and
+DeepSeek-Coder \cite{deepseek_coder} further enhance performance in programming tasks.
 
 Despite these improvements, automatic code translation remains challenging.
 Programming languages require strict syntactic correctness and precise semantic
@@ -42,27 +46,25 @@ models often generate code that appears plausible but still contains logical or
 semantic errors \cite{llm_limitations, correctness_llm}. Models also struggle
 when code depends on larger project context, external libraries, or multiple
 source files \cite{evaluation_limitations, long_context_llm}.
-%szb: kicsit mondhatnál példákat: for examples .... a well known translator tool ... <insert miért szar>. Így hihetőbb lenne
 
-Even existing Java-to-C++ translators %szb: ideírhatnád, hogy ez pl. ai-based vagy traditional fajta, mert az olvasó valszeg nem tudja
-such as J2C \cite{j2c_tool} frequently require manual post-processing. J2C
+
+Even existing traditional Java-to-C++ translators such as J2C \cite{j2c_tool} frequently require manual post-processing. J2C
 attempts to convert Java code into compilable C++ code, but the generated output
 still depends on manual handling of Java runtime libraries and missing
 dependencies \cite{traditional_translation_survey}. More generally,
 transcompilers often preserve the structure of the original code, but the
 resulting translations may not follow target-language conventions and typically
 require additional manual corrections before they can compile or execute
-correctly \cite{roziere2020transcoder, traditional_translation_survey}.
+correctly \cite{roziere2020transcoder}.
 
-Another important challenge is evaluation. %szb: kicsit pontosabban is bevezethetnéd: minek az evaluációja a challange? Jó lenne leszögezni, hogy itt az AI-based dolgok kiértékeléséről van szó
-Traditional metrics such as BLEU measure token-level similarity between
+Another important challenge is the evaluation of AI-based code translation models.
+Traditional metrics such as BLEU \cite{bleu_metric} measure token-level similarity between
 generated and reference code, but do not indicate whether the generated program
-is actually correct or executable \cite{bleu_metric, tran2019ruby}. %szb: ha a bleu-t hivatkozod akkor tedd a bleu measure után rögtön. Ha itt hivatkozol, itt olyan hivatkozás kell, ami leírja ezt a jelenséget.
+is actually correct or executable \cite{tran2019ruby}.
 Multiple studies have shown that models with high BLEU scores may still fail to
-compile or produce incorrect outputs during execution \cite{evtikhiev2022bleu, %szb: előbbihez: nem kell ott, mert itt hivatkozod, szal így jó. Csak a bleu-t tedd jó helyre, ha nincs jó helyen
-huang2022exeds}. Because of this, recent research increasingly relies on
+compile or produce incorrect outputs during execution \cite{evtikhiev2022bleu, huang2022exeds}. Because of this, recent research increasingly relies on
 execution-based evaluation methods, where generated programs are compiled and
-tested against predefined test cases \cite{huang2022exeds, codescore2023}. These
+tested against predefined test cases \cite{codescore2023}. These
 methods provide a more realistic measure of functional correctness, although
 they are also more computationally expensive and dependent on the quality of the
 available test cases.

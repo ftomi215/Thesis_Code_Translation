@@ -1,29 +1,66 @@
 \section{Relation to Previous Research}
 
-%szb: ennél sokkal sokkal sokkal precízebb és pontosabb vizsgálat elvárt:
-% melyik munka mit mondott, te ehhez képest mit vettél észre, hogy viszonyul egymáshoz a két eredmény: egyetért? uyanazt mondja? ellenkezőt mond? hasonlót mond? Nem lehet csak így a levegőbe beszélni. 
 
-The findings of this thesis are generally consistent with the literature reviewed
-in Chapter~\ref{ch:rel_work}. Previous studies have shown that fine-tuning can
-substantially improve the performance of code generation and translation models
-by adapting them to a specific task or dataset. The improvements observed in
-this thesis, particularly in terms of BLEU score, accepted solutions, and
-compilation success, support this conclusion. Similarly, the stronger
-performance of the Qwen models is consistent with recent benchmark studies,
-which report that Qwen2.5-Coder achieves state-of-the-art or near
-state-of-the-art performance on multiple programming benchmarks, including
-HumanEval and MBPP \cite{qwen_coder}.
+The results of this thesis refine and support several findings discussed in
+Chapter~\ref{ch:rel_work}, but they also show that the relationship between
+similarity-based and execution-based evaluation is more complex than a simple
+increase in BLEU score would suggest.
 
-The experiments also support previous findings regarding the limitations of
-BLEU as an evaluation metric for code-related tasks. %szb: lemaradtak a konkrétumok: previous findings konkrétan mit mondott erről, és te mit mondasz?
-BLEU measures token overlap between the generated and reference outputs, but
-multiple implementations of the same program can be functionally equivalent
-while having very different textual representations. %szb: itt már nincs helye a bleu újbóli bevezetésének. Itt azt kell tárgyalni, hogy mások mit mondtak erről a témáról, és az hogyan viszonyul a te findingjaiddal
-Earlier studies found that BLEU often correlates only weakly with semantic
-correctness and human judgment in code translation tasks \cite{tran2019ruby,
-evtikhiev2022bleu}. %szb: itt pl. le lehetne írni, hogy mások milyen korrelációt találtak (számszerűen, pontosan), és te mennyit. Szignifikáns a korreláció a statisztikai tesztek alapján? cikkek és te ugyanazt találtad?
-Recent research therefore increasingly emphasizes execution-based evaluation,
-where generated programs are compiled and tested against predefined test cases,
-as a more reliable measure of functional correctness \cite{codescore2023,
-ice_score}.
+First, the observed effect of fine-tuning is consistent with previous work on
+task-specific adaptation of code models. Liu et al. showed that
+parameter-efficient fine-tuning can improve model performance in code change
+learning tasks \cite{peft_code}. Although their work focuses on code change
+learning rather than Java-to-C++ translation specifically, the tendency observed
+in this thesis is similar: adapting a pre-trained model to a specific code-related
+task improves its performance. In the present experiments, fine-tuning increased
+the average BLEU score of \texttt{starcoder2-3b} from 0.122 to 0.189 and
+increased the number of accepted solutions from 55 to 133. At the same time,
+compilation errors decreased from 390 to 287. The same pattern was observed for
+\texttt{Qwen2.5-Coder-3B-Instruct}: the average BLEU score increased from
+0.178 to 0.217, accepted solutions increased from 101 to 168, and compilation
+errors decreased from 324 to 219. These results therefore agree with the general
+claim that task-specific fine-tuning improves code model performance, and they
+extend this observation to the Java-to-C++ translation setting used in this thesis.
 
+Second, the stronger performance of the Qwen model is consistent with the
+model-level results reported for Qwen2.5-Coder. Hui et al. describe
+Qwen2.5-Coder as a code-specific model trained on a large programming corpus
+and evaluated on standard programming benchmarks such as HumanEval and MBPP
+\cite{qwen_coder}. In the present study, Qwen also outperformed StarCoder2 in
+the Java-to-C++ translation task. The base Qwen model achieved a higher average
+BLEU score than the base StarCoder2 model, and it also produced more accepted
+solutions. The same ordering remained after fine-tuning, where the fine-tuned Qwen
+model achieved the highest average BLEU score and the highest number of accepted
+solutions among all evaluated models. This does not mean that the present
+experiment reproduces the HumanEval or MBPP benchmark results directly, because
+the task and evaluation setup are different. However, it does show that the stronger
+general coding performance reported for Qwen2.5-Coder also appears in this
+translation-specific evaluation.
+
+Third, the correlation analysis performed in this thesis further supports earlier
+criticism of BLEU in code-related evaluation. Previous research has shown that
+BLEU does not always reflect the semantic correctness of generated or translated
+code, because functionally equivalent programs may have different token sequences,
+while lexically similar programs may still contain logical errors
+\cite{tran2019ruby, evtikhiev2022bleu}. The results of this thesis are consistent
+with this view. BLEU is useful for capturing broad similarity trends, and the
+statistically significant correlations show that it is not meaningless. Nevertheless,
+the moderate correlation values demonstrate that BLEU alone is insufficient for
+evaluating code translation quality. Therefore, the present findings agree with
+previous studies in treating BLEU as an auxiliary similarity metric rather than as
+a standalone measure of functional correctness.
+
+Finally, the execution-based results agree with recent work that emphasizes the
+importance of compiling and running generated code. CodeEditorBench was
+introduced to evaluate code editing capabilities of large language models, including
+translation, in practical programming scenarios \cite{codeeditorbench}. The results
+of this thesis confirm the value of such an evaluation setup. Even when BLEU
+improved after fine-tuning, execution-based evaluation still revealed many failures
+that would not be visible from textual similarity alone. The best-performing model,
+the fine-tuned Qwen variant, produced 168 accepted solutions, but it still produced
+219 compilation errors and 96 wrong answers. This confirms the gap identified in
+earlier research between surface-level similarity and actual program correctness.
+In this respect, the present study agrees with the broader direction of recent code
+evaluation research: similarity-based metrics can provide useful auxiliary
+information, but functional correctness in code translation requires execution-based
+evaluation whenever test cases are available.

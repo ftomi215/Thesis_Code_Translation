@@ -1,19 +1,14 @@
 \section{Models Used}
 
-%szb: ez itt egy nagyon hetkikus section lett, több okból:
-% - nem szükséges annyi implementation detail - ugyanakkor kell, hogy milyen paraméterekkel finomhangoltál persze (lora alpha, 4-bites kvantálás, stb.)
-% - A section cím alapján arra számítottam, hogy itt csak leírod, hogy mely 2 modellt használtad fel, mik ők kb (1-2 mondatban) és ennyi. Ez benne van persze, talán túl részletesen is
-% - csak ezeken túl rengetegminden más is itt van, pl. hogy hgoyan finetuneoltál, milyen paramétereket használtál, mivel értékelted ki, stb. Ez így nagyon katyvasz
-
-
-Two code-specific large language models were selected for the experiments:
+Two code-specific large language models are selected for the experiments:
 \texttt{bigcode/starcoder2-3b} and
 \texttt{Qwen/Qwen2.5-Coder-3B-Instruct}. Both models are relatively lightweight
 compared to larger code-focused models, making them suitable for training and
 evaluation under limited hardware resources, while still providing strong coding
-capabilities.
+capabilities. Table~\ref{tab:model_overview} provides an overview of the evaluated models,
+including their size, context length, training data scale, and fine-tuning setup.
 
-\begin{table}[h]
+\begin{table}[b]
 \centering
 \caption{Overview of the evaluated models}
 \begin{adjustbox}{max width=\textwidth}
@@ -29,52 +24,46 @@ Qwen2.5-Coder-3B-Instruct & 3.09B & 32,768 & 5.5T+ & Yes \\
 \label{tab:model_overview}
 \end{table}
 
-\subsection{Base Models} %szb: ne használd a base modellt, mert a qwen modell instruction-tuned. Lehet, hogy csak simán hagyd el a subsection-öket
-
-The first set of experiments used the original pre-trained versions of both
+The first set of experiments uses the original pre-trained versions of both
 models without additional task-specific training.
 
 The \texttt{bigcode/starcoder2-3b} model is a decoder-only Transformer model
 with approximately 3 billion parameters. It is part of the StarCoder2 family
-and was trained on more than 3 trillion tokens collected from large-scale code
+and is trained on more than 3 trillion tokens collected from large-scale code
 repositories and software-related text sources. The model supports 17
 programming languages and provides a context window of up to 16,384 tokens
 \cite{starcoder2, starcoder2_hf}. At the time of its release, StarCoder2-3B
-outperformed several other code models of similar size on standard programming
+outperforms several other code models of similar size on standard programming
 benchmarks.
 
 The \texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model is also a decoder-only
 Transformer model with approximately 3.09 billion parameters. Unlike
 StarCoder2, it is instruction-tuned for coding tasks, which makes it more
 suitable for prompt-based code generation and translation. The model supports a
-context length of up to 32,768 tokens and was trained on more than 5.5 trillion
-tokens. Qwen2.5-Coder models are optimized for programming-related tasks such
-as code generation, reasoning, debugging, and repair \cite{qwen_coder,
-qwen_coder_report}.
-
-%szb: itt elgondolkoztam... A prompt-od, amit fentebb írsz, nem instrukciós kérdés/válaszos jellegű... Ez nyílván okés starcoderhez, de a qwencodert ugye a saját chat template-jével promptolod kiértékeléskor meg tanításkor?
-
-\subsection{Fine-Tuned Models}
+context length of up to 32,768 tokens and is trained on more than 5.5 trillion
+tokens \cite{qwen_coder, qwen_coder_report}. Qwen2.5-Coder models are optimized
+for programming-related tasks such as code generation, reasoning, debugging,
+and repair.
 
 In addition to the original pre-trained models, fine-tuned variants of both
-StarCoder2 and Qwen2.5-Coder %szb: légy következetes a nevekben, a méret és a tuning is a név része - főleg azért, hogy nehogy azt higgye az olvasó, hogy it ttényleg a base-modelről van szó (hiszen annak a nevében ugyancsak nincs ott az instruct szócska)
-were prepared for the Java-to-C++ translation task. Fine-tuning was performed
-using Low-Rank Adaptation (LoRA), which adds small trainable matrices to
-selected layers of the model while keeping the original weights frozen
+\texttt{bigcode/starcoder2-3b} and \texttt{Qwen/Qwen2.5-Coder-3B-Instruct} are
+prepared for the Java-to-C++ translation task. Fine-tuning is performed using
+Low-Rank Adaptation (LoRA), which adds small trainable matrices to selected
+layers of the model while keeping the original weights frozen
 \cite{hu2021lora}. This significantly reduces the number of trainable parameters
 and makes fine-tuning more efficient.
 
-Both models were fine-tuned using 4-bit quantization together with LoRA, which
+Both models are fine-tuned using 4-bit quantization together with LoRA, which
 corresponds to the QLoRA approach. In this setup, the original model weights
 remain frozen and quantized, while only the LoRA adapter weights are updated
 during training. This substantially reduces GPU memory usage and makes it
 possible to fine-tune billion-parameter models on consumer-grade hardware. The
-models were loaded in 4-bit mode and trained using mixed precision and gradient
+models are loaded in 4-bit mode and trained using mixed precision and gradient
 checkpointing in order to further reduce memory requirements.
 
-The same LoRA configuration was used for both models. The low-rank dimension
-was set to $r = 8$, the LoRA scaling factor to $\alpha = 16$, and the dropout
-rate to 0.05. The adapters were applied to both the attention and feed-forward
+The same LoRA configuration is used for both models. The low-rank dimension
+is set to $r = 8$, the LoRA scaling factor to $\alpha = 16$, and the dropout
+rate to 0.05. The adapters are applied to both the attention and feed-forward
 layers of the models, specifically to the
 \texttt{q\_proj}, \texttt{k\_proj}, \texttt{v\_proj},
 \texttt{o\_proj}, \texttt{gate\_proj}, \texttt{up\_proj}, and
@@ -82,15 +71,15 @@ layers of the models, specifically to the
 layers is a common approach because it provides stronger adaptation than using
 attention layers alone \cite{lora_modules, hu2021lora}.
 
-The maximum sequence length during training was set to 1024 tokens. Both models
-were trained for two epochs using a learning rate of $10^{-4}$, cosine learning
+The maximum sequence length during training is set to 1024 tokens. Both models
+are trained for two epochs using a learning rate of $10^{-4}$, cosine learning
 rate scheduling, a warmup ratio of 0.03, and gradient accumulation with 16
-steps. The effective batch size per device was 1. These settings were selected
+steps. The effective batch size per device is 1. These settings are selected
 to balance training stability and GPU memory consumption.
 
-For both models, the training data was converted into an instruction-style
-format in which the model received a Java source code snippet together with a
+For both models, the training data is converted into an instruction-style
+format in which the model receives a Java source code snippet together with a
 prompt asking for the corresponding C++ translation. During training, only the
-target C++ response tokens contributed to the loss, while the prompt portion
-was masked out. This setup allows the models to focus on learning the desired
+target C++ response tokens contribute to the loss, while the prompt portion
+is masked out. This setup allows the models to focus on learning the desired
 translation output format rather than memorizing the prompt structure.

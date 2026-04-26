@@ -1,24 +1,25 @@
 \chapter{Results}
 
-%szb: alapvetően érdekesek az eredmények és jók, viszont a tárgyalásuk helytelen.
-% results: tömören röviden az eredmények
-% discussion: részletesen azok értelmezéséről, stb.
-% apróság: ha már van agv min és max, lehetne medián érték is
 
 This chapter presents the results of the experimental evaluation of the selected
 code translation models. The performance of the base and fine-tuned variants of
-StarCoder2 and Qwen was analyzed using both similarity-based and
+starcoder2-3b and Qwen2.5-Coder-3B-Instruct was analyzed using both similarity-based and
 execution-based metrics.
 
-%szb: javaslom, hogy a táblák top vagy bottom rendezésűek legyenek
-% másrészt minden táblára kötelező hivatkozni, és érdemes előbb a szövegben említeni és csak azt követően betenni az ábrát ténylegesen.
+Table~\ref{tab:relative_improvement} summarizes the relative improvements
+observed after fine-tuning across different evaluation metrics. For starcoder2-3b, the average BLEU score increased by 54.6\%, while the number
+of accepted solutions increased by 141.8\%. At the same time, the number of
+compilation errors decreased by 26.4\%. For Qwen2.5-Coder-3B-Instruct, the average BLEU score increased by 22.1\%, and
+the number of accepted solutions increased by 66.3\%. Compilation errors also
+decreased by 32.4\%.
 
 \begin{table}[h]
 \centering
 \caption{Relative improvement after fine-tuning}
+\resizebox{\textwidth}{!}{
 \begin{tabular}{lcc}
 \hline
-Metric & StarCoder2 Improvement & Qwen Improvement \\
+Metric & starcoder2-3b Improvement & Qwen2.5-Coder-3B-Instruct Improvement \\
 \hline
 Average BLEU & +54.6\% & +22.1\% \\
 Accepted Solutions & +141.8\% & +66.3\% \\
@@ -26,6 +27,7 @@ Compilation Errors & -26.4\% & -32.4\% \\
 \hline
 \end{tabular}
 \label{tab:relative_improvement}
+}
 \end{table}
 
 

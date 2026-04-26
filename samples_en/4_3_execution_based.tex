@@ -8,7 +8,22 @@ compiles and produces the expected outputs.
 
 \subsection{Accepted Solutions and Compilation Errors}
 
-\begin{table}[htbp]
+
+Table~\ref{tab:execution_results} presents the number of accepted solutions and
+the distribution of major error categories for each evaluated model.
+
+For StarCoder2, the number of accepted solutions increased from 55 for the base
+model to 133 for the fine-tuned model. The number of compilation errors
+decreased from 390 to 287, while the number of wrong answers increased from 57
+to 75. Runtime errors also increased from 4 to 13.
+
+For Qwen2.5-Coder-3B-Instruct, the number of accepted solutions increased from
+101 for the base model to 168 for the fine-tuned model. Compilation errors
+decreased from 324 to 219. At the same time, the number of wrong answers
+increased from 63 to 96, while runtime errors decreased from 15 to 9.
+
+
+\begin{table}[t]
 \centering
 \caption{Execution-based evaluation results}
 \label{tab:execution_results}
@@ -26,37 +41,22 @@ Qwen Fine-Tuned & 168 & 96 & 9 & 219 \\
 }
 \end{table}
 
-The number of accepted solutions increased significantly after fine-tuning for
-both model families. %szb: ugyanaz, amit az előbb írtam
 
-For StarCoder2, the number of accepted translations increased from 55 for the
-base model to 133 for the fine-tuned model. This corresponds to an improvement
-of approximately 142\%. At the same time, the number of compilation errors
-decreased from 390 to 287.
+\subsection{Additional Error Types}
+Table~\ref{tab:error_types} shows additional, less frequent error categories
+observed during execution.
 
-%szb: ezekből a részekből (egész results) abszolút hivatkoznak a hivatkozások, vagyis olyanok hogy Table X shows the results of ...
+Presentation errors, time limit exceeded errors, and output limit exceeded
+errors occurred less frequently across all models. For StarCoder2, presentation
+errors decreased from 2 to 0 after fine-tuning, while time limit exceeded errors
+remained unchanged at 2. No output limit exceeded errors were observed.
 
-The Qwen models achieved stronger performance overall. The base Qwen model
-produced 101 accepted solutions, while the fine-tuned version reached 168
-accepted solutions. This represents an improvement of approximately 66.3\%.
-Compilation errors also decreased substantially, from 324 to 219.
-
-Compilation error remained the most frequent failure type for all evaluated
-models. Even after fine-tuning, compilation errors represented the largest
-portion of failed translations. 
-
-%szb: fura, mert efelett már írsz az error type-kről, majd a kövi subsection-ban is. Ha már mindenképp ketté akarjuk bontani, akk a következőképpen: 
-%- puszta eredmények, melyik modell hogy teljesített, minden error-t egyként kezelve
-% - rontások különböző fajtái (error types)
+For Qwen2.5-Coder-3B-Instruct, presentation errors increased from 3 to 10, while
+time limit exceeded errors increased from 4 to 5. Output limit exceeded errors
+appeared only in the fine-tuned model, with a total of 3 cases.
 
 
-
-
-
-
-\subsection{Other Error Types}
-
-\begin{table}[htbp]
+\begin{table}[h]
 \centering
 \caption{Additional execution error types}
 \label{tab:error_types}
@@ -73,22 +73,5 @@ Qwen Fine-Tuned & 10 & 5 & 3 \\
 \end{tabular}%
 }
 \end{table}
-
-In addition to accepted solutions and compilation errors, several other failure
-categories appeared during evaluation.
-
-Wrong Answer (OJ\_WA) was the second most common error type. For StarCoder2,
-the number of wrong answers increased from 57 in the base model to 75 after
-fine-tuning. Similarly, Qwen increased from 63 to 96 wrong answers after
-fine-tuning.
-
-Runtime Error (OJ\_RE) occurred relatively infrequently. For StarCoder2, runtime
-errors increased from 4 to 13 after fine-tuning, while for Qwen they decreased
-from 15 to 9. 
-
-Time Limit Exceeded (OJ\_TL) errors were rare for all models, indicating that
-most generated solutions were computationally efficient enough to finish within
-the allowed execution time. Presentation errors and output limit errors also
-occurred only occasionally and had limited influence on the overall results.
 
 

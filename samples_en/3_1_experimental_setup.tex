@@ -1,116 +1,121 @@
 \chapter{Methodology}
 
-This chapter describes the experimental methodology %szb: sztem nem kell experimental csak methodology
-used to evaluate deep learning-based code translation models. The study focuses
+This chapter describes the methodology used to evaluate deep learning-based code translation models. The study focuses
 on comparing models under a unified experimental setup, using both
 similarity-based and execution-based evaluation techniques.
 
-Code translation outputs are evaluated using BLEU score as a similarity-based
-metric, while functional correctness %szb: mintha szembeállítanád, mintha ez nem vonatkozna a Code translation outputs kategóriába. De igen, hisz ezekkel is ezt értékeled
-is assessed with the CodeEditorBench framework, which assesses model performance
-on practical coding tasks such as translation and debugging, providing a more
-realistic measure of functional correctness.
+Code translation outputs are evaluated using both similarity-based and
+execution-based approaches. Specifically, BLEU \cite{bleu_metric} score is used as a
+similarity-based metric, while functional correctness is assessed through
+execution-based evaluation using the CodeEditorBench \cite{codeeditorbench} framework, which measures
+model performance on practical coding tasks such as translation and debugging,
+providing a more realistic estimate of actual program behavior.
 
-The following sections detail the experimental setup, models, dataset, translation %szb: jelzők jöhetnének: milyen models (finethined), milyen dataset? (training) ilyesmi
-pipeline, and evaluation procedure.
+The following sections detail the experimental setup, including the evaluated
+code-oriented language models (in both base and fine-tuned variants), the
+training dataset used for fine-tuning, the code translation pipeline, and the
+evaluation procedure.
 
 \section{Experimental Setup}
 
-The experiments were designed to compare the performance of base and fine-tuned
+The experiments are designed to compare the performance of base and fine-tuned
 code translation models under identical conditions. Two open-source
-code-specific large language models were selected for evaluation: the
+code-specific large language models are selected for evaluation: the
 \texttt{bigcode/starcoder2-3b} model \cite{starcoder2} and the
 \texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model \cite{qwen_coder}.
 
-For both models, two experimental variants were prepared. The first
-variant used the original pre-trained model %szb: ez így megtévesztő, ugyanis az általad használt Qwen az már finetuneolt modell, így kicsit fura original pre-trained-ként jellemezni. Ink azt írd, hogy original models without any custom/specific funetuning/posttraining for code-transformation, vagy vmi ilyesmi, és akk egyértelmű, hogy itt a te saját finetuningodra gondolsz
-without additional task-specific adaptation. The second variant used a
+For both models, two experimental variants are prepared. The first
+variant uses the original model without any additional task-specific
+fine-tuning for code translation. The second variant uses a
 fine-tuned version of the same model, trained specifically for Java-to-C++ code
-translation. This setup enables a direct comparison between base %szb: ugyanígy, ne hívd base modellnek, mert az sokszor azt jelenti, hogy a nem instrukciókövetésr ehangolt modell
-and fine-tuned models, making it possible to analyze the impact of task-specific
-adaptation on translation quality.
+translation. This setup enables a direct comparison between models without task-specific adaptation and
+models adapted through fine-tuning, making it possible to analyze the impact
+of task-specific training on translation quality.
 
+The experiments focus exclusively on Java-to-C++ translation. This direction is
+selected because Java and C++ are both widely used yet substantially different
+programming languages in terms of execution model, abstraction level, and memory
+management. Java relies on automatic garbage collection and execution through
+the Java Virtual Machine, whereas C++ provides lower-level control and typically
+requires manual memory management, leading to fundamental differences in program
+structure and behavior. These differences make
+Java-to-C++ translation more challenging than translation between more closely
+related languages. In addition, the XLCoST dataset contains a substantial number
+of aligned Java and C++ code pairs, and the CodeEditorBench framework supports
+this language pair, enabling consistent training and evaluation across all
+models.
 
-The experiments focus exclusively on Java-to-C++ translation. This direction was
-selected because Java and C++ represent two widely used but substantially
-different programming languages. Java relies on automatic garbage collection,
-the Java Virtual Machine and higher-level abstractions, while C++ requires
-manual memory management and provides lower-level control over system resources.
-These differences make Java-to-C++ translation more challenging than translation
-between more closely related languages. In addition, the XLCoST dataset used for
-fine-tuning in this thesis contains aligned Java and C++ code pairs, and the
-CodeEditorBench framework supports evaluation of this language pair, allowing
-consistent comparison across all models.
-
-The experimental workflow consisted of two main phases. In the first phase, the
-base models were evaluated directly on the Java-to-C++ translation task in order
+The experimental workflow consists of two main phases. In the first phase, the
+base models are evaluated directly on the Java-to-C++ translation task in order
 to measure their original performance without additional task-specific
-adaptation. For each Java input sample, the model generated a C++ translation.
-The generated output was then compared against the reference
+adaptation. For each Java input sample, the model generates a C++ translation.
+The generated output is then compared against the reference
 \texttt{target\_code} provided in the CodeEditorBench dataset in order to
-compute BLEU score. The same generated translation was also compiled and
+compute BLEU score. The same generated translation is also compiled and
 executed inside the CodeEditorBench environment to assess functional
 correctness.
 
-In the second phase, the same models were fine-tuned for Java-to-C++ code
-translation and evaluated again using the identical procedure. This made it
+In the second phase, the same models are fine-tuned for Java-to-C++ code
+translation and evaluated again using the identical procedure. This makes it
 possible to directly compare the performance of the base and fine-tuned
 variants.
 
-The XLCoST dataset \cite{zhu2022xlcost} %szb: elég csak első említéskor hivatkozni - ez mindenre is igaz
-was used as the primary training resource for the fine-tuned models. XLCoST
+The XLCoST dataset is used as the primary training resource for the fine-tuned models. XLCoST
 contains aligned code snippets across multiple programming languages, including
 Java and C++, making it suitable for supervised code translation tasks. The
-Java--C++ pairs were first extracted and transformed into instruction-based
-prompts, then tokenized and prepared for training. Fine-tuning was performed
+Java--C++ pairs are first extracted and transformed into instruction-based
+prompts, then tokenized and prepared for training. Fine-tuning is performed
 using parameter-efficient methods in order to reduce hardware requirements and
 training time while still allowing the models to adapt to the translation task.
 
-%szb: ez a kövi 2 bekezdés mehetne 1be, és akkor valahogy úgy bevezetni inkább, hogy "As mentioned above, one of the two models selected for the experiments is StarCoder, ... which was selected"
-The StarCoder2-3B model \cite{starcoder2, starcoder2_hf} was selected because it
-provides strong coding capabilities while remaining relatively lightweight
-compared to larger code models. StarCoder2 models are trained on trillions of
-tokens collected from large-scale code corpora. The 3B variant was trained on
-more than 3 trillion tokens and, at the time of its release, outperformed
-several other code models of similar size.
+As mentioned above, one of the two models selected for the experiments is the
+StarCoder2-3B model \cite{starcoder2, starcoder2_hf}, which is chosen for its
+strong coding capabilities despite its relatively small size. StarCoder2 models
+are trained on large-scale code corpora containing trillions of tokens and have
+been shown to outperform several models of similar size on code-related tasks.
+The second selected model is Qwen2.5-Coder-3B-Instruct, which is specifically
+optimized for programming tasks and demonstrates strong performance on code
+generation and repair benchmarks \cite{qwen_coder, qwen_coder_report}. The
+Qwen2.5-Coder series is trained on a large-scale corpus of over 5.5 trillion
+tokens, enabling competitive performance across a wide range of coding tasks.
 
-The Qwen2.5-Coder-3B-Instruct model was selected because it is specifically
-optimized for programming-related tasks and has demonstrated strong results on
-code generation and repair benchmarks \cite{qwen_coder}. The Qwen2.5-Coder
-series is trained on more than 5.5 trillion tokens and achieves competitive
-performance across a wide range of coding tasks \cite{qwen_coder,
-qwen_coder_report}.
-
-Execution-based evaluation was performed using the CodeEditorBench framework.
+Execution-based evaluation is performed using the CodeEditorBench framework.
 CodeEditorBench evaluates model outputs in realistic coding scenarios,
 including translation tasks, by compiling and running generated code against
-predefined test cases \cite{codeeditorbench}. The evaluation environment was
+predefined test cases. The evaluation environment is
 executed inside a Docker container using the official CodeEditorBench image.
-Using Docker ensured that all experiments were performed in an isolated and
+Using Docker ensures that all experiments are performed in an isolated and
 reproducible environment, reducing the risk of issues caused by missing
 dependencies, compiler version differences, or operating system variations.
 Container-based execution also provides sandboxing, which is important when
 running automatically generated code because it limits the potential impact of
-compilation failures, runtime errors or unintended system-level behavior.
+compilation failures, runtime errors, or unintended system-level behavior.
 
+To ensure fair comparison, all models are evaluated on the same Java-to-C++
+pairs of CodeEditorBench and use a consistent instruction structure, while adapting the prompt format to match the expected input template of each model,
+preprocessing pipeline, and generation settings. Each input example is converted into an instruction-following prompt consisting of a system message, a user request, and the original Java code.
 
-To ensure fair comparison, all models were evaluated on the same Java-to-C++
-pairs of CodeEditorBench and used the same instruction format,
-preprocessing pipeline, and generation settings. Each input example was
-converted into an instruction-following prompt containing a system message, a
-user request, the original Java code, and a response tag indicating where the
-C++ translation should begin.
+The prompt formatting differs slightly depending on the model. For
+the StarCoder2 model, a plain text instruction format is used. In contrast, the
+Qwen2.5-Coder-Instruct model requires a structured ChatML-based format, where
+special tokens explicitly separate system, user, and assistant roles. This structure reflects the format used during instruction tuning of the model and ensures alignment between training and inference inputs.
 
-The prompt format used during both training and inference was the following:
+The ChatML-based prompt format used for Qwen2.5-Coder-Instruct is shown below:
 
+\begin{lstlisting}
+<|im_start|>system
+You are an expert code translator. Translate Java code to C++ preserving logic and I/O.
+<|im_end|>
+<|im_start|>user
+Translate this Java code to C++.
 
+<source code>
+<|im_end|>
+<|im_start|>assistant
+\end{lstlisting}
 
-\lstset{
-  basicstyle=\ttfamily\small,
-  breaklines=true,
-  breakatwhitespace=true,
-  columns=fullflexible
-}
+For comparison purposes, a simpler instruction-style format is used for the
+StarCoder2 model:
 
 \begin{lstlisting}
 ### System
@@ -125,21 +130,23 @@ Translate this Java code to C++.
 Answer (C++)
 \end{lstlisting}
 
-Only the generated C++ part after the \texttt{\#\#\# Answer (C++)} tag was used
-as the training target. During preprocessing, all prompt tokens before the
-response tag were masked with \texttt{-100} labels so that the loss was
-calculated only on the translated C++ output.
+Only the generated C++ output corresponding to the assistant response is used
+as the training target. For the StarCoder2 model, this corresponds to the code
+following the \texttt{\#\#\# Answer (C++)} tag, while for the
+Qwen2.5-Coder-Instruct model, it corresponds to the tokens generated after the
+assistant role marker in the ChatML format. In both cases, all preceding prompt
+tokens are masked using \texttt{-100} labels so that the loss is computed only
+on the translated C++ output.
 
 The same tokenizer settings, truncation strategy, and maximum sequence length
-of 1024 tokens were used for all models. During inference, generation was
+of 1024 tokens are used for all models. During inference, generation is
 performed with a maximum of 900 new tokens, a repetition penalty of 1.10,
-\texttt{top\_p=0.95}, and \texttt{temperature=0.2}. Greedy decoding was used
-with \texttt{do\_sample=False} in order to ensure deterministic outputs across
-repeated runs. %szb: picit fura, ha nemnulla a temperature, akkor a do\_sample true szokott lenni. De mostmár ne értékeld persze újra ki az egészet... De lehet, hogy kivenném a do_sample-t, nehogy kérdéseket vessen fel.
+\texttt{top\_p=0.95}, and \texttt{temperature=0.2}. Greedy decoding is used
+to ensure deterministic outputs across repeated runs.
 
-After generation, all outputs were postprocessed using the same cleaning
-pipeline. This step removed markdown code fences, duplicated prompt fragments,
-incomplete trailing sections and any repeated system or user messages. BLEU
-score was then computed against the reference C++ translation, while
-execution-based evaluation was performed by compiling and running the generated
+After generation, all outputs are postprocessed using the same cleaning
+pipeline. This step removes markdown code fences, duplicated prompt fragments,
+incomplete trailing sections, and any repeated system or user messages. BLEU
+score is then computed against the reference C++ translation, while
+execution-based evaluation is performed by compiling and running the generated
 code inside the Docker-based CodeEditorBench environment.
