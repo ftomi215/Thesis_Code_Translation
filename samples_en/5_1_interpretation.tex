@@ -34,6 +34,16 @@ language-specific constructs can cause the entire translation to fail.
 
 
 
+%szb: sztem ennek nem itt van a helye. Ez egy kiegészítő eredmény, nem elsődleges. 
+%Javaslat 1:
+% - e vizsgálat módszerét tedd a method végére, külön section-be
+% - a vizsgálat eredményeit tedd a resultsba szintén akár külön section-be
+% - a discussion-ban értelmezd/minősítsd ezeket az eredményeket
+%Javaslat2:
+% - Csak maradjon itt a discussion-ben, és akkor valahol a végefelé, mindenképp azután, hogy a fő eredményeket értelmezted
+% (talán a 2est javaslom)
+
+%szb: amúgy tök jó lett ez a content, pont ilyesmire gondoltam, szerintem tökre emeli a diplomamunka színvonalát.
 
 \subsection{Relationship Between BLEU and Execution-Based Evaluation}
 
@@ -42,7 +52,7 @@ evaluation more precisely, a correlation analysis was performed between BLEU
 score and two binary execution-based outcomes: accepted solution and compilation
 success. The accepted solution variable was set to 1 when the generated program
 passed all tests, and 0 otherwise. Compilation success was set to 1 when the
-generated program did not result in a compilation error, and 0 otherwise.
+generated program did not result in a compilation error, and 0 otherwise. %szb: fura picit, hogy leírod, mi kapott 0-s meg 1-es értékeket, ez olyan randomnak tűnik. És utána jön, hogy milyen korrelációkat használtál. Gondolom az van, hogy ezek a módszerek 0-sokkal meg 1-esekkel tudnak dolgozni, és azért adtad ezeket az értékeket.
 
 Both Pearson and Spearman correlations were computed. Pearson correlation was
 used to measure the linear association between BLEU and the execution-based

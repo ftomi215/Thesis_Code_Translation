@@ -25,7 +25,7 @@ Qwen2.5-Coder-3B-Instruct & 3.09B & 32,768 & 5.5T+ & Yes \\
 \end{table}
 
 The first set of experiments uses the original pre-trained versions of both
-models without additional task-specific training.
+models without additional task-specific training. %szb: ez így nagyon megfkavaró. Fent azt írod, hogy az ...-Instruct modellt használod a qwen2.5-ből, viszont itt meg írod, hogy nem, csak a pre-trained modellt használod, nem az additional task-specific training-gel rendelkező instrukciókövető modellt. HA valóban az instructot használod, akkor azt írd, hogy azokat a verziókat használod, amikor nem kifejeztetten általad a java-to-cpp feladatra lettek finomhangolva. Lehet, hogy ere gongdoltál task-specific finetuning alatt, csak az pont nem csak ezt jelenti, hanem tágabb - jelentheti azt, hogy instrukciókövetés (mint feladat)
 
 The \texttt{bigcode/starcoder2-3b} model is a decoder-only Transformer model
 with approximately 3 billion parameters. It is part of the StarCoder2 family
@@ -33,8 +33,8 @@ and is trained on more than 3 trillion tokens collected from large-scale code
 repositories and software-related text sources. The model supports 17
 programming languages and provides a context window of up to 16,384 tokens
 \cite{starcoder2, starcoder2_hf}. At the time of its release, StarCoder2-3B
-outperforms several other code models of similar size on standard programming
-benchmarks.
+outperforms %szb: ez kivételesen lehet múltidőben - ez nem a módszer része, ez egy mellékes infó a múltból
+several other code models of similar size on standard programming benchmarks.
 
 The \texttt{Qwen/Qwen2.5-Coder-3B-Instruct} model is also a decoder-only
 Transformer model with approximately 3.09 billion parameters. Unlike
@@ -48,7 +48,8 @@ and repair.
 In addition to the original pre-trained models, fine-tuned variants of both
 \texttt{bigcode/starcoder2-3b} and \texttt{Qwen/Qwen2.5-Coder-3B-Instruct} are
 prepared for the Java-to-C++ translation task. Fine-tuning is performed using
-Low-Rank Adaptation (LoRA), which adds small trainable matrices to selected
+Low-Rank Adaptation (LoRA), %szb: a lorát hivatkozd be, arra tuti van paper. Ha a qlorára is van valami paper v blogpost,az is jöjjön ott annál
+which adds small trainable matrices to selected
 layers of the model while keeping the original weights frozen
 \cite{hu2021lora}. This significantly reduces the number of trainable parameters
 and makes fine-tuning more efficient.
@@ -58,8 +59,9 @@ corresponds to the QLoRA approach. In this setup, the original model weights
 remain frozen and quantized, while only the LoRA adapter weights are updated
 during training. This substantially reduces GPU memory usage and makes it
 possible to fine-tune billion-parameter models on consumer-grade hardware. The
-models are loaded in 4-bit mode and trained using mixed precision and gradient
-checkpointing in order to further reduce memory requirements.
+models are loaded in 4-bit mode %szb: ezt már másodjára írod le
+and trained using mixed precision and gradient checkpointing in order to further
+reduce memory requirements.
 
 The same LoRA configuration is used for both models. The low-rank dimension
 is set to $r = 8$, the LoRA scaling factor to $\alpha = 16$, and the dropout
@@ -77,6 +79,7 @@ rate scheduling, a warmup ratio of 0.03, and gradient accumulation with 16
 steps. The effective batch size per device is 1. These settings are selected
 to balance training stability and GPU memory consumption.
 
+%szb: sztem ez csak ismétlés, nem?
 For both models, the training data is converted into an instruction-style
 format in which the model receives a Java source code snippet together with a
 prompt asking for the corresponding C++ translation. During training, only the

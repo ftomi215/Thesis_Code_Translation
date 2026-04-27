@@ -27,15 +27,16 @@ model-level results reported for Qwen2.5-Coder. Hui et al. describe
 Qwen2.5-Coder as a code-specific model trained on a large programming corpus
 and evaluated on standard programming benchmarks such as HumanEval and MBPP
 \cite{qwen_coder}. In the present study, Qwen also outperformed StarCoder2 in
-the Java-to-C++ translation task. The base Qwen model achieved a higher average
-BLEU score than the base StarCoder2 model, and it also produced more accepted
-solutions. The same ordering remained after fine-tuning, where the fine-tuned Qwen
-model achieved the highest average BLEU score and the highest number of accepted
-solutions among all evaluated models. This does not mean that the present
-experiment reproduces the HumanEval or MBPP benchmark results directly, because
-the task and evaluation setup are different. However, it does show that the stronger
-general coding performance reported for Qwen2.5-Coder also appears in this
-translation-specific evaluation.
+the Java-to-C++ translation task. The base Qwen model %szb: ne használd szerintem a base szót, mert az arra is utalhat, hogy az a qwen modell, ami nincs instrukciókövetésre finomhangolva se
+achieved a higher average BLEU score than the base StarCoder2 model, and it also
+produced more accepted solutions. The same ordering remained after fine-tuning,
+where the fine-tuned Qwen model achieved the highest average BLEU score and the
+highest number of accepted solutions among all evaluated models. This does not
+mean that the present experiment reproduces the HumanEval or MBPP benchmark
+results directly, %szb: nem értem ez hogy jön ide. Senkinek nem jut eszébe feltételezni szerintem, hogy itt bármi közünk lenne ezekhez a codegen benchmarkokhoz
+because the task and evaluation setup are different. However, it does show that
+the stronger general coding performance reported for Qwen2.5-Coder also appears
+in this translation-specific evaluation.
 
 Third, the correlation analysis performed in this thesis further supports earlier
 criticism of BLEU in code-related evaluation. Previous research has shown that
