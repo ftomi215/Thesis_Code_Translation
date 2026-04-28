@@ -1,0 +1,75 @@
+%szb: sztem ennek nem itt van a helye. Ez egy kiegészítő eredmény, nem elsődleges. 
+%Javaslat 1:
+% - e vizsgálat módszerét tedd a method végére, külön section-be
+% - a vizsgálat eredményeit tedd a resultsba szintén akár külön section-be
+% - a discussion-ban értelmezd/minősítsd ezeket az eredményeket
+%Javaslat2:
+% - Csak maradjon itt a discussion-ben, és akkor valahol a végefelé, mindenképp azután, hogy a fő eredményeket értelmezted
+% (talán a 2est javaslom)
+
+%szb: amúgy tök jó lett ez a content, pont ilyesmire gondoltam, szerintem tökre emeli a diplomamunka színvonalát.
+
+\section{Relationship Between BLEU and Execution-Based Evaluation}
+
+To examine the relationship between similarity-based and execution-based
+evaluation more precisely, a correlation analysis was performed between BLEU
+score and two binary execution-based outcomes: accepted solution and compilation
+success.  Because both execution outcomes are
+binary variables (success/failure), they were encoded as indicator variables,
+where accepted solutions and successful compilations received value 1, and
+other outcomes value 0.
+
+Both Pearson and Spearman correlations were computed. Pearson correlation was
+used to measure the linear association between BLEU and the execution-based
+outcomes, while Spearman correlation was used to measure whether higher BLEU
+scores generally correspond to better-ranked execution outcomes. The results are
+shown in Table~\ref{tab:bleu_execution_correlation}.
+
+\begin{table}[b]
+\centering
+\caption{Correlation between BLEU score and execution-based outcomes}
+\begin{tabular}{lcccc}
+\hline
+Execution-based outcome & Pearson $r$ & Pearson $p$ & Spearman $\rho$ & Spearman $p$ \\
+\hline
+Accepted solution & 0.510 & $1.85 \times 10^{-101}$ & 0.368 & $4.46 \times 10^{-50}$ \\
+Compilation success & 0.372 & $4.81 \times 10^{-51}$ & 0.509 & $6.12 \times 10^{-101}$ \\
+\hline
+\end{tabular}
+\label{tab:bleu_execution_correlation}
+\end{table}
+
+The correlation results show a statistically significant positive relationship
+between BLEU score and both execution-based outcomes. In both cases, the
+$p$-values are far below 0.001, which means that the null hypothesis of no
+correlation can be rejected. Therefore, higher BLEU scores are not completely
+independent from execution-based success: outputs with higher BLEU scores are
+generally more likely to compile successfully and to be accepted.
+
+However, the strength of the correlations also shows that BLEU is not a fully
+reliable proxy for functional correctness. The correlation between BLEU and
+accepted solutions is moderate according to Pearson correlation ($r = 0.510$),
+but weaker according to Spearman correlation ($\rho = 0.368$). This suggests that
+although BLEU has some relationship with final correctness, the ranking of
+solutions by BLEU does not consistently match the ranking implied by accepted
+execution results. In practical terms, a higher BLEU score increases the
+likelihood of a correct translation, but it does not guarantee that the generated
+program passes the test cases.
+
+The relationship between BLEU and compilation success shows a slightly different
+pattern. The Pearson correlation is lower ($r = 0.372$), while the Spearman
+correlation is stronger ($\rho = 0.509$). This indicates a moderate monotonic
+relationship: translations with higher BLEU scores are generally more likely to
+compile, but the relationship is still far from deterministic. This is consistent
+with the observation that fine-tuned models produced fewer compilation errors,
+but still generated many wrong answers. In other words, fine-tuning often helped
+the models produce syntactically more valid C++ code, but syntactic validity did
+not always imply semantic correctness.
+
+Therefore, the results support the use of BLEU only as an auxiliary metric.
+Execution-based evaluation remains necessary because it directly checks whether
+the generated C++ program compiles and produces the expected output. A complete
+evaluation of code translation systems should therefore combine similarity-based
+metrics with execution-based testing, rather than relying on BLEU as the sole
+indicator of translation quality.
+

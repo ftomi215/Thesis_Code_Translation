@@ -1,19 +1,10 @@
 \section{Translation and Evaluation Pipeline}
 
 The translation and evaluation process follows a consistent pipeline for both
-the base and fine-tuned models. First, Java--C++ code pairs are loaded from
-XLCoST and filtered to retain only Java-to-C++ translation examples. The
-Java code serves as the input, while the corresponding C++ code is used as the
-target output.
-
-%szb: ez 3x írja le ugyanazt. Sőt, itt a trainingről írsz (During training ...), holott a section címe alapján ez nem idevaló
-The selected code pairs are then converted into an instruction-style prompt
-format suitable for causal language models. During training, the expected C++
-translation is appended to the prompt so that the model can learn the mapping
-between the two programming languages. Prompt-based training is commonly used
-in code translation because it aligns well with instruction-tuned large language
-models and improves the consistency of the generated outputs
-\cite{aljagthami2025prompt}.
+the base and fine-tuned models. Each model receives Java input code from the
+translation subset of CodeEditorBench and generates the corresponding C++
+translation. The input examples are formatted using the model-specific prompt
+format described in the experimental setup.
 
 After preprocessing, the models generate C++ translations from the Java input
 code samples contained in the CodeEditorBench dataset. The generated outputs
